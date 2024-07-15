@@ -1,3 +1,14 @@
+# Local models
+localmodels/
+
+# Uploaded files
+data/
+
+# Local Storage
+storage/
+
+# The following are ignored by default.
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
