@@ -26,3 +26,9 @@ llama-index-retrievers-bm25
 unstructured
 nltk
 jieba
+
+llama-index-readers-web
+llama-index-embeddings-huggingface
+llama_index-storage-kvstore
+llama-index-storage-kvstore-postgres
+llama-index-storage-kvstore-redis
