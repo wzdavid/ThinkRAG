@@ -1,4 +1,4 @@
-# 创建OpenAI兼容API LLM模型
+# Create LLM with API compatible with OpenAI
 from llama_index.core import Settings
 from langchain_openai import ChatOpenAI
 

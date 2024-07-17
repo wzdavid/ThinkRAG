@@ -1,11 +1,11 @@
-# 日志配置
+# Log configuration
 import logging
 import sys
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
-# 配置Streamlit Web应用
+# Configure the Streamlit Web Application
 import streamlit as st
 from frontend.state import init_keys
 

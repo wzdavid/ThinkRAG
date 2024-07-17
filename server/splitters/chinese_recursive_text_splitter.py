@@ -1,5 +1,5 @@
-# 中文递归文本分割器
-# 来源：LangchainChatChat, QAnything
+# Chinese recursive text splitter
+# Source：LangchainChatChat, QAnything
 
 import re
 from typing import List, Optional, Any

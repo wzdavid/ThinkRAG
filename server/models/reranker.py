@@ -1,4 +1,4 @@
-# 创建Rerank模型
+# Create Rerank model
 # https://docs.llamaindex.ai/en/stable/examples/node_postprocessor/SentenceTransformerRerank/
 from llama_index.core.postprocessor import SentenceTransformerRerank
 from config import DEFAULT_RERANKER_MODEL, RERANKER_MODEL_TOP_N, RERANKER_MODEL_PATH, MODEL_DIR

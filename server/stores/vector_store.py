@@ -1,18 +1,18 @@
-# 向量数据库
+# Vector database
 
 # https://docs.llamaindex.ai/en/stable/examples/vector_stores/ChromaIndexDemo/
 # https://docs.llamaindex.ai/en/stable/module_guides/storing/customization/
 
 from config import STORAGE_DIR, DEFAULT_VS_TYPE
 
-# 生产环境 ES 
-# Todo: 使用Metadata Filters
+# Production environment ES 
+# Todo: use Metadata Filters
 
 def create_vector_store(type=DEFAULT_VS_TYPE):
     if type == "chroma":
-        # 向量数据库 Chroma
+        # Vector database Chroma
 
-        # 安装 Chroma 向量数据库
+        # Install Chroma vector database
         """ pip install chromadb """
 
         import chromadb
@@ -23,10 +23,10 @@ def create_vector_store(type=DEFAULT_VS_TYPE):
         chroma_vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
         return chroma_vector_store
     elif type == "es":
-        # 向量数据库 ES
+        # Vector database ES
         # https://docs.llamaindex.ai/en/stable/examples/vector_stores/ElasticsearchIndexDemo/
 
-        # 本地运行ES
+        # Run ES locally
         """ docker run -p 9200:9200 \
         -e "discovery.type=single-node" \
         -e "xpack.security.enabled=false" \
@@ -39,13 +39,13 @@ def create_vector_store(type=DEFAULT_VS_TYPE):
         es_vector_store = ElasticsearchStore(
         es_url="http://localhost:9200",
         index_name="think",
-        retrieval_strategy=AsyncDenseVectorStrategy(hybrid=True), # 使用混合检索
+        retrieval_strategy=AsyncDenseVectorStrategy(hybrid=True), # Use hybrid retrieval
         )
         return es_vector_store
     else:
         raise ValueError(f"Invalid vector store type: {type}")
 
-# 开发环境 SimpleVectorStore
+# Development Environment SimpleVectorStore
 
 from llama_index.core.vector_stores import SimpleVectorStore
 

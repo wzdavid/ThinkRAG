@@ -1,11 +1,11 @@
-# 对话存储
+# chat store
 
 from config import DEV_MODE, REDIS_URI, CHAT_STORE_KEY
 
 def create_chat_memory():
 
     if DEV_MODE:
-        # 开发环境 SimpleChatStore
+        # Development environment: SimpleChatStore
         # https://docs.llamaindex.ai/en/stable/module_guides/storing/chat_stores/
         from llama_index.core.storage.chat_store import SimpleChatStore
         from llama_index.core.memory import ChatMemoryBuffer
@@ -20,10 +20,10 @@ def create_chat_memory():
         return simple_chat_memory
     
     else:
-        # 生产环境 Redis
+        # Production environment: Redis
         # https://docs.llamaindex.ai/en/stable/examples/vector_stores/RedisIndexDemo/
 
-        # 本机启动redis
+        # Start redis locally:
         # docker run --name redis-vecdb -d -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
 
         from llama_index.core.memory import ChatMemoryBuffer

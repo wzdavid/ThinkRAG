@@ -1,14 +1,14 @@
-# 检索方法
+# Retriever method
 
 from llama_index.core.retrievers import BaseRetriever
 from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.retrievers.bm25 import BM25Retriever
 from server.stores.strage_context import STORAGE_CONTEXT
 
-# 一种简单的BM25检索方法，针对文档存储和分词器做了定制
+# A simple BM25 retrieval method, customized for document storage and tokenization
 
-# BM25Retriever默认的tokenizer不支持中文
-# 参考资料：https://github.com/run-llama/llama_index/issues/13866
+# BM25Retriever's default tokenizer does not support Chinese
+# Reference：https://github.com/run-llama/llama_index/issues/13866
 
 import jieba
 from typing import List
@@ -22,26 +22,26 @@ class SimpleBM25Retriever(BM25Retriever):
             docstore = index.docstore
             print(f"Using docstore from vector index: {docstore}")
         else:
-            docstore = STORAGE_CONTEXT.docstore # 从文档存储构建BM25检索器
+            docstore = STORAGE_CONTEXT.docstore # Build BM25 retriever from document storage
             print(f"Using default docstore: {docstore}")
         return BM25Retriever.from_defaults(
             docstore=docstore, similarity_top_k=similarity_top_k, verbose=True,
             tokenizer=chinese_tokenizer, **kwargs
         )
 
-# 一种简单的混合检索方法
-# 参考资料：https://docs.llamaindex.ai/en/stable/examples/retrievers/bm25_retriever/
+# A simple hybrid retriever method
+# Reference：https://docs.llamaindex.ai/en/stable/examples/retrievers/bm25_retriever/
 
 class SimpleHybridRetriever(BaseRetriever):
     def __init__(self, vector_index, top_k=2):
         self.top_k = top_k
 
-        # 从向量索引构建向量检索器
+        # Build vector retriever from vector index
         self.vector_retriever = VectorIndexRetriever(
             index=vector_index, similarity_top_k=top_k, verbose=True,
         )
 
-        # 从文档存储构建BM25检索器
+        # Build BM25 retriever from document storage
         self.bm25_retriever = SimpleBM25Retriever.from_defaults(
             index=vector_index, similarity_top_k=top_k,
         )
@@ -51,21 +51,21 @@ class SimpleHybridRetriever(BaseRetriever):
     def _retrieve(self, query, **kwargs):
         bm25_nodes = self.bm25_retriever.retrieve(query, **kwargs)
 
-        # BM25检索结果，score与查询有关，可能大于1，因此要做归一化
-        # 计算最小值和最大值
+        # the score is related to the query and may exceed 1, thus normalization is required
+        # calculate min and max value
         min_score = min(item.score for item in bm25_nodes)
         max_score = max(item.score for item in bm25_nodes)
 
-        # 归一化score
+        # normalize score
         normalized_data = [(item.score - min_score) / (max_score - min_score) for item in bm25_nodes]
 
-        # 将归一化后的分数赋值回原对象
+        # Assign normalized score back to the original object
         for item, normalized_score in zip(bm25_nodes, normalized_data):
             item.score = normalized_score
 
         vector_nodes = self.vector_retriever.retrieve(query, **kwargs)
 
-        # 合并两个检索结果，去重，并仅返回前Top_K个结果
+        # Merge two retrieval results, remove duplicates, and return only the Top_K results
         all_nodes = []
         node_ids = set()
         count = 0
@@ -80,14 +80,14 @@ class SimpleHybridRetriever(BaseRetriever):
             print(f"Hybrid Retrieved Node: {node.node_id} - Score: {node.score:.2f} - {node.text[:10]}...\n-----")
         return all_nodes
 
-# 融合检索方法
-# 参考资料：https://docs.llamaindex.ai/en/stable/examples/retrievers/relative_score_dist_fusion/
-# 参考资料：https://medium.com/plain-simple-software/distribution-based-score-fusion-dbsf-a-new-approach-to-vector-search-ranking-f87c37488b18
+# Fusion retriever method
+# Reference: https://docs.llamaindex.ai/en/stable/examples/retrievers/relative_score_dist_fusion/
+#            https://medium.com/plain-simple-software/distribution-based-score-fusion-dbsf-a-new-approach-to-vector-search-ranking-f87c37488b18
 
 from llama_index.core.retrievers import QueryFusionRetriever
 from enum import Enum
 
-# 三种模式，来自于LlamaIndex源码
+# Three different modes, from LlamaIndex's source code
 class FUSION_MODES(str, Enum):
     RECIPROCAL_RANK = "reciprocal_rerank"  # apply reciprocal rank fusion
     RELATIVE_SCORE = "relative_score"  # apply relative score fusion
@@ -99,12 +99,12 @@ class SimpleFusionRetriever(QueryFusionRetriever):
         self.top_k = top_k
         self.mode = mode
 
-        # 从向量索引构建向量检索器
+        # Build vector retriever from vector index
         self.vector_retriever = VectorIndexRetriever(
             index=vector_index, similarity_top_k=top_k, verbose=True,
         )
 
-        # 从文档存储构建BM25检索器
+        # Build BM25 retriever from document storage
         self.bm25_retriever = SimpleBM25Retriever.from_defaults(
             index=vector_index, similarity_top_k=top_k,
         )

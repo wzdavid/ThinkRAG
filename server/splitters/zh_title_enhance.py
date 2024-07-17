@@ -1,7 +1,7 @@
-# 中文标题增强
-# 来源：LangchainChatChat, QAnything
+# Chinese title enhance
+# Source：LangchainChatChat, QAnything
 
-from llama_index.core.schema import BaseNode # 修改自Langchain 里的 Document
+from llama_index.core.schema import BaseNode # modified based on Document in Langchain
 from typing import List
 import re
 
@@ -48,24 +48,24 @@ def is_possible_title(
         The minimum number of alpha characters the text needs to be considered a title
     """
 
-    # 文本长度为0的话，肯定不是title
+    # If the text length is zero, it is not a title
     if len(text) == 0:
         print("Not a title. Text is empty.")
         return False
 
-    # 文本中有标点符号，就不是title
+    # If the text has punctuation, it is not a title
     ENDS_IN_PUNCT_PATTERN = r"[^\w\s]\Z"
     ENDS_IN_PUNCT_RE = re.compile(ENDS_IN_PUNCT_PATTERN)
     if ENDS_IN_PUNCT_RE.search(text) is not None:
         return False
 
-    # 文本长度不能超过设定值，默认20
+    # The text length must not exceed the set value, which is set to be 20 by default.
     # NOTE(robinson) - splitting on spaces here instead of word tokenizing because it
     # is less expensive and actual tokenization doesn't add much value for the length check
     if len(text) > title_max_word_length:
         return False
 
-    # 文本中数字的占比不能太高，否则不是title
+    # The ratio of numbers in the text should not be too high, otherwise it is not a title.
     if under_non_alpha_ratio(text, threshold=non_alpha_threshold):
         return False
 
@@ -77,7 +77,7 @@ def is_possible_title(
         print(f"Not a title. Text is all numeric:\n\n{text}")  # type: ignore
         return False
 
-    # 开头的字符内应该有数字，默认5个字符内
+    # "The initial characters should contain numbers, typically within the first 5 characters by default."
     if len(text) < 5:
         text_5 = text
     else:
@@ -89,11 +89,11 @@ def is_possible_title(
     return True
 
 
-def zh_title_enhance(docs: List[BaseNode]) -> List[BaseNode]: # 修改自Langchain 里的 Document
+def zh_title_enhance(docs: List[BaseNode]) -> List[BaseNode]: # modified based on Document in Langchain
     title = None
     if len(docs) > 0:
         for doc in docs:
-            if is_possible_title(doc.text): # 修改自Langchain 里的 doc.page_content
+            if is_possible_title(doc.text): # modified based on doc.page_content in Langchain
                 doc.metadata['category'] = 'cn_Title'
                 title = doc.text
             elif title:
@@ -102,7 +102,7 @@ def zh_title_enhance(docs: List[BaseNode]) -> List[BaseNode]: # 修改自Langcha
     else:
         print("文件不存在")
 
-# 以下为基于LlamaIndex的封装
+# The following is an encapsulation based on LlamaIndex
 
 import re
 from llama_index.core.schema import TransformComponent

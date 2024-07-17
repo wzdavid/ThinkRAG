@@ -11,13 +11,13 @@ def find_api_by_model(model_name):
         if model_name in api_info['models']:
             return api_info
 
-# 初始化st.session_state
+# Initialize st.session_state
 def init_keys():
-    # 初始化索引
+    # Initialize index
     if "index_manager" not in st.session_state.keys():
         st.session_state.index_manager = IndexManager(DEFAULT_INDEX_NAME)
 
-    # 初始化模型选择
+    # Initialize model selection
     if "ollama_api_url" not in st.session_state.keys():
         st.session_state.ollama_api_url = OLLAMA_API_URL
 
@@ -45,11 +45,11 @@ def init_keys():
     if "use_reranker" not in st.session_state.keys():
         st.session_state.use_reranker = USE_RERANKER
 
-    # 初始化查询/聊天引擎
+    # Initialize query engine
     if "query_engine" not in st.session_state.keys():
         st.session_state.query_engine = None
 
-    # 初始化设置
+    # Initialize settings
     if "top_k" not in st.session_state.keys():
         st.session_state.top_k = 5
 
@@ -80,7 +80,7 @@ def init_keys():
     if "top_p" not in st.session_state.keys():
         st.session_state.top_p = 1.0
 
-    # 知识库相关
+    # contents related to the knowledge base
     if "websites" not in st.session_state:
         st.session_state["websites"] = []
 
@@ -89,8 +89,8 @@ def init_keys():
     if 'selected_files' not in st.session_state:
         st.session_state.selected_files = None
 
-# 初始化用户数据
-# TODO: 未来从数据库中加载
+# Initialize user data
+# TODO: supposed to be loaded from database
     st.session_state.user_id = "user_1"
     st.session_state.kb_id = "kb_1"
     st.session_state.kb_name = "我的知识库"

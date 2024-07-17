@@ -1,5 +1,5 @@
-# 中文文本分割器
-# 来源：LangchainChatChat, QAnything
+# Chinese text splitter
+# Source：LangchainChatChat, QAnything
 
 from langchain.text_splitter import CharacterTextSplitter
 import re
@@ -25,19 +25,20 @@ class ChineseTextSplitter(CharacterTextSplitter):
                 sent_list.append(ele)
         return sent_list
 
-    def split_text(self, text: str) -> List[str]:   ##此处需要进一步优化逻辑
+    def split_text(self, text: str) -> List[str]:   ## Need further logical optimization here
         if self.pdf:
             text = re.sub(r"\n{3,}", r"\n", text)
             text = re.sub('\s', " ", text)
             text = re.sub("\n\n", "", text)
 
-        text = re.sub(r'([;；.!?。！？\?])([^”’])', r"\1\n\2", text)  # 单字符断句符
-        text = re.sub(r'(\.{6})([^"’”」』])', r"\1\n\2", text)  # 英文省略号
-        text = re.sub(r'(\…{2})([^"’”」』])', r"\1\n\2", text)  # 中文省略号
+        text = re.sub(r'([;；.!?。！？\?])([^”’])', r"\1\n\2", text)  # Single-character delimiter
+        text = re.sub(r'(\.{6})([^"’”」』])', r"\1\n\2", text)  # English ellipsis
+        text = re.sub(r'(\…{2})([^"’”」』])', r"\1\n\2", text)  # Chinese ellipsis
         text = re.sub(r'([;；!?。！？\?]["’”」』]{0,2})([^;；!?，。！？\?])', r'\1\n\2', text)
-        # 如果双引号前有终止符，那么双引号才是句子的终点，把分句符\n放到双引号后，注意前面的几句都小心保留了双引号
-        text = text.rstrip()  # 段尾如果有多余的\n就去掉它
-        # 很多规则中会考虑分号;，但是这里我把它忽略不计，破折号、英文双引号等同样忽略，需要的再做些简单调整即可。
+        # If there is an ending punctuation before the double quotes, then the double quotes are considered to be the end of the sentence.
+        # Place the sentence delimiter \n after the double quotes, and be aware that the double quotes in the previous sentences are preserved.
+        text = text.rstrip()  # Remove the extra \n at the end of the paragraph(if any)
+        # Semicolons was not considered in this case, along with dashes and English double quotes. If needed, all we need is some simple adjustment.
         ls = [i for i in text.split("\n") if i]
         for ele in ls:
             if len(ele) > self.sentence_size:

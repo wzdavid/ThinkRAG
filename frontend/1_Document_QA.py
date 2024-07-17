@@ -1,4 +1,4 @@
-# 文档问答
+# Document-based Q&A
 import time
 import re
 import streamlit as st
@@ -26,8 +26,8 @@ def perform_query(prompt):
         query_response = query_engine.query(prompt)
         return query_response
     except Exception as e:
-        print(f"An error occurred while processing the query: {e}")
-
+        # print(f"An error occurred while processing the query: {e}")
+        print(f"An error occurred while processing the query: {type(e).__name__}: {e}")
 # https://github.com/halilergul1/QA-app
 def simple_format_response_and_sources(response):
     primary_response = getattr(response, 'response', '')
@@ -51,19 +51,19 @@ def simple_format_response_and_sources(response):
 
 def chatbox():
 
-    # 加载问答记录
+    # Load Q&A history
     messages = CHAT_MEMORY.get() 
     if len(messages) == 0:
-        # 初始化问答记录
+        # Initialize Q&A record
         CHAT_MEMORY.put(ChatMessage(role=MessageRole.ASSISTANT, content="关于文档库里的内容，请随便问"))
         messages = CHAT_MEMORY.get()
 
-    # 显示问答记录
+    # Show Q&A records
     for message in messages: 
         with st.chat_message(message.role):
             st.write(message.content)
 
-    if prompt := st.chat_input("输入你的问题"): # 提示用户输入问题，并将问题添加到消息历史记录
+    if prompt := st.chat_input("输入你的问题"): # Prompt the user to input the question then add it to the message history
         with st.chat_message(MessageRole.USER):
             st.write(prompt)
             CHAT_MEMORY.put(ChatMessage(role=MessageRole.USER, content=prompt))
@@ -94,10 +94,10 @@ def chatbox():
                             source_nodes.append({"文件名": file_name, "页码": page_label, "文本": short_text, "得分": f"{score:.2f}"})
                         df = pd.DataFrame(source_nodes)
                         st.table(df)
-                    # 将回答存入聊天记录
+                    # store the answer in the chat history
                     CHAT_MEMORY.put(ChatMessage(role=MessageRole.ASSISTANT, content=response.response))
 
-from server.engine import create_query_engine # 创建新ES实例和查询引擎，否则ES（aiohttp）复用的异步问题会报错
+from server.engine import create_query_engine # Create a new ES instance and query engine; otherwise, the reuse of ES (aiohttp) will cause asynchronous errors
 from config import USE_RERANKER
 
 if st.session_state.index_manager is not None:

@@ -1,4 +1,4 @@
-# 设置HuggingFace镜像
+# Setting up a HuggingFace mirror
 
 def use_hf_mirror():
     import os

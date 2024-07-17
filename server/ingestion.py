@@ -1,4 +1,4 @@
-# 导入管道 IngestionPipeline
+# Import pipeline IngestionPipeline
 # https://docs.llamaindex.ai/en/stable/api_reference/ingestion/
 # https://docs.llamaindex.ai/en/stable/examples/ingestion/advanced_ingestion_pipeline/
 
@@ -26,7 +26,7 @@ class AdvancedIngestionPipeline(IngestionPipeline):
             transformations=[
                 text_splitter,
                 embed_model,
-                ChineseTitleExtractor(), # 修改后的中文标题增强 zh_title_enhance
+                ChineseTitleExtractor(), # modified Chinese title enhance: zh_title_enhance
             ],
             docstore=storage_context.docstore,
             vector_store=storage_context.vector_store,

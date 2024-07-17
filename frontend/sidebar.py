@@ -1,4 +1,4 @@
-# 配置Streamlit Web应用
+# Configure the Streamlit Web Application
 import streamlit as st
 from server.models import ollama
 from server.models.llm_api import create_openai_llm

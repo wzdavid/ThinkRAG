@@ -1,5 +1,4 @@
-# 索引管理 - 索引的创建、加载、插入
-
+# Index management - create, load and insert
 import os
 from llama_index.core import StorageContext
 from llama_index.core import VectorStoreIndex
@@ -35,7 +34,7 @@ class IndexManager:
         print(f"Created index {self.index.index_id}")
         return self.index
 
-    def load_index(self): # TODO: 基于index_id加载索引
+    def load_index(self): # TODO: load index based on index_id
         self.index = load_index_from_storage(self.storage_context)
         print(f"Loaded index {self.index.index_id}")
         return self.index
@@ -48,8 +47,8 @@ class IndexManager:
         else:
             self.init_index(nodes=nodes)
         return self.index
-    
-    # 将data文件夹下的文档建立索引
+
+    # Build index based on documents under 'data' folder
     def load_dir(self, input_dir, chunk_size, chunk_overlap, zh_title_enhance):
         documents = SimpleDirectoryReader(input_dir=input_dir, recursive=True).load_data()
         pipeline = AdvancedIngestionPipeline(
@@ -61,7 +60,7 @@ class IndexManager:
         index = self.insert_nodes(nodes)
         return nodes
 
-    # 给出文件路径，建立索引
+    # get file's directory and create index
     def load_files(self, uploaded_files, chunk_size, chunk_overlap, zh_title_enhance):
         save_dir = get_save_dir()
         files = [os.path.join(save_dir, file["name"]) for file in uploaded_files]
@@ -75,7 +74,7 @@ class IndexManager:
         index = self.insert_nodes(nodes)
         return nodes
 
-    # 给出网址，建立索引
+    # Get URL and create index
     # https://docs.llamaindex.ai/en/stable/examples/data_connectors/WebPageDemo/
     def load_websites(self, websites, chunk_size, chunk_overlap, zh_title_enhance):
         # NOTE: the html_to_text=True option requires html2text to be installed

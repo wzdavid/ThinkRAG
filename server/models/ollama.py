@@ -17,14 +17,14 @@ def get_model_list():
         client = Client(host=st.session_state.ollama_api_url)
         response = client.list()
         models = response["models"]
-        # 初始化模型名称列表
+        # Initialize the list of model names
         for model in models:
             st.session_state.ollama_models.append(model["name"])
         return response["models"]
     else:
         return None
 
-# 创建OLLAMA LLM模型
+# Create Ollama LLM
 def create_ollama_llm(model) -> Ollama:
     try:
         Settings.llm = Ollama(model=model, base_url=st.session_state.ollama_api_url, request_timeout=600)

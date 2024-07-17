@@ -128,7 +128,7 @@ def get_unique_files_info(ref_doc_info):
 
         if file_path is None:
             print(f"File path not found in ref doc: {ref_doc}") 
-            # TODO: website ref doc中metadata为{}
+            # TODO: in the website ref doc, metadata is {}
 
         if file_path and file_path not in seen_paths:
             file_info = {

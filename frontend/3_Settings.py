@@ -60,7 +60,7 @@ def settings():
         )
         st.session_state["embedding_model"] = embedding_model
 
-        st.toggle("启用重排", key="selected_use_reranker", value= st.session_state.use_reranker) # 默认关闭
+        st.toggle("启用重排", key="selected_use_reranker", value= st.session_state.use_reranker) # closed by default
         st.session_state.use_reranker = st.session_state["selected_use_reranker"]
         if st.session_state.use_reranker == True:
             reranker_model_list = list(RERANKER_MODEL_PATH.keys())
@@ -72,7 +72,7 @@ def settings():
             )
             st.session_state["reranker_model"] = reranker_model
 
-    st.toggle("显示高级设置", key="advanced", value= False) # 默认关闭
+    st.toggle("显示高级设置", key="advanced", value= False) # closed by default
 
     if st.session_state["advanced"] == True:
         st.subheader("高级设置")

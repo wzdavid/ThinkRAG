@@ -1,11 +1,11 @@
-# 文档存储 Document Store
+# Document Store
 # https://docs.llamaindex.ai/en/stable/examples/docstore/MongoDocstoreDemo/
 
-# 生产环境 MongoDB
+# Production environment: MongoDB
 from llama_index.storage.docstore.mongodb import MongoDocumentStore
 from config import MONGO_URI
 
-# 开发环境 SimpleDocumentStore
+# Development environment: SimpleDocumentStore
 from llama_index.core.storage.docstore import SimpleDocumentStore
 
 from config import DEV_MODE
