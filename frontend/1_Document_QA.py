@@ -14,8 +14,8 @@ init_keys()
 select_llm()
 footer()
 
-st.header("文档问答")
-st.caption("检索知识库中的内容回答问题")
+st.header("Document-based Q&A")
+st.caption("Retrieve contents in the knowledge base to answer questions")
 
 def perform_query(prompt):
     if not query_engine:
@@ -55,7 +55,7 @@ def chatbox():
     messages = CHAT_MEMORY.get() 
     if len(messages) == 0:
         # Initialize Q&A record
-        CHAT_MEMORY.put(ChatMessage(role=MessageRole.ASSISTANT, content="关于文档库里的内容，请随便问"))
+        CHAT_MEMORY.put(ChatMessage(role=MessageRole.ASSISTANT, content="Feel free to ask about anything in the knowledge base"))
         messages = CHAT_MEMORY.get()
 
     # Show Q&A records
@@ -63,22 +63,22 @@ def chatbox():
         with st.chat_message(message.role):
             st.write(message.content)
 
-    if prompt := st.chat_input("输入你的问题"): # Prompt the user to input the question then add it to the message history
+    if prompt := st.chat_input("Input your question"): # Prompt the user to input the question then add it to the message history
         with st.chat_message(MessageRole.USER):
             st.write(prompt)
             CHAT_MEMORY.put(ChatMessage(role=MessageRole.USER, content=prompt))
         with st.chat_message(MessageRole.ASSISTANT):
-            with st.spinner("思考中……"):
+            with st.spinner("Thinking..."):
                 start_time = time.time()
                 response = perform_query(prompt)
                 end_time = time.time()
                 query_time = round(end_time - start_time, 2)
                 if response is None:
-                    st.write("未能给出回答")
+                    st.write("Couldn't come up with an answer.")
                 else:
                     st.write(response.response)
-                    st.write(f"用时 {query_time} 秒")
-                    details_title = f"找到 {len(response.source_nodes)} 份文档"
+                    st.write(f"Took {query_time} second(s)")
+                    details_title = f"Found {len(response.source_nodes)} document(s)"
                     with st.expander(
                             details_title,
                             expanded=False,
@@ -91,7 +91,7 @@ def chatbox():
                             page_label = node.metadata.get('page_label', 'N/A')
                             text = node.text
                             short_text = text[:50] + "..." if len(text) > 50 else text
-                            source_nodes.append({"文件名": file_name, "页码": page_label, "文本": short_text, "得分": f"{score:.2f}"})
+                            source_nodes.append({"File name": file_name, "Page number": page_label, "Text": short_text, "Score": f"{score:.2f}"})
                         df = pd.DataFrame(source_nodes)
                         st.table(df)
                     # store the answer in the chat history
@@ -108,7 +108,7 @@ if st.session_state.index_manager is not None:
         chatbox()
     else:
         print("Index does not exist yet")
-        st.warning("知识库为空，请先创建知识库")
+        st.warning("The knowledge base is empty. You'll need to create one first")
 else:
     print("IndexManager is not initialized yet")
-    st.warning("请先创建知识库")
+    st.warning("Please create the knowledge base first")

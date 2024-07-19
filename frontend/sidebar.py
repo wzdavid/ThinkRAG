@@ -22,23 +22,23 @@ def handle_openai_llm():
 
 def select_llm():    
     with st.sidebar:
-        st.header('当前设置')
+        st.header('Current settings')
 
         if ollama.is_alive():
             ollama.get_model_list()
-            options = ('本地大模型', '大模型API')
+            options = ('Local LLMs', 'LLMs API')
             options1 = st.session_state.ollama_models
         else:
-            options = ['大模型API']
+            options = ['LLMs API']
 
         if 'selected_radio_option' not in st.session_state or len(options) == 1:
             st.session_state.selected_radio_option = options[0]
 
-        select_box = st.radio("选择模型来源", options, horizontal=True, label_visibility='collapsed', index=options.index(st.session_state.selected_radio_option))
+        select_box = st.radio("Select model source", options, horizontal=True, label_visibility='collapsed', index=options.index(st.session_state.selected_radio_option))
         st.session_state.selected_radio_option = select_box
         
         options2 = st.session_state.llm_api_list
-        if select_box == '本地大模型':
+        if select_box == 'Local LLMs':
             index = None
             if st.session_state.ollama_model_selected is None:
                 if len(st.session_state.ollama_models) > 0:
@@ -46,16 +46,16 @@ def select_llm():
                     index=0
             else:
                 index = st.session_state.ollama_models.index(st.session_state.ollama_model_selected)
-            st.selectbox('选择本地大模型', options1,
+            st.selectbox('Choose local LLM', options1,
                         index=index,
-                        help='选择Ollama本地部署的LLM',
+                        help="Select Ollama's locally deployed LLM",
                         on_change=handle_ollama_llm,
                         key='ollama_model_name', # session_state key
             )
-        elif select_box == '大模型API':
-            st.selectbox('选择大模型API', options2,
+        elif select_box == 'LLMs API':
+            st.selectbox('Choose LLM API', options2,
                         index=st.session_state.llm_api_list.index(st.session_state.llm_api_selected),
-                        help='选择大模型API服务',
+                        help='Choose LLMs API service',
                         on_change=handle_openai_llm,
                         key='llm_api_model_name', # session_state key
             )
@@ -63,5 +63,5 @@ def select_llm():
 
 def footer():
     with st.sidebar:
-        st.caption('ThinkRAG 本地大模型知识库问答系统')
+        st.caption('ThinkRAG —— Local LLM Knowledge Base Q&A System')
         st.caption('©2024 wzdavid@gmail.com')

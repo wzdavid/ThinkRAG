@@ -93,4 +93,4 @@ def init_keys():
 # TODO: supposed to be loaded from database
     st.session_state.user_id = "user_1"
     st.session_state.kb_id = "kb_1"
-    st.session_state.kb_name = "我的知识库"
+    st.session_state.kb_name = "My knowledge base"

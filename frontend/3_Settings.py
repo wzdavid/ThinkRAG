@@ -8,8 +8,8 @@ def change_ollama_endpoint():
     st.session_state.ollama_api_url = st.session_state.ollama_endpoint
 
 def settings():
-    st.header("设置")
-    st.caption("设置模型与参数")
+    st.header("Settings")
+    st.caption("Set model and parameters")
 
     st.subheader(
         "Ollama",
@@ -18,64 +18,64 @@ def settings():
     chat_settings = st.container(border=True)
     with chat_settings:
         st.text_input(
-            "设置Ollama API服务地址",
+            "Set Ollama API service address",
             key="ollama_endpoint",
             value=st.session_state.ollama_api_url,
             on_change=change_ollama_endpoint,
         )
         if ollama.is_alive():
             ollama.get_model_list()
-            st.write("🟢 Ollama运行中")
-            with st.expander("当前可用的模型"):
+            st.write("🟢 Ollama is running")
+            with st.expander("Available models"):
                 st.write(st.session_state.ollama_models)
         else:
-            st.write("🔴 Ollama未运行")
+            st.write("🔴 Ollama is not running")
 
         st.button(
-            "刷新",
+            "Refresh",
             on_click=ollama.get_model_list,
         )
 
     st.subheader(
-        "大模型API",
+        "LLMs API",
         help="Large language models (LLMs) are powerful models that can generate human-like text based on the input they receive. LLMs can be used for a wide range of natural language processing tasks, including text generation, question answering, and summarization.",
     )
     llm_api_settings = st.container(border=True)
     with llm_api_settings:
-        with st.expander("当前可用的模型"):
+        with st.expander("Available models"):
             st.write(st.session_state.llm_api_list)
 
     st.subheader(
-        "嵌入模型",
+        "Embedding models",
         help="Embeddings are numerical representations of data, useful for tasks like document clustering and similarity detection when processing files, as they encode semantic meaning for efficient manipulation and retrieval.",
     )
     embedding_settings = st.container(border=True)
     with embedding_settings:
         embedding_model_list = list(EMBEDDING_MODEL_PATH.keys())
         embedding_model = st.selectbox(
-            "嵌入模型", 
+            "Embedding models", 
             embedding_model_list,
             key="selected_embedding_model",
             index=embedding_model_list.index(st.session_state["embedding_model"]),
         )
         st.session_state["embedding_model"] = embedding_model
 
-        st.toggle("启用重排", key="selected_use_reranker", value= st.session_state.use_reranker) # closed by default
+        st.toggle("Enable reranking", key="selected_use_reranker", value= st.session_state.use_reranker) # closed by default
         st.session_state.use_reranker = st.session_state["selected_use_reranker"]
         if st.session_state.use_reranker == True:
             reranker_model_list = list(RERANKER_MODEL_PATH.keys())
             reranker_model = st.selectbox(
-                "重排模型", 
+                "Reranking models", 
                 reranker_model_list,
                 key="selected_reranker_model",
                 index=reranker_model_list.index(st.session_state["reranker_model"]),
             )
             st.session_state["reranker_model"] = reranker_model
 
-    st.toggle("显示高级设置", key="advanced", value= False) # closed by default
+    st.toggle("Show advanced settings", key="advanced", value= False) # closed by default
 
     if st.session_state["advanced"] == True:
-        st.subheader("高级设置")
+        st.subheader("Advanced settings")
         advanced_settings = st.container(border=True)
         with advanced_settings:
             st.select_slider(
@@ -105,7 +105,7 @@ def settings():
                 disabled=True,
             )
             st.write("")
-        with st.expander("当前应用参数列表"):
+        with st.expander("List of current application parameters"):
             state = dict(sorted(st.session_state.items()))
             st.write(state)
 

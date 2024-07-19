@@ -12,7 +12,7 @@ from frontend.state import init_keys
 if __name__ == '__main__':
 
     st.set_page_config(
-        page_title="ThinkRAG 本地大模型知识库问答系统",
+        page_title="ThinkRAG —— Local LLM Knowledge Base Q&A System",
         page_icon="🧊",
         layout="wide",
         initial_sidebar_state="auto",
@@ -22,12 +22,12 @@ if __name__ == '__main__':
     init_keys()
 
     pages = {
-        "应用" : [
-            st.Page("frontend/1_Document_QA.py", title="文档问答", icon="🧊"),
-            st.Page("frontend/2_Knowledge_Base.py", title="知识库", icon="📃"),
+        "Application" : [
+            st.Page("frontend/1_Document_QA.py", title="Document-based Q&A", icon="🧊"),
+            st.Page("frontend/2_Knowledge_Base.py", title="Knowledge Base", icon="📃"),
         ],
-        "设置" : [
-            st.Page("frontend/3_Settings.py", title="设置", icon="🧭"),
+        "Settings" : [
+            st.Page("frontend/3_Settings.py", title="Settings", icon="🧭"),
             #st.Page("learn.py", title="Learn about us"),
         ]
     }
