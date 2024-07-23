@@ -26,6 +26,8 @@
 
 </details>
 
+</br>
+
 <div id='What-is-ThinkRAG'></a>
 
 # What is ThinkRAG 🤔
@@ -47,7 +49,7 @@ ThinkRAG is an open-source RAG engine that based on document retrieval.
 
 
 
-</br></br>
+</br>
 
 <div id='quick-start'></a>
 
@@ -72,6 +74,8 @@ streamlit run app.py
 <br/><br/>
 
 <div id='set-api-key'></a>
+
+</br>
 
 # Set API Key: ⚙️
 
@@ -116,7 +120,7 @@ To ensure the changes take effect in your current terminal session, you can sour
 source ~/.zshenv 
 # source ~/.bashrc for Linux, macOS Mojave (10.14) or earlier
 ```
-</br></br>
+</br>
 
 ## Windows
 
@@ -133,11 +137,15 @@ setx VARIABLE_NAME "value" -m # Set Permanent API Key
 
 <div id='engine-interface-instructions'></a>
 
+</br>
+
 # Engine Interface Instructions 📖
 
 See [here](Instructions.md) for detailed instructions about ThinkRAG's key features and how to use them for your own customized purposes.
 
 <div id='model-support'></a>
+
+</br>
 
 # Model Support 🪀
 
@@ -193,6 +201,8 @@ gpt-4o
 </table>
 
 <div id='license'></a>
+
+</br>
 
 # License 📄
 

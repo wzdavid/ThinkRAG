@@ -15,7 +15,7 @@
 
 
 <details open>
-<summary></b> Table of Contents</b></summary>
+<summary></b> 目录</b></summary>
 
 - [ThinkRAG](#think-rag) 🤔
 - [快速开始](#快速开始) 🔜
@@ -28,6 +28,8 @@
 
 
 <div id='think-rag'></a>
+
+</br>
 
 # ThinkRAG 🤔
 ThinkRAG是一款基于文档检索的开源RAG引擎。
@@ -44,7 +46,7 @@ ThinkRAG是一款基于文档检索的开源RAG引擎。
 
 
 
-</br></br>
+</br>
 
 # 快速开始 🔜
 
@@ -63,7 +65,7 @@ pip3 install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
-<br/><br/>
+<br/>
 
 # 设置密钥: ⚙️
 
@@ -108,10 +110,8 @@ export OPENAI_API_KEY=your_OpenAI_API_key
 source ~/.zshenv 
 # source ~/.bashrc for Linux, macOS Mojave (10.14) or earlier
 ```
-</br></br>
 
 ## Windows
-
 
 ### 运行以下命令
 
@@ -123,10 +123,13 @@ set VARIABLE_NAME=value # Set Temporary API Key
 setx VARIABLE_NAME "value" -m # Set Permanent API Key
 ```
 
+</br>
 
 # 应用界面详解 📖
 
 应用界面的详细功能及操作详解，见[此处](Instructions_zh.md)
+
+</br>
 
 # 模型支持 🪀
 
@@ -181,6 +184,7 @@ gpt-4o
 </tr>
 </table>
 
+</br>
 
 # 授权条款 📄
 
