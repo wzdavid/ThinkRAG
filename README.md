@@ -135,7 +135,7 @@ setx VARIABLE_NAME "value" -m # Set Permanent API Key
 
 # Engine Interface Instructions 📖
 
-See [here](instructions.md) for detailed instructions about ThinkRAG's key features and how to use them for your own customized purposes.
+See [here](Instructions.md) for detailed instructions about ThinkRAG's key features and how to use them for your own customized purposes.
 
 <div id='model-support'></a>
 
