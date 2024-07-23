@@ -71,11 +71,9 @@ Then, run ThinkRAG by the following command:
 ```bash
 streamlit run app.py
 ```
-<br/><br/>
+<br/>
 
 <div id='set-api-key'></a>
-
-</br>
 
 # Set API Key: ⚙️
 
