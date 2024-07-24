@@ -102,7 +102,11 @@ RERANKER_MODEL_TOP_N = 2
 RERANKER_MAX_LENGTH = 1024
 
 # Development environment or production environment
-DEV_MODE = True
+THINKRAG_ENV = os.getenv("THINKRAG_ENV", "")
+if THINKRAG_ENV == "prod":
+    DEV_MODE = False
+else:
+    DEV_MODE = True
 
 # For creating IndexManager
 DEFAULT_INDEX_NAME = "knowledge_base"

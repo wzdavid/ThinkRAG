@@ -18,7 +18,7 @@ def create_vector_store(type=DEFAULT_VS_TYPE):
         import chromadb
         from llama_index.vector_stores.chroma import ChromaVectorStore
 
-        db = chromadb.PersistentClient(path="./" + STORAGE_DIR)
+        db = chromadb.PersistentClient(path=".chroma")
         chroma_collection = db.get_or_create_collection("think")
         chroma_vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
         return chroma_vector_store
@@ -42,6 +42,18 @@ def create_vector_store(type=DEFAULT_VS_TYPE):
         retrieval_strategy=AsyncDenseVectorStrategy(hybrid=True), # Use hybrid retrieval
         )
         return es_vector_store
+    elif type == "lancedb":
+        # Vector database LanceDB
+        # https://docs.llamaindex.ai/en/stable/examples/vector_stores/LanceDBIndexDemo/
+        # https://lancedb.github.io/lancedb/hybrid_search/hybrid_search/
+        from llama_index.vector_stores.lancedb import LanceDBVectorStore
+        from lancedb.rerankers import LinearCombinationReranker
+        reranker = LinearCombinationReranker(weight=0.9)
+
+        lance_vector_store = LanceDBVectorStore(
+            uri=".lancedb", mode="overwrite", query_type="hybrid", reranker=reranker
+        )
+        return lance_vector_store
     else:
         raise ValueError(f"Invalid vector store type: {type}")
 
@@ -51,4 +63,4 @@ from llama_index.core.vector_stores import SimpleVectorStore
 
 from config import DEV_MODE
 
-VECTOR_STORE = SimpleVectorStore() if DEV_MODE else create_vector_store()
+VECTOR_STORE = SimpleVectorStore() if DEV_MODE else create_vector_store(type="lancedb")

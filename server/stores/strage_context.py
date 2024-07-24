@@ -23,14 +23,14 @@ def create_storage_context():
             print(f"Created new storage context")
             return dev_storage_context
     else:
-        # Production environment: ES for vector store、MongoDB for vector store、Redis for chat store
+        # Production environment: LanceDB for vector store, Redis for chat store
         from server.stores.doc_store import DOC_STORE
-        from server.stores.vector_store import VECTOR_STORE, create_vector_store
+        from server.stores.vector_store import VECTOR_STORE
         from server.stores.index_store import INDEX_STORE
         pro_storage_context = StorageContext.from_defaults(
             docstore=DOC_STORE,
             index_store=INDEX_STORE,
-            vector_store=create_vector_store(),
+            vector_store=VECTOR_STORE,
         )
         return pro_storage_context
 

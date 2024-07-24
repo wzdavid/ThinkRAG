@@ -14,6 +14,7 @@ llama-index-storage-kvstore-postgres
 llama-index-storage-kvstore-redis
 llama-index-vector-stores-chroma
 llama-index-vector-stores-elasticsearch
+llama-index-vector-stores-lancedb
 llama-index-llms-fireworks
 llama-index-llms-ollama
 llama-index-storage-chat_store-redis

@@ -7,6 +7,9 @@ data/
 # Local Storage
 storage/
 
+# Test files
+test_*.*
+
 # The following are ignored by default.
 
 # Byte-compiled / optimized / DLL files
