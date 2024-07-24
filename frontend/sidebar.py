@@ -48,7 +48,7 @@ def select_llm():
                 index = st.session_state.ollama_models.index(st.session_state.ollama_model_selected)
             st.selectbox('Choose local LLM', options1,
                         index=index,
-                        help="Select Ollama's locally deployed LLM",
+                        help='Select locally deployed LLM from Ollama',
                         on_change=handle_ollama_llm,
                         key='ollama_model_name', # session_state key
             )
