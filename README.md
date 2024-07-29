@@ -4,22 +4,6 @@
 </p>
 
 
-<style>
-  summary {
-    font-size: 17px; /* This enlarges the triangle */
-  }
-  summary > span {
-    font-size: 28PX; /* This reduces the text size 
-    relative to the summary */
-    font-weight: bold;
-  }
-  summary > div {
-    font-size: 20PX; /* This reduces the text size 
-    relative to the summary */
-    font-weight: bold;
-  }
-</style>
-
 <details open>
 <summary><span>Table of Contents</span></summary>
 
@@ -39,7 +23,7 @@
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>What is ThinkRAG 🤔</span>
+    <span style="font-size: 28px; font-weight: bold;">What is ThinkRAG 🤔</span>
   </summary>
 
 ThinkRAG is an open-source RAG engine that based on document retrieval.
@@ -78,7 +62,7 @@ Visit [here](https://lancedb.com/) to learn more about LanceDB.
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>Quick Start 🔜</span>
+    <span style="font-size: 28px; font-weight: bold;">Quick Start 🔜</span>
   </summary>
 
 ### Step 1
@@ -105,13 +89,13 @@ streamlit run app.py
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>Set API Key ⚙️</span>
+    <span style="font-size: 28px; font-weight: bold;">Set API Key ⚙️</span>
   </summary>
 
 
 <details style="font-size: 14px;">
   <summary>
-    <div>MacOS & Linux</div>
+    <div style="font-size: 20px; font-weight: bold;">MacOS & Linux</div>
   </summary>
 
 ### Set Temporary API Key
@@ -160,7 +144,7 @@ source ~/.zshenv
 
 <details style="font-size: 14px;">
   <summary>
-    <div>Windows</div>
+    <div style="font-size: 20px; font-weight: bold;">Windows</div>
   </summary>
 
 ### Run the command line in your terminal
@@ -182,7 +166,7 @@ setx VARIABLE_NAME "value" -m # Set Permanent API Key
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>Engine Interface Instructions 📖</span>
+    <span style="font-size: 28px; font-weight: bold;">Engine Interface Instructions 📖</span>
   </summary>
 
 See [here](Instructions.md) for detailed instructions about ThinkRAG's key features and how to use them for your own customized purposes.
@@ -195,7 +179,7 @@ See [here](Instructions.md) for detailed instructions about ThinkRAG's key featu
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>Model Support 🪀<span>
+    <span style="font-size: 28px; font-weight: bold;">Model Support 🪀<span>
   </summary>
 
 <table>
@@ -257,7 +241,7 @@ gpt-4o
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>License 📄</span>
+    <span style="font-size: 28px; font-weight: bold;">License 📄</span>
   </summary>
 
 ThinkRAG uses MIT License. See [here](LICENSE) for details.

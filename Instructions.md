@@ -1,22 +1,6 @@
-<style>
-  summary {
-    font-size: 17px; /* This enlarges the triangle */
-  }
-  summary > span {
-    font-size: 28PX; /* This reduces the text size 
-    relative to the summary */
-    font-weight: bold;
-  }
-  summary > div {
-    font-size: 20PX; /* This reduces the text size 
-    relative to the summary */
-    font-weight: bold;
-  }
-</style>
-
 <details open style="font-size: 14px;">
     <summary>
-        <span>Create Your Own Knowledge Base 👤</span>
+        <span style="font-size: 28px; font-weight: bold;">Create Your Own Knowledge Base 👤</span>
     </summary>
 
 
@@ -88,7 +72,7 @@ __*You are gonna have to generate the index after customized you preferrd text p
 
 <details open style="font-size: 14px;">
     <summary>
-        <span>Settings ⚙️</span>
+        <span style="font-size: 28px; font-weight: bold;">Settings ⚙️</span>
     </summary>
 
 </br>
@@ -132,7 +116,7 @@ These interfaces provide comprehensive control over the application’s function
 
 <details open style="font-size: 14px;">
     <summary>
-        <span>Choose your preferred LLM 👀</span>
+        <span style="font-size: 28px; font-weight: bold;">Choose your preferred LLM 👀</span>
     </summary>
 
 </br>

@@ -1,26 +1,10 @@
-<style>
-  summary {
-    font-size: 17px; /* This enlarges the triangle */
-  }
-  summary > span {
-    font-size: 28PX; /* This reduces the text size 
-    relative to the summary */
-    font-weight: bold;
-  }
-  summary > div {
-    font-size: 20PX; /* This reduces the text size 
-    relative to the summary */
-    font-weight: bold;
-  }
-</style>
-
 <details open style="font-size: 14px;">
     <summary>
-        <span>创建你的个人知识库 👤</span>
+        <span style="font-size: 28px; font-weight: bold;">创建你的个人知识库 👤</span>
     </summary>
 
 
-Think 作为本地大语言模型知识库问答系统，首选需要保证具备知识库来运作。
+Think 作为本地大语言模型知识库问答系统，首选需要保证具备知识库来运作。对于第一次使用ThinkRAG的用户，首先要创建自己的知识库。
 
 <div align="center">
 <img src="web/src/the_knowledge_base_is_empty.png" width="350" alt="the_knowledge_base_is_empty">
@@ -28,7 +12,7 @@ Think 作为本地大语言模型知识库问答系统，首选需要保证具�
 </div>
 
 </br>
-对于第一次使用ThinkRAG的用户，首先要创建自己的知识库。
+
 
 
 ### ThinkRAG 目前支持文件上传和URL上传:
@@ -93,7 +77,7 @@ __*在自定义您喜欢的文本处理参数（或保持默认设置）之后�
 
 <details open style="font-size: 14px;">
     <summary>
-        <span>设置 ⚙️</span>
+        <span style="font-size: 28px; font-weight: bold;">设置 ⚙️</span>
     </summary>
 
 </br>
@@ -137,7 +121,7 @@ __*在自定义您喜欢的文本处理参数（或保持默认设置）之后�
 
 <details open style="font-size: 14px;">
     <summary>
-        <span>选择LLM 👀</span>
+        <span style="font-size: 28px; font-weight: bold;">选择LLM 👀</span>
     </summary>
 
 </br>

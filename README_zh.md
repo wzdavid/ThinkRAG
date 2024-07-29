@@ -4,22 +4,6 @@
 </p>
 
 
-<style>
-  summary {
-    font-size: 17px; /* This enlarges the triangle */
-  }
-  summary > span {
-    font-size: 28PX; /* This reduces the text size 
-    relative to the summary */
-    font-weight: bold;
-  }
-  summary > div {
-    font-size: 20PX; /* This reduces the text size 
-    relative to the summary */
-    font-weight: bold;
-  }
-</style>
-
 <details open>
 <summary><span>目录</span></summary>
 
@@ -37,7 +21,7 @@
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>什么是ThinkRAG🤔</span>
+    <span style="font-size: 28px; font-weight: bold;">什么是ThinkRAG🤔</span>
   </summary>
 
 ThinkRAG是一款基于文档检索的开源RAG引擎。
@@ -71,7 +55,7 @@ ThinkRAG是一款基于文档检索的开源RAG引擎。
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>快速开始 🔜</span>
+    <span style="font-size: 28px; font-weight: bold;">快速开始 🔜</span>
   </summary>
 
 ### Step 1
@@ -97,12 +81,12 @@ streamlit run app.py
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>设置密钥 ⚙️</span>
+    <span style="font-size: 28px; font-weight: bold;">设置密钥 ⚙️</span>
   </summary>
 
 <details style="font-size: 14px;">
   <summary>
-    <div>MacOS & Linux</div>
+    <div style="font-size: 20px; font-weight: bold;">MacOS & Linux</div>
   </summary>
 
 ### 设置临时 API 密钥
@@ -147,7 +131,7 @@ source ~/.zshenv
 
 <details style="font-size: 14px;">
   <summary>
-    <div>Windows</div>
+    <div style="font-size: 20px; font-weight: bold;">Windows</div>
   </summary>
 
 ### 运行以下命令
@@ -169,7 +153,7 @@ setx VARIABLE_NAME "value" -m # Set Permanent API Key
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>应用界面详解 📖</span>
+    <span style="font-size: 28px; font-weight: bold;">应用界面详解 📖</span>
   </summary>
 
 应用界面的详细功能及操作详解，见[此处](Instructions_zh.md)
@@ -180,7 +164,7 @@ setx VARIABLE_NAME "value" -m # Set Permanent API Key
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>模型支持 🪀<span>
+    <span style="font-size: 28px; font-weight: bold;">模型支持 🪀<span>
   </summary>
 
 
@@ -243,7 +227,7 @@ gpt-4o
 
 <details open style="font-size: 14px;">
   <summary>
-    <span>授权条款 📄<span>
+    <span style="font-size: 28px; font-weight: bold;">授权条款 📄<span>
   </summary>
 
 ThinkRAG 遵循 MIT 授权条款，详情请见[此处](LICENSE)
