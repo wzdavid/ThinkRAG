@@ -37,5 +37,5 @@ def create_chat_memory():
             chat_store_key=CHAT_STORE_KEY,
         )
         return redis_chat_memory
-    
+
 CHAT_MEMORY = create_chat_memory()

@@ -1,21 +1,27 @@
-<div align="center">
-<img src="web/src/temporary_logo.png" width="350" alt="temporary_logo">
-</a>
-</div>
-
-
-
-
 <p align="center">
   <a href="./README.md">English</a> |
   <a href="./README_zh.md">简体中文</a>
 </p>
 
 
-
+<style>
+  summary {
+    font-size: 17px; /* This enlarges the triangle */
+  }
+  summary > span {
+    font-size: 28PX; /* This reduces the text size 
+    relative to the summary */
+    font-weight: bold;
+  }
+  summary > div {
+    font-size: 20PX; /* This reduces the text size 
+    relative to the summary */
+    font-weight: bold;
+  }
+</style>
 
 <details open>
-<summary></b> Table of Contents</b></summary>
+<summary><span>Table of Contents</span></summary>
 
 - [What is ThinkRAG](#What-is-ThinkRAG) 🤔
 - [Quick Start](#quick-start) 🔜
@@ -24,13 +30,18 @@
 - [Model Support](#model-support) 🪀
 - [License](#license) 📄
 
-</details>
-
 </br>
+
+</details>
 
 <div id='What-is-ThinkRAG'></a>
 
-# What is ThinkRAG 🤔
+
+<details open style="font-size: 14px;">
+  <summary>
+    <span>What is ThinkRAG 🤔</span>
+  </summary>
+
 ThinkRAG is an open-source RAG engine that based on document retrieval.
 
 ### Key Features
@@ -47,16 +58,31 @@ ThinkRAG is an open-source RAG engine that based on document retrieval.
 
 &emsp;&emsp; ThinkRAG also includes advanced settings that allow users to further refine system behaviour and interaction modes, such as adjusting response selection criteria and customizing system prompts.
 
+#### Support LanceDB:
 
+&emsp;&emsp; As a open-source multimodal vector database, LanceDB has following core advantages:
+- Optimized for Time Series Data: Designed specifically for handling time series data, making it ideal for real-time monitoring, IoT device data, financial trading data, and more.
+- High Performance: Offers high data ingestion rates and fast query performance, suitable for real-time analytics.
+- Scalability: Supports horizontal scaling, enabling increased load handling by adding more nodes.
+- Efficient Data Compression: Utilizes advanced data compression techniques to optimize storage and enhance I/O efficiency.
+- Flexible Data Retention Policies: Allows for customizable data retention policies, supporting automatic downsampling or deletion of old data.
+- Robust Query Language: Provides a powerful and flexible query language to facilitate complex data analysis and aggregation directly in the database.
+- Integrated Visualization Tools: May include integrated tools for data visualization and dashboarding, simplifying data monitoring and analysis.
+
+Visit [here](https://lancedb.com/) to learn more about LanceDB. 
 
 </br>
+</details>
 
 <div id='quick-start'></a>
 
-# Quick Start 🔜
+<details open style="font-size: 14px;">
+  <summary>
+    <span>Quick Start 🔜</span>
+  </summary>
 
 ### Step 1
-```bash
+```zsh
 pip3 install -r requirements.txt
 ```
 ### Step 2
@@ -67,26 +93,34 @@ Refer to [here](/docs/HowToDownloadModels.md) to download embedding models and n
 
 If you need LLMs API, please set your corresponding API Key first, see [Set API Key](#set-api-key) for detailed instructions.
 
-Then, run ThinkRAG by the following command:
-```bash
+Then, run ThinkRAG by the following command (after returning to the root directory of ThinkRAG):
+```zsh
 streamlit run app.py
 ```
 <br/>
 
+</details>
+
 <div id='set-api-key'></a>
 
-# Set API Key: ⚙️
+<details open style="font-size: 14px;">
+  <summary>
+    <span>Set API Key ⚙️</span>
+  </summary>
 
 
-## MacOS & Linux
+<details style="font-size: 14px;">
+  <summary>
+    <div>MacOS & Linux</div>
+  </summary>
 
 ### Set Temporary API Key
 ### 1. Run the command line in your terminal
-```bash
+```zsh
 export VARIABLE_NAME=value
 ```
 For instance, to set your API key for OpenAI, just run the following line in your terminal:
-```bash
+```zsh
 export OPENAI_API_KEY=your_OpenAI_API_key 
 ```
 <br/>
@@ -94,19 +128,19 @@ export OPENAI_API_KEY=your_OpenAI_API_key
 ### Set Permanent API Key
 ### 1. Create or edit '.zshenv' file
 
-```bash
+```zsh
 nano ~/.zshenv
 ```
 For Linux, macOS Mojave (10.14) or earlier version, run 
-```bash
+```zsh
 nano ~/.bashrc
 ```
 ### 2. Add Your Configuration
-```bash
+```zsh
 export VARIABLE_NAME="value"
 ```
 For instance, to set your API key for OpenAI, just type the following line into your '.zshenv' (or '.bashrc') file:
-```bash
+```zsh
 export OPENAI_API_KEY=your_OpenAI_API_key 
 ```
 ### 3. Save and exit
@@ -114,38 +148,55 @@ You may now save changes by pressing 'Ctrl + O', then press 'Enter' to confirm, 
 
 ### 4. Apply the Changes
 To ensure the changes take effect in your current terminal session, you can source the file by run
-```bash
+```zsh
 source ~/.zshenv 
 # source ~/.bashrc for Linux, macOS Mojave (10.14) or earlier
 ```
 </br>
 
-## Windows
+</details>
 
+
+
+<details style="font-size: 14px;">
+  <summary>
+    <div>Windows</div>
+  </summary>
 
 ### Run the command line in your terminal
 
-```bash
+```zsh
 set VARIABLE_NAME=value # Set Temporary API Key
 ```
 
-```bash
+```zsh
 setx VARIABLE_NAME "value" -m # Set Permanent API Key
 ```
 
-<div id='engine-interface-instructions'></a>
-
 </br>
 
-# Engine Interface Instructions 📖
+</details>
+</details>
+
+<div id='engine-interface-instructions'></a>
+
+<details open style="font-size: 14px;">
+  <summary>
+    <span>Engine Interface Instructions 📖</span>
+  </summary>
 
 See [here](Instructions.md) for detailed instructions about ThinkRAG's key features and how to use them for your own customized purposes.
 
-<div id='model-support'></a>
-
 </br>
 
-# Model Support 🪀
+</details>
+
+<div id='model-support'></a>
+
+<details open style="font-size: 14px;">
+  <summary>
+    <span>Model Support 🪀<span>
+  </summary>
 
 <table>
 <tr>
@@ -198,17 +249,16 @@ gpt-4o
 </tr>
 </table>
 
-<div id='license'></a>
-
 </br>
 
-# License 📄
+</details>
+
+<div id='license'></a>
+
+<details open style="font-size: 14px;">
+  <summary>
+    <span>License 📄</span>
+  </summary>
 
 ThinkRAG uses MIT License. See [here](LICENSE) for details.
-
-
-
-
-
-
-
+</details>

@@ -1,21 +1,27 @@
-<div align="center">
-<img src="web/src/temporary_logo.png" width="350" alt="temporary_logo">
-</a>
-</div>
-
-
-
-
 <p align="center">
   <a href="./README.md">English</a> |
   <a href="./README_zh.md">简体中文</a>
 </p>
 
 
-
+<style>
+  summary {
+    font-size: 17px; /* This enlarges the triangle */
+  }
+  summary > span {
+    font-size: 28PX; /* This reduces the text size 
+    relative to the summary */
+    font-weight: bold;
+  }
+  summary > div {
+    font-size: 20PX; /* This reduces the text size 
+    relative to the summary */
+    font-weight: bold;
+  }
+</style>
 
 <details open>
-<summary></b> 目录</b></summary>
+<summary><span>目录</span></summary>
 
 - [ThinkRAG](#think-rag) 🤔
 - [快速开始](#快速开始) 🔜
@@ -29,9 +35,11 @@
 
 <div id='think-rag'></a>
 
-</br>
+<details open style="font-size: 14px;">
+  <summary>
+    <span>什么是ThinkRAG🤔</span>
+  </summary>
 
-# ThinkRAG 🤔
 ThinkRAG是一款基于文档检索的开源RAG引擎。
 
 ### 主要功能：
@@ -44,11 +52,27 @@ ThinkRAG是一款基于文档检索的开源RAG引擎。
 #### 高级设置：
 &emsp;&emsp; ThinkRAG 还包括允许用户进一步优化系统行为和交互模式的高级设置，如调整响应选择标准和自定义系统提示。
 
+#### 支持LanceDB：
+&emsp;&emsp; LanceDB 作为开源多模态向量数据库，具备以下核心优势：
+- 针对时间序列数据优化：专为时间序列数据设计，适合实时监控，物联网设备数据、金融交易数据等。
+- 高性能处理：具有高数据吞吐率和快速查询性能，适用于实时分析。
+- 可扩展性强：支持水平扩展，可以通过增加节点来处理更大的负载。
+- 高效数据压缩：采用先进的数据压缩技术优化存储并提高 I/O 效率。
+- 灵活的数据保留策略：支持自定义数据保留政策，自动降采样或删除旧数据。
+- 强大的查询语言：提供强大而灵活的查询语言，支持数据库内复杂的数据分析和聚合。
+- 内置可视化工具：可能包括集成的数据可视化和仪表盘工具，简化数据监控和分析。
 
+浏览[LanceDB官网](https://lancedb.com/)以了解更多信息。
 
 </br>
+</details>
 
-# 快速开始 🔜
+<div id='快速开始'></a>
+
+<details open style="font-size: 14px;">
+  <summary>
+    <span>快速开始 🔜</span>
+  </summary>
 
 ### Step 1
 ```bash
@@ -65,12 +89,21 @@ pip3 install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
-<br/>
+</br>
+</details>
 
-# 设置密钥: ⚙️
+<div id='设置密钥'></a>
 
 
-## MacOS & Linux
+<details open style="font-size: 14px;">
+  <summary>
+    <span>设置密钥 ⚙️</span>
+  </summary>
+
+<details style="font-size: 14px;">
+  <summary>
+    <div>MacOS & Linux</div>
+  </summary>
 
 ### 设置临时 API 密钥
 ### 1. 运行以下指令
@@ -110,8 +143,12 @@ export OPENAI_API_KEY=your_OpenAI_API_key
 source ~/.zshenv 
 # source ~/.bashrc for Linux, macOS Mojave (10.14) or earlier
 ```
+</details>
 
-## Windows
+<details style="font-size: 14px;">
+  <summary>
+    <div>Windows</div>
+  </summary>
 
 ### 运行以下命令
 
@@ -125,13 +162,27 @@ setx VARIABLE_NAME "value" -m # Set Permanent API Key
 
 </br>
 
-# 应用界面详解 📖
+</details>
+</details>
+
+<div id='应用界面详解'></a>
+
+<details open style="font-size: 14px;">
+  <summary>
+    <span>应用界面详解 📖</span>
+  </summary>
 
 应用界面的详细功能及操作详解，见[此处](Instructions_zh.md)
 
-</br>
+</details>
 
-# 模型支持 🪀
+<div id='模型支持'></a>
+
+<details open style="font-size: 14px;">
+  <summary>
+    <span>模型支持 🪀<span>
+  </summary>
+
 
 <table>
 <tr>
@@ -186,12 +237,14 @@ gpt-4o
 
 </br>
 
-# 授权条款 📄
+</details>
 
+<div id='授权条款'></a>
+
+<details open style="font-size: 14px;">
+  <summary>
+    <span>授权条款 📄<span>
+  </summary>
 
 ThinkRAG 遵循 MIT 授权条款，详情请见[此处](LICENSE)
-
-
-
-
-
+</details>
