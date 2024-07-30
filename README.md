@@ -14,6 +14,7 @@
 
 - 🤔 [What is ThinkRAG](#What-is-ThinkRAG)
 - ✨ [Key features](#Key-Features)
+- 📝 [Demo](#Demo)
 - 🛫 [Quick Start](#quick-start)
 - ⚙️ [Set API Key](#set-api-key)
   - [MacOS & Linux](#MacOS-Linux)
@@ -31,7 +32,6 @@
 # What is ThinkRAG 🤔
 
 ThinkRAG is an open-source RAG engine that based on document retrieval.
-
 
 <div id='Key-Features'></a>
 
@@ -74,6 +74,16 @@ Visit [here](https://lancedb.com/) to learn more about LanceDB.
 
 </details>
 
+<div id='Demo'></a>
+
+# Demo 📝
+
+<details open>
+  <summary>
+    <b>Expand</b>
+  </summary>
+  Try our demo here!
+</details>
 
 <div id='quick-start'></a>
 
@@ -212,7 +222,7 @@ To install your preferred Ollama models, run this command in your terminal:
 ```zsh
 ollama pull <model_name>
 ```
->_*We suggest you to specify the model_name otherwise it will point to the latest, smallest sized-parameter model that fits the name you indicate and may not be the model you want.*_
+>_*We suggest you to specify the model_name otherwise it will point to the latest, smallest sized-parameter model that fits the name you indicate, which may not be the model you actually want.*_
 
 Once the installation is complete, you may double-check that viewing all the models you have pulled via:
 ```zsh
@@ -224,10 +234,15 @@ or directly run a certain model via:
 ollama run <model_name>
 ```
 
+Take gemma:2b for example：
+<div align="center">
+<img src="web/src/gemma_2b.png" width="700" alt="gemma_2b">
+</a>
+</div>
+
 <div id='Tested-Models'></a>
 
-</br>
-
+### Supported Ollama models and other LLMs
 
 <table>
 <tr>
@@ -290,7 +305,6 @@ gpt-4o
 # License 📄
 
 ThinkRAG uses MIT License. See [here](LICENSE) for details.
-</details>
 
 <div id='Future-Plans'></a>
 

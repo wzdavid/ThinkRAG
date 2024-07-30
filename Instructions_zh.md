@@ -2,7 +2,7 @@
 
 <details open>
   <summary>
-    <b>Expand</b>
+    <b>展开</b>
   </summary>
 
 Think 作为本地大语言模型知识库问答系统，首选需要保证具备知识库来运作。对于第一次使用ThinkRAG的用户，首先要创建自己的知识库。
@@ -78,7 +78,7 @@ Think 作为本地大语言模型知识库问答系统，首选需要保证具�
 
 <details open>
   <summary>
-    <b>Expand</b>
+    <b>展开</b>
   </summary>
 
 </br>
@@ -124,7 +124,7 @@ Think 作为本地大语言模型知识库问答系统，首选需要保证具�
 
 <details open>
   <summary>
-    <b>Expand</b>
+    <b>展开</b>
   </summary>
 
 </br>
