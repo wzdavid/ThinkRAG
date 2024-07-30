@@ -1,7 +1,9 @@
-<details open style="font-size: 14px;">
-    <summary>
-        <span style="font-size: 28px; font-weight: bold;">Create Your Own Knowledge Base 👤</span>
-    </summary>
+# Create Your Own Knowledge Base 👤
+
+<details open>
+  <summary>
+    <b>Expand</b>
+  </summary>
 
 
 ThinkRAG, as a local LLM knowledge base Q&A system, needs a non-empty knowledge base to function. 
@@ -9,7 +11,7 @@ ThinkRAG, as a local LLM knowledge base Q&A system, needs a non-empty knowledge 
 For first-time users, the first thing you need to do before moving forward is to create your own knowledge base.
 
 <div align="center">
-<img src="web/src/the_knowledge_base_is_empty.png" width="350" alt="the_knowledge_base_is_empty">
+<img src="web/src/the_knowledge_base_is_empty.png" width="700" alt="the_knowledge_base_is_empty">
 </a>
 </div>
 
@@ -18,7 +20,7 @@ For first-time users, the first thing you need to do before moving forward is to
 #### File Uploads ⏫
 
 <div align="center">
-<img src="web/src/file_uploads.png" width="350" alt="file_uploads">
+<img src="web/src/file_uploads.png" width="700" alt="file_uploads">
 </a>
 </div>
 
@@ -38,7 +40,7 @@ This section of the interface is designed for uploading and managing files(all f
 #### URL Uploads ⏫
 
 <div align="center">
-<img src="web/src/url_uploads.png" width="350" alt="url_uploads">
+<img src="web/src/url_uploads.png" width="700" alt="url_uploads">
 </a>
 </div>
 
@@ -56,7 +58,7 @@ This interface is focused on adding and processing web page URLs in the knowledg
 <br/>
 
 <div align="center">
-<img src="web/src/knowledge_base_content.png" width="350" alt="knowledge_base_content">
+<img src="web/src/knowledge_base_content.png" width="700" alt="knowledge_base_content">
 </a>
 </div>
 
@@ -70,21 +72,23 @@ Once you've uploaded successfully, you may check out the content in the knowledg
 
 </details>
 
-<details open style="font-size: 14px;">
-    <summary>
-        <span style="font-size: 28px; font-weight: bold;">Settings ⚙️</span>
-    </summary>
+# Settings ⚙️
+
+<details open>
+  <summary>
+    <b>Expand</b>
+  </summary>
 
 </br>
 
 <div align="center">
-<img src="web/src/settings_1.png" width="350" alt="settings_1">
+<img src="web/src/settings_1.png" width="700" alt="settings_1">
 </a>
 </div>
 
 
 <div align="center">
-<img src="web/src/settings_2.png" width="350" alt="settings_2">
+<img src="web/src/settings_2.png" width="700" alt="settings_2">
 </a>
 </div>
 
@@ -114,15 +118,17 @@ These interfaces provide comprehensive control over the application’s function
 </br></br>
 </details>
 
-<details open style="font-size: 14px;">
-    <summary>
-        <span style="font-size: 28px; font-weight: bold;">Choose your preferred LLM 👀</span>
-    </summary>
+# Choose your preferred LLM 👀
+
+<details open>
+  <summary>
+    <b>Expand</b>
+  </summary>
 
 </br>
 
 <div align="center">
-<img src="web/src/choose_your_llms.png" width="350" alt="choose_your_llms">
+<img src="web/src/choose_your_llms.png" width="700" alt="choose_your_llms">
 </a>
 </div>
 

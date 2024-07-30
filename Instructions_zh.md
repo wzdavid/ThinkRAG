@@ -1,13 +1,14 @@
-<details open style="font-size: 14px;">
-    <summary>
-        <span style="font-size: 28px; font-weight: bold;">创建你的个人知识库 👤</span>
-    </summary>
+# 创建你的个人知识库 👤
 
+<details open>
+  <summary>
+    <b>Expand</b>
+  </summary>
 
 Think 作为本地大语言模型知识库问答系统，首选需要保证具备知识库来运作。对于第一次使用ThinkRAG的用户，首先要创建自己的知识库。
 
 <div align="center">
-<img src="web/src/the_knowledge_base_is_empty.png" width="350" alt="the_knowledge_base_is_empty">
+<img src="web/src/the_knowledge_base_is_empty.png" width="700" alt="the_knowledge_base_is_empty">
 </a>
 </div>
 
@@ -20,7 +21,7 @@ Think 作为本地大语言模型知识库问答系统，首选需要保证具�
 #### 文件上传 ⏫
 
 <div align="center">
-<img src="web/src/file_uploads.png" width="350" alt="file_uploads">
+<img src="web/src/file_uploads.png" width="700" alt="file_uploads">
 </a>
 </div>
 
@@ -41,7 +42,7 @@ Think 作为本地大语言模型知识库问答系统，首选需要保证具�
 #### URL上传 ⏫
 
 <div align="center">
-<img src="web/src/url_uploads.png" width="350" alt="url_uploads">
+<img src="web/src/url_uploads.png" width="700" alt="url_uploads">
 </a>
 </div>
 
@@ -60,36 +61,36 @@ Think 作为本地大语言模型知识库问答系统，首选需要保证具�
 <br/>
 
 <div align="center">
-<img src="web/src/knowledge_base_content.png" width="350" alt="knowledge_base_content">
+<img src="web/src/knowledge_base_content.png" width="700" alt="knowledge_base_content">
 </a>
 </div>
 
 </br>
 上传成功后，您可以在知识库管理界面中查看知识库的内容。
 
-
 #### 注意⚠️
 > __*在自定义您喜欢的文本处理参数（或保持默认设置）之后，请务必生成索引，否则将影响检索功能的正常工作。*__
-
 
 </br></br>
 </details>
 
-<details open style="font-size: 14px;">
-    <summary>
-        <span style="font-size: 28px; font-weight: bold;">设置 ⚙️</span>
-    </summary>
+# 设置 ⚙️
+
+<details open>
+  <summary>
+    <b>Expand</b>
+  </summary>
 
 </br>
 
 <div align="center">
-<img src="web/src/settings_1.png" width="350" alt="settings_1">
+<img src="web/src/settings_1.png" width="700" alt="settings_1">
 </a>
 </div>
 
 
 <div align="center">
-<img src="web/src/settings_2.png" width="350" alt="settings_2">
+<img src="web/src/settings_2.png" width="700" alt="settings_2">
 </a>
 </div>
 
@@ -119,15 +120,17 @@ Think 作为本地大语言模型知识库问答系统，首选需要保证具�
 </br></br>
 </details>
 
-<details open style="font-size: 14px;">
-    <summary>
-        <span style="font-size: 28px; font-weight: bold;">选择LLM 👀</span>
-    </summary>
+# 选择LLM 👀
+
+<details open>
+  <summary>
+    <b>Expand</b>
+  </summary>
 
 </br>
 
 <div align="center">
-<img src="web/src/choose_your_llms.png" width="350" alt="choose_your_llms">
+<img src="web/src/choose_your_llms.png" width="700" alt="choose_your_llms">
 </a>
 </div>
 

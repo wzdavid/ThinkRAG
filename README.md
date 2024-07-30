@@ -12,17 +12,18 @@
 
 ### Table of Contents
 
-- [What is ThinkRAG](#What-is-ThinkRAG) 🤔
-- [Key features](#Key-Features) ✨
-- [Quick Start](#quick-start) 🛫
-- [Set API Key](#set-api-key) ⚙️
+- 🤔 [What is ThinkRAG](#What-is-ThinkRAG)
+- ✨ [Key features](#Key-Features)
+- 🛫 [Quick Start](#quick-start)
+- ⚙️ [Set API Key](#set-api-key)
   - [MacOS & Linux](#MacOS-Linux)
   - [Windows](#Windows)
-- [Engine Interface Instructions](#engine-interface-instructions) 📖
-- [Model Support](#model-support) 🪀
-- [License](#license) 📄
-- [Future Plans](#Future-Plans) 🔜
-- [Contact Us](#Contact-Us) ☎️
+- 📖 [Engine Interface Instructions](#engine-interface-instructions)
+- 🪀 [Model Support](#model-support)
+- 📄 [License](#license)
+- 🔜 [Future Plans](#Future-Plans)
+- ❓ [FAQ](#FAQ)
+- ☎️ [Contact Us](#Contact-Us)
 
 
 <div id='What-is-ThinkRAG'></a>
@@ -295,8 +296,12 @@ ThinkRAG uses MIT License. See [here](LICENSE) for details.
 
 # Future-Plans 🔜
 
+<div id='FAQ'></a>
+
+# FAQ❓
+
 <div id='Contact-Us'></a>
 
 # Contact Us ☎️
 
-##### Wechat Official Account
+##### Official WeChat Account
