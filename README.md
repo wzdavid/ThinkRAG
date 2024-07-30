@@ -1,34 +1,48 @@
+---
+layout: default
+---
+
 <p align="center">
   <a href="./README.md">English</a> |
   <a href="./README_zh.md">简体中文</a>
 </p>
 
+<div align="center">
 
-<details open>
-<summary><span>Table of Contents</span></summary>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
+
+### Table of Contents
 
 - [What is ThinkRAG](#What-is-ThinkRAG) 🤔
+- [Key features](#Key-Features)
 - [Quick Start](#quick-start) 🔜
 - [Set API Key](#set-api-key) ⚙️
+  - [MacOS & Linux](#MacOS-Linux)
+  - [Windows](#Windows)
 - [Engine Interface Instructions](#engine-interface-instructions) 📖
 - [Model Support](#model-support) 🪀
 - [License](#license) 📄
+- [Contact Us](#Contact-Us)
 
-</br>
-
-</details>
 
 <div id='What-is-ThinkRAG'></a>
 
-
-<details open style="font-size: 14px;">
-  <summary>
-    <span style="font-size: 28px; font-weight: bold;">What is ThinkRAG 🤔</span>
-  </summary>
+## What is ThinkRAG 🤔
 
 ThinkRAG is an open-source RAG engine that based on document retrieval.
 
-### Key Features
+
+<div id='Key-Features'></a>
+
+## Key Features
+
+<details open>
+  <summary>
+    <b>Expand</b>
+  </summary>
+
 
 #### Knowledge Base Management: 
 
@@ -56,13 +70,16 @@ ThinkRAG is an open-source RAG engine that based on document retrieval.
 Visit [here](https://lancedb.com/) to learn more about LanceDB. 
 
 </br>
+
 </details>
+
 
 <div id='quick-start'></a>
 
-<details open style="font-size: 14px;">
+## Quick Start 🔜
+<details open>
   <summary>
-    <span style="font-size: 28px; font-weight: bold;">Quick Start 🔜</span>
+    <b>Expand</b>
   </summary>
 
 ### Step 1
@@ -81,25 +98,25 @@ Then, run ThinkRAG by the following command (after returning to the root directo
 ```zsh
 streamlit run app.py
 ```
-<br/>
 
 </details>
 
+
 <div id='set-api-key'></a>
 
-<details open style="font-size: 14px;">
+## Set API Key ⚙️
+
+<div id='MacOS-Linux'></a>
+
+- ### MacOS & Linux
+
+<details>
   <summary>
-    <span style="font-size: 28px; font-weight: bold;">Set API Key ⚙️</span>
+    <b>Expand</b>
   </summary>
 
-
-<details style="font-size: 14px;">
-  <summary>
-    <div style="font-size: 20px; font-weight: bold;">MacOS & Linux</div>
-  </summary>
-
-### Set Temporary API Key
-### 1. Run the command line in your terminal
+#### Set Temporary API Key
+##### 1. Run the command line in your terminal
 ```zsh
 export VARIABLE_NAME=value
 ```
@@ -109,8 +126,8 @@ export OPENAI_API_KEY=your_OpenAI_API_key
 ```
 <br/>
 
-### Set Permanent API Key
-### 1. Create or edit '.zshenv' file
+#### Set Permanent API Key
+##### 1. Create or edit '.zshenv' file
 
 ```zsh
 nano ~/.zshenv
@@ -119,7 +136,7 @@ For Linux, macOS Mojave (10.14) or earlier version, run
 ```zsh
 nano ~/.bashrc
 ```
-### 2. Add Your Configuration
+##### 2. Add Your Configuration
 ```zsh
 export VARIABLE_NAME="value"
 ```
@@ -127,10 +144,10 @@ For instance, to set your API key for OpenAI, just type the following line into 
 ```zsh
 export OPENAI_API_KEY=your_OpenAI_API_key 
 ```
-### 3. Save and exit
+##### 3. Save and exit
 You may now save changes by pressing 'Ctrl + O', then press 'Enter' to confirm, and 'Ctrl + X' to exit the editor.
 
-### 4. Apply the Changes
+##### 4. Apply the Changes
 To ensure the changes take effect in your current terminal session, you can source the file by run
 ```zsh
 source ~/.zshenv 
@@ -140,14 +157,16 @@ source ~/.zshenv
 
 </details>
 
+<div id='Windows'></a>
 
+- ### Windows
 
-<details style="font-size: 14px;">
+<details>
   <summary>
-    <div style="font-size: 20px; font-weight: bold;">Windows</div>
+    <b>Expand</b>
   </summary>
 
-### Run the command line in your terminal
+#### Run the command line in your terminal
 
 ```zsh
 set VARIABLE_NAME=value # Set Temporary API Key
@@ -160,27 +179,30 @@ setx VARIABLE_NAME "value" -m # Set Permanent API Key
 </br>
 
 </details>
-</details>
 
 <div id='engine-interface-instructions'></a>
 
-<details open style="font-size: 14px;">
+## Engine Interface Instructions 📖
+
+<details open>
   <summary>
-    <span style="font-size: 28px; font-weight: bold;">Engine Interface Instructions 📖</span>
+    <b>Expand</b>
   </summary>
 
-See [here](Instructions.md) for detailed instructions about ThinkRAG's key features and how to use them for your own customized purposes.
-
-</br>
+  See [here](Instructions.md) for detailed instructions about ThinkRAG's key features and how to use them for your own customized purposes.
 
 </details>
 
 <div id='model-support'></a>
 
-<details open style="font-size: 14px;">
+## Model Support 🪀
+
+<details open>
   <summary>
-    <span style="font-size: 28px; font-weight: bold;">Model Support 🪀<span>
+    <b>Expand</b>
   </summary>
+
+</br>
 
 <table>
 <tr>
@@ -239,10 +261,13 @@ gpt-4o
 
 <div id='license'></a>
 
-<details open style="font-size: 14px;">
-  <summary>
-    <span style="font-size: 28px; font-weight: bold;">License 📄</span>
-  </summary>
+## License 📄
 
 ThinkRAG uses MIT License. See [here](LICENSE) for details.
 </details>
+
+<div id='Contact-Us'></a>
+
+## Contact Us ☎️
+
+##### Wechat Official Account
