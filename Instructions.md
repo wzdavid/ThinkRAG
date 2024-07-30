@@ -64,7 +64,7 @@ This interface is focused on adding and processing web page URLs in the knowledg
 Once you've uploaded successfully, you may check out the content in the knowledge base in the Knowledge Base Management interface.
 
 #### Please Note ⚠️
-__*You are gonna have to generate the index after customized you preferrd text processing parameters (or keep them as defaults), otherwise the retrieval will not function properly.*__
+>__*You are gonna have to generate the index after customized you preferrd text processing parameters (or keep them as defaults), otherwise the retrieval will not function properly.*__
 
 </br></br>
 

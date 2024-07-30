@@ -5,22 +5,24 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![support: LanceDB](https://img.shields.io/badge/Support-LanceDB-blue.svg)](#LanceDB) [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](#model-support)
+
 
 </div>
 
 ### Table of Contents
 
 - [What is ThinkRAG](#What-is-ThinkRAG) 🤔
-- [Key features](#Key-Features)
-- [Quick Start](#quick-start) 🔜
+- [Key features](#Key-Features) ✨
+- [Quick Start](#quick-start) 🛫
 - [Set API Key](#set-api-key) ⚙️
   - [MacOS & Linux](#MacOS-Linux)
   - [Windows](#Windows)
 - [Engine Interface Instructions](#engine-interface-instructions) 📖
 - [Model Support](#model-support) 🪀
 - [License](#license) 📄
-- [Contact Us](#Contact-Us)
+- [Future Plans](#Future-Plans) 🔜
+- [Contact Us](#Contact-Us) ☎️
 
 
 <div id='What-is-ThinkRAG'></a>
@@ -32,7 +34,7 @@ ThinkRAG is an open-source RAG engine that based on document retrieval.
 
 <div id='Key-Features'></a>
 
-# Key Features
+# Key Features ✨
 
 <details open>
   <summary>
@@ -51,6 +53,8 @@ ThinkRAG is an open-source RAG engine that based on document retrieval.
 ### Advanced Settings:
 
 &emsp;&emsp; ThinkRAG also includes advanced settings that allow users to further refine system behaviour and interaction modes, such as adjusting response selection criteria and customizing system prompts.
+
+<div id='LanceDB'></a>
 
 ### Support LanceDB:
 
@@ -72,7 +76,7 @@ Visit [here](https://lancedb.com/) to learn more about LanceDB.
 
 <div id='quick-start'></a>
 
-# Quick Start 🔜
+# Quick Start 🛫
 <details open>
   <summary>
     <b>Expand</b>
@@ -104,9 +108,9 @@ streamlit run app.py
 
 <div id='MacOS-Linux'></a>
 
-- ## MacOS & Linux
+## MacOS & Linux
 
-<details>
+<details open>
   <summary>
     <b>Expand</b>
   </summary>
@@ -153,9 +157,9 @@ source ~/.zshenv
 
 <div id='Windows'></a>
 
-- ## Windows
+## Windows
 
-<details>
+<details open>
   <summary>
     <b>Expand</b>
   </summary>
@@ -199,6 +203,30 @@ setx VARIABLE_NAME "value" -m # Set Permanent API Key
   </summary>
 
 </br>
+
+ThinkRAG supports Ollama and the [following models](#Tested-Models) were tested. To use these Ollama models, you need to [install Ollama](https://ollama.com/download) on your device.
+
+### Install your preferred models
+To install your preferred Ollama models, run this command in your terminal:
+```zsh
+ollama pull <model_name>
+```
+>_*We suggest you to specify the model_name otherwise it will point to the latest, smallest sized-parameter model that fits the name you indicate and may not be the model you want.*_
+
+Once the installation is complete, you may double-check that viewing all the models you have pulled via:
+```zsh
+ollama list
+```
+or directly run a certain model via:
+
+```zsh
+ollama run <model_name>
+```
+
+<div id='Tested-Models'></a>
+
+</br>
+
 
 <table>
 <tr>
@@ -251,6 +279,7 @@ gpt-4o
 </tr>
 </table>
 
+
 </br>
 
 </details>
@@ -261,6 +290,10 @@ gpt-4o
 
 ThinkRAG uses MIT License. See [here](LICENSE) for details.
 </details>
+
+<div id='Future-Plans'></a>
+
+# Future-Plans 🔜
 
 <div id='Contact-Us'></a>
 
