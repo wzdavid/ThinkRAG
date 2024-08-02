@@ -76,7 +76,7 @@ def chatbox():
                 if response is None:
                     st.write("Couldn't come up with an answer.")
                 else:
-                    st.write(response.response)
+                    response_text = st.write_stream(response.response_gen)
                     st.write(f"Took {query_time} second(s)")
                     details_title = f"Found {len(response.source_nodes)} document(s)"
                     with st.expander(
@@ -95,7 +95,7 @@ def chatbox():
                         df = pd.DataFrame(source_nodes)
                         st.table(df)
                     # store the answer in the chat history
-                    CHAT_MEMORY.put(ChatMessage(role=MessageRole.ASSISTANT, content=response.response))
+                    CHAT_MEMORY.put(ChatMessage(role=MessageRole.ASSISTANT, content=response_text))
 
 from server.engine import create_query_engine # Create a new ES instance and query engine; otherwise, the reuse of ES (aiohttp) will cause asynchronous errors
 from config import USE_RERANKER

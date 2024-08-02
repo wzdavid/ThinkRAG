@@ -1,7 +1,6 @@
 # Index management - create, load and insert
 import os
-from llama_index.core import StorageContext
-from llama_index.core import VectorStoreIndex
+from llama_index.core import Settings, StorageContext, VectorStoreIndex
 from llama_index.core import load_index_from_storage, load_indices_from_storage
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.readers.web import SimpleWebPageReader
@@ -49,34 +48,32 @@ class IndexManager:
         return self.index
 
     # Build index based on documents under 'data' folder
-    def load_dir(self, input_dir, chunk_size, chunk_overlap, zh_title_enhance):
+    def load_dir(self, input_dir, chunk_size, chunk_overlap):
+        Settings.chunk_size = chunk_size
+        Settings.chunk_overlap = chunk_overlap
         documents = SimpleDirectoryReader(input_dir=input_dir, recursive=True).load_data()
-        pipeline = AdvancedIngestionPipeline(
-            embed_model_name="bge-small-zh-v1.5", 
-            chunk_size=chunk_size, 
-            chunk_overlap=chunk_overlap,
-        )
+        pipeline = AdvancedIngestionPipeline()
         nodes = pipeline.run(documents=documents)
         index = self.insert_nodes(nodes)
         return nodes
 
     # get file's directory and create index
-    def load_files(self, uploaded_files, chunk_size, chunk_overlap, zh_title_enhance):
+    def load_files(self, uploaded_files, chunk_size, chunk_overlap):
+        Settings.chunk_size = chunk_size
+        Settings.chunk_overlap = chunk_overlap
         save_dir = get_save_dir()
         files = [os.path.join(save_dir, file["name"]) for file in uploaded_files]
         documents = SimpleDirectoryReader(input_files=files).load_data()
-        pipeline = AdvancedIngestionPipeline(
-            embed_model_name="bge-small-zh-v1.5", 
-            chunk_size=chunk_size, 
-            chunk_overlap=chunk_overlap,
-        )
+        pipeline = AdvancedIngestionPipeline()
         nodes = pipeline.run(documents=documents)
         index = self.insert_nodes(nodes)
         return nodes
 
     # Get URL and create index
     # https://docs.llamaindex.ai/en/stable/examples/data_connectors/WebPageDemo/
-    def load_websites(self, websites, chunk_size, chunk_overlap, zh_title_enhance):
+    def load_websites(self, websites, chunk_size, chunk_overlap):
+        Settings.chunk_size = chunk_size
+        Settings.chunk_overlap = chunk_overlap
         # NOTE: the html_to_text=True option requires html2text to be installed
         documents = SimpleWebPageReader(html_to_text=True).load_data(websites)
         
@@ -92,11 +89,7 @@ class IndexManager:
         #)
         #documents = loader.load_data()
         
-        pipeline = AdvancedIngestionPipeline(
-            embed_model_name="bge-small-zh-v1.5", 
-            chunk_size=chunk_size, 
-            chunk_overlap=chunk_overlap,
-        )
+        pipeline = AdvancedIngestionPipeline()
         nodes = pipeline.run(documents=documents)
         for node in nodes:
             print(node)

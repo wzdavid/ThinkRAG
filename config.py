@@ -66,6 +66,8 @@ ZH_TITLE_ENHANCE = False # Chinese title enhance
 
 MONGO_URI = "mongodb://localhost:27017"
 REDIS_URI = "redis://localhost:6379"
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
 ES_URI = "http://localhost:9200"
 
 # Default vector database type, including "es" and "chroma"
@@ -97,7 +99,7 @@ RERANKER_MODEL_PATH = {
 }
 
 # Use reranker model or not
-USE_RERANKER = True
+USE_RERANKER = False
 RERANKER_MODEL_TOP_N = 2
 RERANKER_MAX_LENGTH = 1024
 

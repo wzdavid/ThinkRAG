@@ -23,7 +23,7 @@ def create_storage_context():
             print(f"Created new storage context")
             return dev_storage_context
     else:
-        # Production environment: LanceDB for vector store, Redis for chat store
+        # Production environment: LanceDB for vector store, Redis for document, index and chat store
         from server.stores.doc_store import DOC_STORE
         from server.stores.vector_store import VECTOR_STORE
         from server.stores.index_store import INDEX_STORE

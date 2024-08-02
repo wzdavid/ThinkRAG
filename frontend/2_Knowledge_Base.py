@@ -66,7 +66,7 @@ def handle_file():
     ):
         print("Generating index...")
         with st.spinner(text="Loading documents and building the index, may take a minute or two"):
-            st.session_state.index_manager.load_files(st.session_state.uploaded_files, chunk_size, chunk_overlap, zh_title_enhance)
+            st.session_state.index_manager.load_files(st.session_state.uploaded_files, chunk_size, chunk_overlap)
             st.toast('✔️ Knowledge base index generation complete', icon='🎉')
             st.session_state.uploaded_files = []
             time.sleep(4)
@@ -112,7 +112,7 @@ def handle_website():
     if process_button:
         print("Generating index...")
         with st.spinner(text="Loading documents and building the index, may take a minute or two"):
-            st.session_state.index_manager.load_websites(st.session_state["websites"], chunk_size, chunk_overlap, zh_title_enhance)
+            st.session_state.index_manager.load_websites(st.session_state["websites"], chunk_size, chunk_overlap)
             st.toast('✔️ Knowledge base index generation complete', icon='🎉')
             st.session_state.websites = []
             time.sleep(4)

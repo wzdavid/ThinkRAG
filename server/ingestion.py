@@ -2,24 +2,21 @@
 # https://docs.llamaindex.ai/en/stable/api_reference/ingestion/
 # https://docs.llamaindex.ai/en/stable/examples/ingestion/advanced_ingestion_pipeline/
 
+from llama_index.core import Settings
 from llama_index.core.ingestion import IngestionPipeline, DocstoreStrategy
 from server.models.embedding import create_embedding_model
 from server.text_splitter import create_text_splitter
 from server.splitters import ChineseTitleExtractor
-from server.stores.strage_context import create_storage_context
+from server.stores.strage_context import STORAGE_CONTEXT
 from server.stores.ingestion_cache import INGESTION_CACHE
 
 class AdvancedIngestionPipeline(IngestionPipeline):
     def __init__(
         self, 
-        embed_model_name : str = None, 
-        chunk_size : int = 1024, 
-        chunk_overlap : int = 128,
     ):
-        # Initialize the embedding model, text splitter, storage context
-        embed_model = create_embedding_model(embed_model_name)
-        text_splitter = create_text_splitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-        storage_context = create_storage_context()
+        # Initialize the embedding model, text splitter
+        embed_model = Settings.embed_model
+        text_splitter = Settings.text_splitter
 
         # Call the super class's __init__ method with the necessary arguments
         super().__init__(
@@ -28,8 +25,8 @@ class AdvancedIngestionPipeline(IngestionPipeline):
                 embed_model,
                 ChineseTitleExtractor(), # modified Chinese title enhance: zh_title_enhance
             ],
-            docstore=storage_context.docstore,
-            vector_store=storage_context.vector_store,
+            docstore=STORAGE_CONTEXT.docstore,
+            vector_store=STORAGE_CONTEXT.vector_store,
             cache=INGESTION_CACHE,
             docstore_strategy=DocstoreStrategy.UPSERTS,  # UPSERTS: Update or insert
         )

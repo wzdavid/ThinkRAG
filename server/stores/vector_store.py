@@ -5,9 +5,6 @@
 
 from config import STORAGE_DIR, DEFAULT_VS_TYPE
 
-# Production environment ES 
-# Todo: use Metadata Filters
-
 def create_vector_store(type=DEFAULT_VS_TYPE):
     if type == "chroma":
         # Vector database Chroma
@@ -23,6 +20,8 @@ def create_vector_store(type=DEFAULT_VS_TYPE):
         chroma_vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
         return chroma_vector_store
     elif type == "es":
+        # Todo: use Metadata Filters
+
         # Vector database ES
         # https://docs.llamaindex.ai/en/stable/examples/vector_stores/ElasticsearchIndexDemo/
 
@@ -51,7 +50,7 @@ def create_vector_store(type=DEFAULT_VS_TYPE):
         reranker = LinearCombinationReranker(weight=0.9)
 
         lance_vector_store = LanceDBVectorStore(
-            uri=".lancedb", mode="overwrite", query_type="hybrid", reranker=reranker
+            uri=".lancedb", mode="overwrite", query_type="vector", reranker=reranker
         )
         return lance_vector_store
     else:

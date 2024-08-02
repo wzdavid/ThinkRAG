@@ -3,7 +3,6 @@
 from llama_index.core.retrievers import BaseRetriever
 from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.retrievers.bm25 import BM25Retriever
-from server.stores.strage_context import STORAGE_CONTEXT
 
 # A simple BM25 retrieval method, customized for document storage and tokenization
 
@@ -18,12 +17,7 @@ def chinese_tokenizer(text: str) -> List[str]:
 class SimpleBM25Retriever(BM25Retriever):
     @classmethod
     def from_defaults(cls, index, similarity_top_k, **kwargs) -> "BM25Retriever":
-        if index.docstore is not None:
-            docstore = index.docstore
-            print(f"Using docstore from vector index: {docstore}")
-        else:
-            docstore = STORAGE_CONTEXT.docstore # Build BM25 retriever from document storage
-            print(f"Using default docstore: {docstore}")
+        docstore = index.docstore
         return BM25Retriever.from_defaults(
             docstore=docstore, similarity_top_k=similarity_top_k, verbose=True,
             tokenizer=chinese_tokenizer, **kwargs
@@ -83,7 +77,7 @@ class SimpleHybridRetriever(BaseRetriever):
 # Fusion retriever method
 # Reference: https://docs.llamaindex.ai/en/stable/examples/retrievers/relative_score_dist_fusion/
 #            https://medium.com/plain-simple-software/distribution-based-score-fusion-dbsf-a-new-approach-to-vector-search-ranking-f87c37488b18
-
+#            https://docs.llamaindex.ai/en/stable/examples/low_level/fusion_retriever/?h=retrieverqueryengine
 from llama_index.core.retrievers import QueryFusionRetriever
 from enum import Enum
 
