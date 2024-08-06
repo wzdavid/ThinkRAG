@@ -5,7 +5,8 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![support: LanceDB](https://img.shields.io/badge/Support-LanceDB-blue.svg)](#LanceDB) [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](#model-support)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![support: LanceDB](https://img.shields.io/badge/Support-LanceDB-blue.svg)](https://lancedb.com/) [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](https://ollama.com/) [![support: LlamaIndex](https://img.shields.io/badge/Support-LlamaIndex-purple.svg)](https://www.llamaindex.ai/)
+
 
 
 </div>
@@ -13,85 +14,38 @@
 ### Table of Contents
 
 - 🤔 [What is ThinkRAG](#What-is-ThinkRAG)
-- ✨ [Key features](#Key-Features)
-- 📝 [Demo](#Demo)
+- ✨ [Key Features](#Key-Features)
 - 🛫 [Quick Start](#quick-start)
-- ⚙️ [Set API Key](#set-api-key)
-  - [MacOS & Linux](#MacOS-Linux)
-  - [Windows](#Windows)
-- 📖 [Engine Interface Instructions](#engine-interface-instructions)
-- 🪀 [Model Support](#model-support)
+- 📖 [Usage](#engine-interface-instructions)
+- 🔬 [Technology Stack](#Modes-Comparison)
+- 🧸 [Support Models](#Support-Models)
 - 📄 [License](#license)
-- 🔜 [Future Plans](#Future-Plans)
-- ❓ [FAQ](#FAQ)
-- ☎️ [Contact Us](#Contact-Us)
-
 
 <div id='What-is-ThinkRAG'></a>
 
 # What is ThinkRAG 🤔
 
-ThinkRAG is an open-source RAG engine that based on document retrieval.
+ThinkRAG is a Large Language Model (LLM) RAG system leveraging LlamaIndex and Streamlit, specifically optimized for Chinese users. It incorporates BAAI embedding/reranker models and Ollama local models, and utilizes LLM APIs from Chinese service providers such as Zhipu, DeepSeek, and Moonshot.
+
 
 <div id='Key-Features'></a>
 
 # Key Features ✨
 
-<details open>
-  <summary>
-    <b>Expand</b>
-  </summary>
+ThinkRAG is specially tailored for Chinese usage, incorporating several key features:
 
-
-### Knowledge Base Management: 
-
-&emsp;&emsp; ThinkRAG allows users to upload, manage, and index content from both files (like PDFs, DOCX, and TXT files) and web pages. This includes setting parameters for text processing to ensure optimal data organization and retrievability.
-
-### API Configuration:
-
-&emsp;&emsp; ThinkRAG offers extensive settings for configuring APIs, including setting up service addresses, selecting models, and enabling specific features like re-ranking for embedding models. This facilitates integration and management of various language and embedding models that can be used for enhanced data processing and retrieval within the knowledge base.
-
-### Advanced Settings:
-
-&emsp;&emsp; ThinkRAG also includes advanced settings that allow users to further refine system behaviour and interaction modes, such as adjusting response selection criteria and customizing system prompts.
-
-<div id='LanceDB'></a>
-
-### Support LanceDB:
-
-&emsp;&emsp; As a open-source multimodal vector database, LanceDB has following core advantages:
-- Optimized for Time Series Data: Designed specifically for handling time series data, making it ideal for real-time monitoring, IoT device data, financial trading data, and more.
-- High Performance: Offers high data ingestion rates and fast query performance, suitable for real-time analytics.
-- Scalability: Supports horizontal scaling, enabling increased load handling by adding more nodes.
-- Efficient Data Compression: Utilizes advanced data compression techniques to optimize storage and enhance I/O efficiency.
-- Flexible Data Retention Policies: Allows for customizable data retention policies, supporting automatic downsampling or deletion of old data.
-- Robust Query Language: Provides a powerful and flexible query language to facilitate complex data analysis and aggregation directly in the database.
-- Integrated Visualization Tools: May include integrated tools for data visualization and dashboarding, simplifying data monitoring and analysis.
-
-Visit [here](https://lancedb.com/) to learn more about LanceDB. 
+- Complete implementation of LlamaIndex, allows the RAG system to operate flawlessly on personal computers. The Ollama model additionally ensures the privacy of personal data and is fully capable of local implementation.
+- A Spacy text splitter and enhancements for Chinese titles, specifically designed for Chinese characters (referencing Langchain-Chatchat, QAnything).
+- Chinese prompt templates tailored for Q&A and Refinement processes.
+- Large Chinese language models such as Zhipu, DeepSeek and Moonshot.
+- Hugging Face’s Chinese embedding model (BAAI/bge-large-zh-v1.5) designed for optimal performance in Chinese language tasks.
 
 </br>
 
-</details>
-
-<div id='Demo'></a>
-
-# Demo 📝
-
-<details open>
-  <summary>
-    <b>Expand</b>
-  </summary>
-  Try our demo here!
-</details>
 
 <div id='quick-start'></a>
 
 # Quick Start 🛫
-<details open>
-  <summary>
-    <b>Expand</b>
-  </summary>
 
 ## Step 1
 ```zsh
@@ -99,223 +53,76 @@ pip3 install -r requirements.txt
 ```
 ## Step 2
 
-Refer to [here](/docs/HowToDownloadModels.md) to download embedding models and nltk data into localmodels directory
+You have the option to download and implement the embedding models BAAI/bge-large-zh-v1.5 and BAAI/bge-reranker-base. If you choose to do so, please refer to this [document](Instructions.md) for instructions on how to download models into the localmodels directory.
 
 ## Step 3
 
-If you need LLMs API, please set your corresponding API Key first, see [Set API Key](#set-api-key) for detailed instructions.
+Depending on the models you intend to utilize, you should either establish their API keys as global variables or download them from their official websites:
 
-Then, run ThinkRAG by the following command (after returning to the root directory of ThinkRAG):
+1. To set your API key as a global variable, the variable names for supported Large Language Models (LLMs) are as follows:
+
+```zsh
+ZHIPU_API_KEY = ""
+MOONSHOT_API_KEY = ""
+DEEPSEEK_API_KEY = ""
+OPENAI_API_KEY = ""
+```
+
+2. Alternatively, should you intend to utilize Ollama models, you are advised to download [Ollama](https://ollama.com/download) and your [models](https://ollama.com/library) of preference from this library, such as gemma and llama (support is extended to all Ollama models).
+
+## step 4
+
+Please be informed that ThinkRAG currently operates in both development mode (the default setting) and production mode. To transition to production mode, designate THINKRAG_ENV as a global variable:
+
+```zsh
+THINKRAG_ENV = prod
+```
+
+For information regarding the distinctions between these two modes, please consult this [detailed comparison](#Modes-Comparison).
+
+## Step 5
+
+To run ThinkRAG, execute the following command (ensure you are in the root directory of ThinkRAG beforehand):
+
 ```zsh
 streamlit run app.py
 ```
 
-</details>
-
-
-<div id='set-api-key'></a>
-
-# Set API Key ⚙️
-
-<div id='MacOS-Linux'></a>
-
-## MacOS & Linux
-
-<details open>
-  <summary>
-    <b>Expand</b>
-  </summary>
-
-## Set Temporary API Key
-### 1. Run the command line in your terminal
-```zsh
-export VARIABLE_NAME=value
-```
-For instance, to set your API key for OpenAI, just run the following line in your terminal:
-```zsh
-export OPENAI_API_KEY=your_OpenAI_API_key 
-```
-
-## Set Permanent API Key
-### 1. Create or edit '.zshenv' file
-
-```zsh
-nano ~/.zshenv
-```
-For Linux, macOS Mojave (10.14) or earlier version, run 
-```zsh
-nano ~/.bashrc
-```
-### 2. Add Your Configuration
-```zsh
-export VARIABLE_NAME="value"
-```
-For instance, to set your API key for OpenAI, just type the following line into your '.zshenv' (or '.bashrc') file:
-```zsh
-export OPENAI_API_KEY=your_OpenAI_API_key 
-```
-### 3. Save and exit
-You may now save changes by pressing 'Ctrl + O', then press 'Enter' to confirm, and 'Ctrl + X' to exit the editor.
-
-### 4. Apply the Changes
-To ensure the changes take effect in your current terminal session, you can source the file by run
-```zsh
-source ~/.zshenv 
-# source ~/.bashrc for Linux, macOS Mojave (10.14) or earlier
-```
-
-</details>
-
-<div id='Windows'></a>
-
-## Windows
-
-<details open>
-  <summary>
-    <b>Expand</b>
-  </summary>
-
-### Run the command line in your terminal
-
-```zsh
-set VARIABLE_NAME=value # Set Temporary API Key
-```
-
-```zsh
-setx VARIABLE_NAME "value" -m # Set Permanent API Key
-```
-
-</br>
-
-</details>
-
-<div id='engine-interface-instructions'></a>
-
-# Engine Interface Instructions 📖
-
-<details open>
-  <summary>
-    <b>Expand</b>
-  </summary>
-
-</br>
-
-  See [here](Instructions.md) for detailed instructions about ThinkRAG's key features and how to use them for your own customized purposes.
-
-</details>
-
-<div id='model-support'></a>
-
-# Model Support 🪀
-
-<details open>
-  <summary>
-    <b>Expand</b>
-  </summary>
-
-</br>
-
-ThinkRAG supports Ollama and the [following models](#Tested-Models) were tested. To use these Ollama models, you need to [install Ollama](https://ollama.com/download) on your device.
-
-### Install your preferred models
-To install your preferred Ollama models, run this command in your terminal:
-```zsh
-ollama pull <model_name>
-```
->_*We suggest you to specify the model_name otherwise it will point to the latest, smallest sized-parameter model that fits the name you indicate, which may not be the model you actually want.*_
-
-Once the installation is complete, you may double-check that viewing all the models you have pulled via:
-```zsh
-ollama list
-```
-or directly run a certain model via:
-
-```zsh
-ollama run <model_name>
-```
-
-Take gemma:2b for example：
 <div align="center">
-<img src="web/src/gemma_2b.png" width="700" alt="gemma_2b">
+<img src="web/src/Home_Page.png" width="700" alt="the_knowledge_base_is_empty">
 </a>
 </div>
 
-<div id='Tested-Models'></a>
+<div id='engine-interface-instructions'></a>
 
-### Supported Ollama models and other LLMs
+# Usage 📖
 
-<table>
-<tr>
-<th> Ollama models </th>
-<th> LLMs </th>
-</tr>
-<tr>
-<td>
+For detailed instructions on the key functionalities of ThinkRAG and how to tailor them for your specific needs, please refer to this [document](Instructions.md).
 
-gemma:2b
+<div id='Modes-Comparison'></a>
 
-llama2-chinese:13b
+# Technology Stack 🔬
 
-llama2:13b
+| |DEV_MODE|PROD_MODE|
+|:----|:----|:----|
+|Framework|LlamaIndex|LlamaIndex|
+|Frontend|Streamlit|Streamlit|
+|Embedding Models|BAAI/bge-large-zh-v1.5 & BAAI/bge-reranker-base|BAAI/bge-large-zh-v1.5 & BAAI/bge-reranker-base|
+|Retriever|FusionRetriever|HybridRetriever|
+|Text Splitter|SentenceSplitter|SpacyTextSplitter|
+|Chat store|SimpleChatStore|Redis|
+|Doc store|SimpleDocumentStore|Redis or MangoDB|
+|Index store|SimpleIndexStore|Redis or MangoDB|
+|Vector Store|SimpleVectorStore|LanceDB as default, Chroma and ES available.|
 
-mistral:latest
+<div id='Support-Models'></a>
 
-deepseek-coder:33b
+# Support Models 🧸
 
-deepseek-coder:latest
-
-gemma:latest
-
-</td>
-<td>
-
-glm-4
-
-glm-4v
-
-glm-3-turbo
-
-moonshot-v1-8k
-
-moonshot-v1-32k
-
-moonshot-v1-128k
-
-deepseek-chat
-
-deepseek-coder
-
-gpt-4
-
-gpt-3.5
-
-gpt-4o
-
-</td>
-</tr>
-</table>
-
-
-</br>
-
-</details>
+Ollama, Zhipu, Moonshot, DeepSeek, OpenAI
 
 <div id='license'></a>
 
 # License 📄
 
 ThinkRAG uses MIT License. See [here](LICENSE) for details.
-
-<div id='Future-Plans'></a>
-
-# Future-Plans 🔜
-
-<div id='FAQ'></a>
-
-# FAQ❓
-
-<div id='Contact-Us'></a>
-
-# Contact Us ☎️
-
-##### Official WeChat Account
