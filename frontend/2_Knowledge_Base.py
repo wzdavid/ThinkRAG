@@ -10,15 +10,15 @@ from server.utils.file import save_uploaded_file, get_save_dir
 def handle_file():
    
     st.subheader(
-        "Upload PDF, DOCX, TXT, and other files.",
-        help="Upload files to create a knowledge base index.",
+        "Load Files like PDF, DOCX, TXT, etc.",
+        help="Load files to create a knowledge base index.",
         )
     
     with st.form("my-form", clear_on_submit=True):
         st.session_state.selected_files = st.file_uploader("Upload files: ", accept_multiple_files=True, label_visibility="hidden")
         submitted = st.form_submit_button(
-            "Upload files",
-            help="Click here to upload after selecting the file",
+            "Load",
+            help="Click here to load it after you select a file.",
             )
         if len(st.session_state.selected_files) > 0 and submitted:
             print("Starting to upload files...")
@@ -32,7 +32,7 @@ def handle_file():
 
     if len(st.session_state.uploaded_files) > 0:
         with st.expander(
-                "File uploaded",
+                "The following files are uploaded successfully.",
                 expanded=True,
         ):
             df = pd.DataFrame(st.session_state.uploaded_files)
@@ -49,20 +49,17 @@ def handle_file():
             )
 
     with st.expander(
-            "Text processing parameter configuration",
+            "Text Splitter Settings",
             expanded=True,
     ):
-        cols = st.columns(3)
+        cols = st.columns(2)
         chunk_size = cols[0].number_input("Maximum length of a single text block: ", 1, 4096, st.session_state.chunk_size)
         chunk_overlap = cols[1].number_input("Adjacent text overlap length: ", 0, st.session_state.chunk_size, st.session_state.chunk_overlap)
-        cols[2].write("")
-        cols[2].write("")
-        zh_title_enhance = cols[2].checkbox("Enable Chinese title enhancement", st.session_state.zh_title_enhance)
 
     if st.button(
-        "Generate index",
+        "Save",
         disabled=len(st.session_state.uploaded_files) == 0,
-        help="After uploading the file, click here to generate the index and save it to the knowledge base.",
+        help="After uploading files, click here to generate the index and save it to the knowledge base.",
     ):
         print("Generating index...")
         with st.spinner(text="Loading documents and building the index, may take a minute or two"):
@@ -74,7 +71,7 @@ def handle_file():
 
 def handle_website():
     st.subheader(
-        "Web page information processing",
+        "Load Web Pages",
         help="Enter a list of URLs to extract text and metadata from web pages.",
         )
 
@@ -84,7 +81,7 @@ def handle_website():
         with col1:
             new_website = st.text_input("Please enter the web page address", label_visibility="collapsed")
         with col2:
-            add_button = st.form_submit_button("add")
+            add_button = st.form_submit_button("Load")
             if add_button and new_website != "":
                 st.session_state["websites"].append(new_website)
 
@@ -98,15 +95,11 @@ def handle_website():
             "Text processing parameter configuration",
             expanded=True,
     ):
-        cols = st.columns(3)
+        cols = st.columns(2)
         chunk_size = cols[0].number_input("Maximum length of a single text block: ", 1, 4096, st.session_state.chunk_size, key="web_chunk_size")
         chunk_overlap = cols[1].number_input("Adjacent text overlap length: ", 0, st.session_state.chunk_size, st.session_state.chunk_overlap, key="web_chunk_overlap")
-        cols[2].write("")
-        cols[2].write("")
-        zh_title_enhance = cols[2].checkbox("Enable Chinese title enhancement", st.session_state.zh_title_enhance, key="web_zh_title_enhance")
 
-
-    process_button = st.button("Generate index", 
+    process_button = st.button("Save", 
                                 key="process_website",
                                 disabled=len(st.session_state["websites"]) == 0)
     if process_button:
@@ -175,7 +168,7 @@ def handle_knowledgebase():
 
 def main():
     st.header("Knowledge base")
-    st.caption("Manage the content of knowledge base, including files, web pages, and more")
+    st.caption("Manage documents and web urls in your knowledge base.")
 
     tab1, tab2, tab3 = st.tabs(["Add File", "Add URL", "Knowledge Base Management"])
 

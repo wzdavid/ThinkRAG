@@ -14,8 +14,8 @@ init_keys()
 select_llm()
 footer()
 
-st.header("Document-based Q&A")
-st.caption("Retrieve contents in the knowledge base to answer questions")
+st.header("Query")
+st.caption("Answer questions based on information reterieved from your knowledge base.")
 
 def perform_query(prompt):
     if not query_engine:
@@ -108,7 +108,7 @@ if st.session_state.index_manager is not None:
         chatbox()
     else:
         print("Index does not exist yet")
-        st.warning("The knowledge base is empty. You'll need to create one first")
+        st.warning("Your knowledge base is empty. Please upload some documents into it first.")
 else:
-    print("IndexManager is not initialized yet")
-    st.warning("Please create the knowledge base first")
+    print("IndexManager is not initialized yet.")
+    st.warning("Please upload documents into your knowledge base first.")

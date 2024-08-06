@@ -4,8 +4,6 @@
 
 from llama_index.core import Settings
 from llama_index.core.ingestion import IngestionPipeline, DocstoreStrategy
-from server.models.embedding import create_embedding_model
-from server.text_splitter import create_text_splitter
 from server.splitters import ChineseTitleExtractor
 from server.stores.strage_context import STORAGE_CONTEXT
 from server.stores.ingestion_cache import INGESTION_CACHE

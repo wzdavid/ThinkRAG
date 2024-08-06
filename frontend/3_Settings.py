@@ -8,17 +8,17 @@ def change_ollama_endpoint():
     st.session_state.ollama_api_url = st.session_state.ollama_endpoint
 
 def settings():
-    st.header("Settings")
-    st.caption("Set model and parameters")
+    st.header("Models")
+    st.caption("Configure the settings for local models and APIs used in the application.")
 
     st.subheader(
-        "Ollama",
+        "1. Ollama",
         help="Ollama is a lightweight, fast, and scalable large language model (LLM) server that provides a RESTful API for interacting with LLMs. Ollama can run on a single machine or in a distributed environment, and can be easily deployed on-premises or in the cloud.",
         )
     chat_settings = st.container(border=True)
     with chat_settings:
         st.text_input(
-            "Set Ollama API service address",
+            "Input Ollama API service address here.",
             key="ollama_endpoint",
             value=st.session_state.ollama_api_url,
             on_change=change_ollama_endpoint,
@@ -37,16 +37,17 @@ def settings():
         )
 
     st.subheader(
-        "LLMs API",
+        "2. LLMs API",
         help="Large language models (LLMs) are powerful models that can generate human-like text based on the input they receive. LLMs can be used for a wide range of natural language processing tasks, including text generation, question answering, and summarization.",
     )
     llm_api_settings = st.container(border=True)
     with llm_api_settings:
+        st.caption("Support OpenAI and compatible LLM APIs.")
         with st.expander("Available models"):
             st.write(st.session_state.llm_api_list)
 
     st.subheader(
-        "Embedding models",
+        "3. Embedding models",
         help="Embeddings are numerical representations of data, useful for tasks like document clustering and similarity detection when processing files, as they encode semantic meaning for efficient manipulation and retrieval.",
     )
     embedding_settings = st.container(border=True)

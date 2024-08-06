@@ -5,4 +5,4 @@ showSidebarNavigation = false
 [theme]
 primaryColor = "#F63366"
 backgroundColor = "white"
-font = "monospace"
+font = "sans serif"

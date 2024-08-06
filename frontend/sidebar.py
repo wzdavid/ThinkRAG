@@ -22,7 +22,7 @@ def handle_openai_llm():
 
 def select_llm():    
     with st.sidebar:
-        st.header('Current settings')
+        st.header('Query settings')
 
         if ollama.is_alive():
             ollama.get_model_list()
@@ -63,5 +63,5 @@ def select_llm():
 
 def footer():
     with st.sidebar:
-        st.caption('ThinkRAG —— Local LLM Knowledge Base Q&A System')
+        st.caption('ThinkRAG - Local LLM Knowledge Base Q&A')
         st.caption('©2024 wzdavid@gmail.com')

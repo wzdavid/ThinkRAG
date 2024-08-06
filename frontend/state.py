@@ -1,10 +1,14 @@
 import streamlit as st
 from config import LLM_API_LIST, OLLAMA_API_URL, DEFAULT_CHUNK_SIZE, DEFAULT_CHUNK_OVERLAP, ZH_TITLE_ENHANCE, DEFAULT_EMBEDDING_MODEL, DEFAULT_RERANKER_MODEL, USE_RERANKER
+from llama_index.core import Settings
 from server.models import ollama
 from server.models.llm_api import create_openai_llm
 from server.models.ollama import create_ollama_llm
+from server.models.embedding import create_embedding_model
+from server.models.reranker import create_reranker_model
 from server.index import IndexManager
 from config import DEFAULT_INDEX_NAME
+
 
 def find_api_by_model(model_name):
     for api_name, api_info in LLM_API_LIST.items():
@@ -38,9 +42,11 @@ def init_keys():
     
     if "embedding_model" not in st.session_state.keys():
         st.session_state.embedding_model = DEFAULT_EMBEDDING_MODEL
+        Settings.embed_model = create_embedding_model(st.session_state.embedding_model)
     
     if "reranker_model" not in st.session_state.keys():
         st.session_state.reranker_model = DEFAULT_RERANKER_MODEL
+        Settings.reranker_model = create_reranker_model(st.session_state.reranker_model)
 
     if "use_reranker" not in st.session_state.keys():
         st.session_state.use_reranker = USE_RERANKER
