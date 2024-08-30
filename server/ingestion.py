@@ -31,7 +31,7 @@ class AdvancedIngestionPipeline(IngestionPipeline):
 
     # If you need to override the run method or add new methods, you can do so here
     def run(self, documents):
+        print(f"Load {len(documents)} Documents")
         nodes = super().run(documents=documents)
         print(f"Ingested {len(nodes)} Nodes")
-        print(f"Load {len(self.docstore.docs)} documents into docstore")
         return nodes

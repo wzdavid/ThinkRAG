@@ -17,6 +17,8 @@ def find_api_by_model(model_name):
 
 # Initialize st.session_state
 def init_keys():
+
+    #Settings.llm = None
     # Initialize index
     if "index_manager" not in st.session_state.keys():
         st.session_state.index_manager = IndexManager(DEFAULT_INDEX_NAME)

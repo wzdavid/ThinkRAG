@@ -112,7 +112,7 @@ def handle_website():
             st.rerun()
 
 def get_unique_files_info(ref_doc_info):
-    unique_files = []
+    docs = []
     seen_paths = set()
 
     for ref_doc in ref_doc_info.values():
@@ -120,21 +120,29 @@ def get_unique_files_info(ref_doc_info):
         file_path = metadata.get('file_path', None)
 
         if file_path is None:
-            print(f"File path not found in ref doc: {ref_doc}") 
-            # TODO: in the website ref doc, metadata is {}
+            title = metadata.get('title', None)
+            docs.append({
+                'name': title,
+                'type': "url",
+                'date': metadata['creation_date']
+            })
 
         if file_path and file_path not in seen_paths:
+            base_name, extension = os.path.splitext(metadata['file_name'])
+            # Remove the leading dot from the extension
+            extension = extension.lstrip('.')
+
             file_info = {
-                'file_name': metadata['file_name'],
-                'file_path': file_path,
-                'file_type': metadata['file_type'],
-                'file_size': metadata['file_size'],
-                'creation_date': metadata['creation_date']
+                'name': base_name,
+                #'file_path': file_path,
+                'type': extension,
+                #'file_size': metadata['file_size'],
+                'date': metadata['creation_date']
             }
-            unique_files.append(file_info)
+            docs.append(file_info)
             seen_paths.add(file_path)
 
-    return unique_files
+    return docs
 
 
 def handle_knowledgebase():
@@ -153,13 +161,13 @@ def handle_knowledgebase():
         st.dataframe(
             df,
             column_config={
-                "file_name": "name",
-                "file_path": "path",
-                "file_type": "type",
-                "file_size": st.column_config.NumberColumn(
+                "name": "name",
+                "type": "type",
+"""                 "file_size": st.column_config.NumberColumn(
                     "size", format="%d byte",
                 ),
-                "creation_date": "Creation date",
+"""                
+                "date": "Creation date",
             },
             hide_index=True,
         )

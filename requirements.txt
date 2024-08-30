@@ -18,7 +18,6 @@ llama-index-vector-stores-lancedb
 llama-index-llms-fireworks
 llama-index-llms-ollama
 llama-index-storage-chat_store-redis
-nltk
 ollama
 Pillow
 python-pptx 

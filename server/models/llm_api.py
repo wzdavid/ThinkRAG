@@ -12,4 +12,5 @@ def create_openai_llm(model_name, api_base, api_key) -> ChatOpenAI:
         print(f"created openai model: {model_name}")
         return Settings.llm
     except Exception as e:
+        print(f"An error occurred while creating the OpenAI compatibale model: {type(e).__name__}: {e}")
         return None

@@ -74,21 +74,10 @@ class IndexManager:
     def load_websites(self, websites, chunk_size, chunk_overlap):
         Settings.chunk_size = chunk_size
         Settings.chunk_overlap = chunk_overlap
-        # NOTE: the html_to_text=True option requires html2text to be installed
-        documents = SimpleWebPageReader(html_to_text=True).load_data(websites)
-        
-        # Note: requires pip install unstructured, and download nltk data https://www.nltk.org/data.html
-        #>>>import nltk
-        #>>>nltk.download('averaged_perceptron_tagger')
-        #参考：langchain-chatchat
-        #import nltk
-        #from config  import NLTK_DATA_PATH
-        #nltk.data.path = [NLTK_DATA_PATH] + nltk.data.path
-        #loader = UnstructuredURLLoader(
-        #    urls=websites, continue_on_failure=True, headers={"User-Agent": "value"}
-        #)
-        #documents = loader.load_data()
-        
+
+        from server.readers.jina_web import JinaWebReader
+        documents = JinaWebReader().load_data(websites)        
+                
         pipeline = AdvancedIngestionPipeline()
         nodes = pipeline.run(documents=documents)
         for node in nodes:
