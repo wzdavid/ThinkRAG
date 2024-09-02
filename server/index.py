@@ -75,8 +75,8 @@ class IndexManager:
         Settings.chunk_size = chunk_size
         Settings.chunk_overlap = chunk_overlap
 
-        from server.readers.jina_web import JinaWebReader
-        documents = JinaWebReader().load_data(websites)        
+        from server.readers.beautiful_soup_web import BeautifulSoupWebReader
+        documents = BeautifulSoupWebReader().load_data(websites)        
                 
         pipeline = AdvancedIngestionPipeline()
         nodes = pipeline.run(documents=documents)

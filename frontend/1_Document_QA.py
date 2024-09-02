@@ -87,11 +87,14 @@ def chatbox():
                         for item in response.source_nodes:
                             node = item.node
                             score = item.score
-                            file_name = node.metadata.get('file_name', 'N/A')
+                            title = node.metadata.get('file_name', None)
+                            if title is None:
+                                title = node.metadata.get('title', 'N/A') # if the document is a webpage, use the title
+                                continue
                             page_label = node.metadata.get('page_label', 'N/A')
                             text = node.text
                             short_text = text[:50] + "..." if len(text) > 50 else text
-                            source_nodes.append({"File name": file_name, "Page number": page_label, "Text": short_text, "Score": f"{score:.2f}"})
+                            source_nodes.append({"Title": title, "Page": page_label, "Text": short_text, "Score": f"{score:.2f}"})
                         df = pd.DataFrame(source_nodes)
                         st.table(df)
                     # store the answer in the chat history
