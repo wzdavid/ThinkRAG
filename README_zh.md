@@ -19,26 +19,31 @@
 - 📖 [用法说明](#engine-interface-instructions)
 - 🔬 [技术栈](#Modes-Comparison)
 - 🧸 [模型支持](#Support-Models)
-- 📄 [协议](#license)
+- 📄 [许可协议](#license)
 
 <div id='What-is-ThinkRAG'></a>
 
 # ThinkRAG 🤔
 
-ThinkRAG 是一个基于 LlamaIndex 和 Streamlit 的大型语言模型（LLM）RAG 系统，专为中国用户优化。它整合了 BAAI 嵌入/重排序模型和 Ollama 本地模型，并利用来自 Zhipu、DeepSeek 和 Moonshot 等中国服务提供商的 LLM API。
-
+ThinkRAG 是一个设计精良的大型语言模型（LLM）检索式生成（RAG）系统，可以轻松部署在您的笔记本电脑上。该系统基于 LlamaIndex 和 Streamlit 构建，并针对中国用户在许多领域进行了优化。系统支持本地的 Ollama 语言模型，以及来自 HuggingFace 的 BAAI 嵌入和重排模型。它还支持使用 OpenAI API 以及兼容的 LLM API，如 Zhipu、DeepSeek、Moonshot 等。
 
 <div id='Key-Features'></a>
 
 # 主要特点 ✨
 
-ThinkRAG 特别为中国用户量身定制，具备多项关键功能：
+ThinkRAG 是一个为专业人士准备的、可以在个人电脑上使用本地多模态知识库的生产就绪系统，在这个系统中，私人数据永远不会离开您的电脑。
 
-- 完整实现 LlamaIndex，使 RAG 系统能够在个人电脑上完美运行。Ollama 模型还确保了个人数据的隐私，并实现在本地的完整实施。
-- 为中文字符特别设计的 Spacy 文本分割器和中文标题增强功能（参考 Langchain-Chatchat, QAnything）。
-- 为问答和精炼回答过程量身定制的中文提示模板。
-- Zhipu、DeepSeek 和 Moonshot 等大型中文语言模型。
-- Hugging Face 的中文嵌入模型（BAAI/bge-large-zh-v1.5），为中文任务设计，以达到最佳性能。
+- 完全应用 LlamaIndex
+- 支持本地存储，无需安装数据库
+- 无需 GPU 支持即可在笔记本电脑上轻松运行
+- 支持本地模型和离线使用
+
+以下是针对中国用户的一些特性：
+- 使用 Spacy 文本分割器，更好地处理中文字符
+- 采用中文标题增强功能
+- 使用中文的提示模板进行问答和细化过程
+- 支持中国本地用户使用的 LLM 服务提供商，如 Zhipu、DeepSeek 和 Moonshot
+- 使用双语嵌入模型，如 BAAI/bge-large-zh-v1.5
 
 <div id='quick-start'></a>
 
@@ -52,13 +57,16 @@ pip3 install -r requirements.txt
 
 ## Step 2
 
-您可以选择下载并调用嵌入模型 BAAI/bge-large-zh-v1.5 和 BAAI/bge-reranker-base。具体请参考[此文档](Instructions_zh.md)，了解如何将模型下载到 localmodels 目录中。
+您可以将模型（BAAI/bge-large-zh-v1.5, BAAI/bge-reranker-base）下载到本地计算机上，以防您需要在没有互联网连接的情况下运行系统。
+
+请参阅此[说明](Instructions.md)，了解如何将模型从 HuggingFace 下载到您的 "localmodels" 目录中。
+
 
 ## Step 3
 
-根据您打算使用的模型，将对应的 API 密钥设置为全局变量，或从官方网站下载模型（Ollama）：
+为了获得更好的性能，建议使用 LLM API。
 
-1. 要将您的 API 密钥设置为全局变量，支持的大型语言模型（LLMs）的变量名称如下：
+1. 从 LLM 服务提供商处获取您的 API 密钥，并按照以下方式配置环境变量。您可以选择使用其中一个或多个，并在 config.py 文件中删除其他模型服务商。当然，您也可以在文件中添加其他兼容的 LLM API 服务商。
 
 ```zsh
 ZHIPU_API_KEY = ""
@@ -67,21 +75,26 @@ DEEPSEEK_API_KEY = ""
 OPENAI_API_KEY = ""
 ```
 
-2. 若使用 Ollama 模型，建议您从库中下载 [Ollama](https://ollama.com/download) 和选择的[模型](https://ollama.com/library)，如 gemma 和 llama（所有 Ollama 模型均受支持）。
+2. 如果您更倾向于使用本地 LLM，可以通过 Ollama 来实现。请首先下载 [Ollama](https://ollama.com/download)。然后使用 Ollama 命令下载如 Gemma 和 QWen 等 [模型](https://ollama.com/library)。
+
+您可以在 Ollama 官网上找到它提供的完整 LLM 列表。
 
 ## step 4
 
-请注意，ThinkRAG 当前支持开发模式（默认设置）和生产模式。要切换到生产模式，请将 THINKRAG_ENV 设置为全局变量：
+ThinkRAG 默认以开发模式运行，这对于个人电脑来说是最佳选择。
+
+如果您有服务器，请按照以下方式配置环境变量 THINKRAG_ENV 以切换到生产模式。
+
 
 ```zsh
 THINKRAG_ENV = prod
 ```
 
-有关这两种模式的区别，请参阅[技术栈](#Modes-Comparison).
+请参阅[详细比较](#Modes-Comparison)以了解两种模式的详细信息。
 
 ## Step 5
 
-要运行 ThinkRAG，请执行以下命令（事先确保您位于 ThinkRAG 的根目录）：
+现在您已经准备好运行 ThinkRAG。请在包含 app.py 文件的目录中运行以下命令。
 
 ```zsh
 streamlit run app.py
@@ -96,7 +109,7 @@ streamlit run app.py
 
 # 用法说明 📖
 
-有关 ThinkRAG 关键功能的详细说明以及如何根据您的具体需求调整这些功能，请参考这份[文档](Instructions_zh.md)。
+有关如何使用 ThinkRAG 以及如何根据您的目的进行定制的详细说明，请参考此[文档](Instructions.md)。
 
 <div id='Modes-Comparison'></a>
 
@@ -104,21 +117,21 @@ streamlit run app.py
 
 | |开发模式（DEV_MODE）|生产模式（PROD_MODE）|
 |:----|:----|:----|
-|框架|LlamaIndex|LlamaIndex|
-|前段|Streamlit|Streamlit|
-|嵌入模型|BAAI/bge-large-zh-v1.5 & BAAI/bge-reranker-base|BAAI/bge-large-zh-v1.5 & BAAI/bge-reranker-base|
-|巡回检索|FusionRetriever|HybridRetriever|
+|RAG框架|LlamaIndex|LlamaIndex|
+|前端框架|Streamlit|Streamlit|
+|嵌入模型|BAAI/bge-large-zh-v1.5|BAAI/bge-large-zh-v1.5|
+|重排模型|BAAI/bge-reranker-base|BAAI/bge-reranker-base|
 |文本分割器|SentenceSplitter|SpacyTextSplitter|
 |对话存储|SimpleChatStore|Redis|
 |文档存储|SimpleDocumentStore|Redis or MangoDB|
 |索引存储|SimpleIndexStore|Redis or MangoDB|
-|向量存储|SimpleVectorStore|LanceDB as default, Chroma and ES available.|
+|向量存储|SimpleVectorStore|默认使用LanceDB，也支持Chroma和ES|
 
 <div id='Support-Models'></a>
 
 # 模型支持 🧸
 
-Ollama, Zhipu, Moonshot, DeepSeek, OpenAI
+由 Ollama 支持的所有大语言模型（LLM），OpenAI，以及Zhipu、Moonshot、DeepSeek 等所有与 OpenAI 兼容的 LLM API。
 
 <div id='license'></a>
 
