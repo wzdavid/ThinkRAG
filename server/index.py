@@ -84,3 +84,9 @@ class IndexManager:
             print(node)
         index = self.insert_nodes(nodes)
         return nodes
+    
+    # Delete a document and all related nodes
+    def delete_ref_doc(self, ref_doc_id):
+        self.index.delete_ref_doc(ref_doc_id=ref_doc_id, delete_from_docstore=True)
+        self.index.storage_context.persist()
+        print("Deleted document", ref_doc_id)
