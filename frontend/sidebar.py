@@ -63,5 +63,4 @@ def select_llm():
 
 def footer():
     with st.sidebar:
-        st.caption('ThinkRAG - Local LLM Knowledge Base Q&A')
         st.caption('©2024 wzdavid@gmail.com')

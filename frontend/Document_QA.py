@@ -8,26 +8,26 @@ from frontend.sidebar import select_llm, footer
 from frontend.state import init_keys
 from server.stores.chat_store import CHAT_MEMORY
 from llama_index.core.llms import ChatMessage, MessageRole
-
-
-init_keys()
-select_llm()
-footer()
-
-st.header("Query")
-st.caption("Answer questions based on information reterieved from your knowledge base.")
+from llama_index.core import Settings
+from config import USE_RERANKER
+from server.engine import create_query_engine # Create a new ES instance and query engine; otherwise, the reuse of ES (aiohttp) will cause asynchronous errors
+from server.models.llm_api import create_openai_llm
+from server.models.ollama import create_ollama_llm
+from frontend.state import find_api_by_model
+from server.stores.config_store import CONFIG_STORE
 
 def perform_query(prompt):
-    if not query_engine:
+    if not st.session_state.query_engine:
         print("Index is not initialized yet")
     if (not prompt) or prompt.strip() == "":
         print("Query text is required")
     try:
-        query_response = query_engine.query(prompt)
+        query_response = st.session_state.query_engine.query(prompt)
         return query_response
     except Exception as e:
         # print(f"An error occurred while processing the query: {e}")
         print(f"An error occurred while processing the query: {type(e).__name__}: {e}")
+
 # https://github.com/halilergul1/QA-app
 def simple_format_response_and_sources(response):
     primary_response = getattr(response, 'response', '')
@@ -99,19 +99,24 @@ def chatbox():
                         st.table(df)
                     # store the answer in the chat history
                     CHAT_MEMORY.put(ChatMessage(role=MessageRole.ASSISTANT, content=response_text))
-
-from server.engine import create_query_engine # Create a new ES instance and query engine; otherwise, the reuse of ES (aiohttp) will cause asynchronous errors
-from config import USE_RERANKER
-
-if st.session_state.index_manager is not None:
-    if st.session_state.index_manager.check_index_exists():
-        st.session_state.index_manager.load_index()
-        query_engine = create_query_engine(st.session_state.index_manager.index, use_reranker=USE_RERANKER)
-        print("Index loaded and query engine created")
-        chatbox()
+def main():
+    st.header("Query")
+    if st.session_state.llm is not None:
+        current_llm_info = CONFIG_STORE.get(key="current_llm_info")
+        st.caption("Current LLM instance: " + current_llm_info["service_provider"] + " / " + current_llm_info["model"])
+        if st.session_state.index_manager is not None:
+            if st.session_state.index_manager.check_index_exists():
+                st.session_state.index_manager.load_index()
+                st.session_state.query_engine = create_query_engine(st.session_state.index_manager.index, use_reranker=USE_RERANKER)
+                print("Index loaded and query engine created")
+                chatbox()
+            else:
+                print("Index does not exist yet")
+                st.warning("Your knowledge base is empty. Please upload some documents into it first.")
+        else:
+            print("IndexManager is not initialized yet.")
+            st.warning("Please upload documents into your knowledge base first.")
     else:
-        print("Index does not exist yet")
-        st.warning("Your knowledge base is empty. Please upload some documents into it first.")
-else:
-    print("IndexManager is not initialized yet.")
-    st.warning("Please upload documents into your knowledge base first.")
+        st.warning("Please configure LLM first.")
+
+main()

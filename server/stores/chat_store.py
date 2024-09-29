@@ -1,4 +1,4 @@
-# chat store
+# Chat Store
 
 from config import DEV_MODE, REDIS_URI, CHAT_STORE_KEY
 

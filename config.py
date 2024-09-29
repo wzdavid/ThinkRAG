@@ -3,6 +3,7 @@ import os
 STORAGE_DIR = "storage"  # directory to cache the generated index
 DATA_DIR = "data"  # directory containing the documents to index
 MODEL_DIR = "localmodels"  # directory containing the model files, use None if use remote model
+CONFIG_STORE_FILE = "config_store.json" # local storage for configurations
 
 # The device that used for running the model. 
 # Set it to 'auto' will automatically detect (with warnings), or it can be manually set to one of 'cuda', 'mps', 'cpu', or 'xpu'.
@@ -17,6 +18,10 @@ MAX_TOKENS = 2048
 
 TEMPERATURE = 0.7
 
+TOP_K = 3
+
+SYSTEM_PROMPT = "You are an AI assistant that helps users to find accurate information. You can answer questions, provide explanations, and generate text based on the input. Please answer the user's question exactly in the same language as the question or follow user's instructions. For example, if user's question is in Chinese, please generate answer in Chinese as well. If you don't know the answer, please reply the user that you don't know. If you need more information, you can ask the user for clarification. Please be professional to the user."
+
 OLLAMA_API_URL = "http://localhost:11434"
 
 # Models' API configuration，set the KEY in environment variables
@@ -26,26 +31,11 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 
 LLM_API_LIST = {
-    # ZhiPu API
-    "Zhipu": {
-        "api_key": ZHIPU_API_KEY,
-        "api_base": "https://open.bigmodel.cn/api/paas/v4/",
-        "models": ["glm-4","glm-4v","glm-3-turbo"],
-        "provider": "智谱",
-    },
-    # Moonshot API
-    "Moonshot": {
-        "api_key": MOONSHOT_API_KEY,
-        "api_base": "https://api.moonshot.cn/v1/",
-        "models": ["moonshot-v1-8k","moonshot-v1-32k","moonshot-v1-128k"],
-        "provider": "月之暗面",
-    },
-    # DeepSeek API
-    "DeepSeek": {
-        "api_key": DEEPSEEK_API_KEY,
-        "api_base": "https://api.deepseek.com/v1/",
-        "models": ["deepseek-chat","deepseek-coder"],
-        "provider": "月之暗面",
+    # Ollama API
+    "Ollama": {
+        "api_base": OLLAMA_API_URL,
+        "models": [],
+        "provider": "Ollama",
     },
     # OpenAI API
     "OpenAI": {
@@ -53,6 +43,27 @@ LLM_API_LIST = {
         "api_base": "https://api.openai.com/v1/",
         "models": ["gpt-4", "gpt-3.5", "gpt-4o"],
         "provider": "OpenAI",
+    },
+    # ZhiPu API
+    "Zhipu": {
+        "api_key": ZHIPU_API_KEY,
+        "api_base": "https://open.bigmodel.cn/api/paas/v4/",
+        "models": ["glm-4","glm-4v","glm-3-turbo"],
+        "provider": "Zhipu",
+    },
+    # Moonshot API
+    "Moonshot": {
+        "api_key": MOONSHOT_API_KEY,
+        "api_base": "https://api.moonshot.cn/v1/",
+        "models": ["moonshot-v1-8k","moonshot-v1-32k","moonshot-v1-128k"],
+        "provider": "Moonshot",
+    },
+    # DeepSeek API
+    "DeepSeek": {
+        "api_key": DEEPSEEK_API_KEY,
+        "api_base": "https://api.deepseek.com/v1/",
+        "models": ["deepseek-chat","deepseek-coder"],
+        "provider": "DeepSeek",
     },
 }
 
@@ -85,17 +96,14 @@ HF_ENDPOINT = "https://hf-mirror.com" # Default to be "https://huggingface.co"
 DEFAULT_EMBEDDING_MODEL = "bge-small-zh-v1.5"
 EMBEDDING_MODEL_PATH = {
     "bge-small-zh-v1.5": "BAAI/bge-small-zh-v1.5",
-    "bge-base-zh-v1.5": "BAAI/bge-base-zh-v1.5",
     "bge-large-zh-v1.5": "BAAI/bge-large-zh-v1.5",
-    "bce-embedding-base_v1": "InfiniFlow/bce-embedding-base_v1",
 }
 
 # Configure Reranker model
 DEFAULT_RERANKER_MODEL = "bge-reranker-base"
 RERANKER_MODEL_PATH = {
-    "bge-reranker-large": "BAAI/bge-reranker-large",
     "bge-reranker-base": "BAAI/bge-reranker-base",
-    "bce-reranker-base_v1": "InfiniFlow/bce-reranker-base_v1",
+    "bge-reranker-large": "BAAI/bge-reranker-large",
 }
 
 # Use reranker model or not
@@ -103,9 +111,10 @@ USE_RERANKER = False
 RERANKER_MODEL_TOP_N = 2
 RERANKER_MAX_LENGTH = 1024
 
-# Development environment or production environment
-THINKRAG_ENV = os.getenv("THINKRAG_ENV", "")
-if THINKRAG_ENV == "prod":
+# Evironment variable: "Lite" for development, "Prod" for production, "Plus" for enhancement, default to be "Lite"
+THINKRAG_ENV = os.getenv("THINKRAG_ENV", "Lite")
+
+if THINKRAG_ENV == "Prod" or THINKRAG_ENV == "Plus":
     DEV_MODE = False
 else:
     DEV_MODE = True
