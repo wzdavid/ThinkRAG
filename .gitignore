@@ -6,7 +6,8 @@ data/
 
 # Local Storage
 storage/
-
+.chroma/
+.lancedb/
 # Test files
 test_*.*
 
