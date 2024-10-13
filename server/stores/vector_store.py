@@ -3,9 +3,9 @@
 # https://docs.llamaindex.ai/en/stable/examples/vector_stores/ChromaIndexDemo/
 # https://docs.llamaindex.ai/en/stable/module_guides/storing/customization/
 
-from config import STORAGE_DIR, DEFAULT_VS_TYPE
+import config
 
-def create_vector_store(type=DEFAULT_VS_TYPE):
+def create_vector_store(type=config.DEFAULT_VS_TYPE):
     if type == "chroma":
         # Vector database Chroma
 
@@ -38,7 +38,7 @@ def create_vector_store(type=DEFAULT_VS_TYPE):
         es_vector_store = ElasticsearchStore(
         es_url="http://localhost:9200",
         index_name="think",
-        retrieval_strategy=AsyncDenseVectorStrategy(hybrid=True), # Use hybrid retrieval
+        retrieval_strategy=AsyncDenseVectorStrategy(hybrid=False),
         )
         return es_vector_store
     elif type == "lancedb":
@@ -53,13 +53,13 @@ def create_vector_store(type=DEFAULT_VS_TYPE):
             uri=".lancedb", mode="overwrite", query_type="vector", reranker=reranker
         )
         return lance_vector_store
+    elif type == "simple":
+        from llama_index.core.vector_stores import SimpleVectorStore
+        return SimpleVectorStore()
     else:
         raise ValueError(f"Invalid vector store type: {type}")
 
-# Development Environment SimpleVectorStore
-
-from llama_index.core.vector_stores import SimpleVectorStore
-
-from config import DEV_MODE
-
-VECTOR_STORE = SimpleVectorStore() if DEV_MODE else create_vector_store(type="lancedb")
+if config.THINKRAG_ENV == "production":
+    VECTOR_STORE = create_vector_store(type="chroma")
+else:
+    VECTOR_STORE = create_vector_store(type="simple")

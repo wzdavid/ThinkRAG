@@ -5,7 +5,7 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![support: LanceDB](https://img.shields.io/badge/Support-LanceDB-blue.svg)](https://lancedb.com/) [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](https://ollama.com/) [![support: LlamaIndex](https://img.shields.io/badge/Support-LlamaIndex-purple.svg)](https://www.llamaindex.ai/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](https://ollama.com/) [![support: LlamaIndex](https://img.shields.io/badge/Support-LlamaIndex-purple.svg)](https://www.llamaindex.ai/)
 
 
 
@@ -81,10 +81,9 @@ OPENAI_API_KEY = ""
 
 ## step 4
 
-ThinkRAG 默认以开发模式运行，这对于个人电脑来说是最佳选择。
+ThinkRAG 默认以开发模式运行。
 
-如果您有服务器，请按照以下方式配置环境变量 THINKRAG_ENV 以切换到生产模式。
-
+请按照以下方式配置环境变量 THINKRAG_ENV 以切换到生产模式。
 
 ```zsh
 THINKRAG_ENV = prod
@@ -115,17 +114,17 @@ streamlit run app.py
 
 # 技术栈 🔬
 
-| |开发模式（DEV_MODE）|生产模式（PROD_MODE）|
+| |开发模式|生产模式|
 |:----|:----|:----|
 |RAG框架|LlamaIndex|LlamaIndex|
 |前端框架|Streamlit|Streamlit|
-|嵌入模型|BAAI/bge-large-zh-v1.5|BAAI/bge-large-zh-v1.5|
-|重排模型|BAAI/bge-reranker-base|BAAI/bge-reranker-base|
+|嵌入模型|BAAI/bge-small-zh-v1.5|BAAI/bge-large-zh-v1.5|
+|重排模型|BAAI/bge-reranker-base|BAAI/bge-reranker-large|
 |文本分割器|SentenceSplitter|SpacyTextSplitter|
 |对话存储|SimpleChatStore|Redis|
-|文档存储|SimpleDocumentStore|Redis or MangoDB|
-|索引存储|SimpleIndexStore|Redis or MangoDB|
-|向量存储|SimpleVectorStore|默认使用LanceDB，也支持Chroma和ES|
+|文档存储|SimpleDocumentStore|Redis|
+|索引存储|SimpleIndexStore|Redis|
+|向量存储|SimpleVectorStore|Chroma|
 
 <div id='Support-Models'></a>
 

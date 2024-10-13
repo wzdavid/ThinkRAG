@@ -3,17 +3,9 @@ import time
 import re
 import streamlit as st
 import pandas as pd
-
-from frontend.sidebar import select_llm, footer
-from frontend.state import init_keys
 from server.stores.chat_store import CHAT_MEMORY
 from llama_index.core.llms import ChatMessage, MessageRole
-from llama_index.core import Settings
-from config import USE_RERANKER
-from server.engine import create_query_engine # Create a new ES instance and query engine; otherwise, the reuse of ES (aiohttp) will cause asynchronous errors
-from server.models.llm_api import create_openai_llm
-from server.models.ollama import create_ollama_llm
-from frontend.state import find_api_by_model
+from server.engine import create_query_engine
 from server.stores.config_store import CONFIG_STORE
 
 def perform_query(prompt):
@@ -103,11 +95,25 @@ def main():
     st.header("Query")
     if st.session_state.llm is not None:
         current_llm_info = CONFIG_STORE.get(key="current_llm_info")
-        st.caption("Current LLM instance: " + current_llm_info["service_provider"] + " / " + current_llm_info["model"])
+        current_llm_settings = CONFIG_STORE.get(key="current_llm_settings")
+        st.caption("LLM `" + current_llm_info["service_provider"] + "` `" + current_llm_info["model"] + 
+                   "` Response mode `" + current_llm_settings["response_mode"] + 
+                   "` Top K `" + str(current_llm_settings["top_k"]) + 
+                   "` Temperature `" + str(current_llm_settings["temperature"]) + 
+                   "` Reranking `" + str(current_llm_settings["use_reranker"]) + 
+                   "` Top N `" + str(current_llm_settings["top_n"]) + 
+                   "` Reranker `" + current_llm_settings["reranker_model"] + "`"
+                   )
         if st.session_state.index_manager is not None:
             if st.session_state.index_manager.check_index_exists():
                 st.session_state.index_manager.load_index()
-                st.session_state.query_engine = create_query_engine(st.session_state.index_manager.index, use_reranker=USE_RERANKER)
+                st.session_state.query_engine = create_query_engine(
+                    index=st.session_state.index_manager.index, 
+                    use_reranker=current_llm_settings["use_reranker"], 
+                    response_mode=current_llm_settings["response_mode"], 
+                    top_k=current_llm_settings["top_k"],
+                    top_n=current_llm_settings["top_n"],
+                    reranker=current_llm_settings["reranker_model"])
                 print("Index loaded and query engine created")
                 chatbox()
             else:

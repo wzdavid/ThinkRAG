@@ -1,10 +1,6 @@
 import time
 import streamlit as st
 
-from frontend.sidebar import footer
-from frontend.state import init_keys
-
-
 def handle_website():
     st.header("Load Web Pages")
     st.caption("Enter a list of URLs to extract text and metadata from web pages.")
@@ -44,8 +40,6 @@ def handle_website():
             st.session_state.websites = []
             time.sleep(4)
             st.rerun()
-
-init_keys()
 
 handle_website()
 

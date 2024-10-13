@@ -5,7 +5,7 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![support: LanceDB](https://img.shields.io/badge/Support-LanceDB-blue.svg)](https://lancedb.com/) [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](https://ollama.com/) [![support: LlamaIndex](https://img.shields.io/badge/Support-LlamaIndex-purple.svg)](https://www.llamaindex.ai/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](https://ollama.com/) [![support: LlamaIndex](https://img.shields.io/badge/Support-LlamaIndex-purple.svg)](https://www.llamaindex.ai/)
 
 
 
@@ -82,12 +82,12 @@ You can find a complete list of LLMs provided by Ollama from its website.
 
 ## step 4
 
-ThinkRAG runs in development mode by default which is the best choice for personal computers. 
+ThinkRAG runs in development mode by default. 
 
-If you have a server, please configure the environment variable THINKRAG_ENV as below to switch to production mode.
+You can configure the environment variable THINKRAG_ENV as below to switch to production mode.
 
 ```zsh
-THINKRAG_ENV = prod
+THINKRAG_ENV = production
 ```
 
 Please refer to the [detailed comparison](#Modes-Comparison) to learn the details about the two modes.
@@ -115,17 +115,17 @@ There are detailed instructions on how to use ThinkRAG and how to customize it f
 
 # Technology Stack 🔬
 
-| |DEV_MODE|PROD_MODE|
+| |Development|Production|
 |:----|:----|:----|
 |Framework|LlamaIndex|LlamaIndex|
 |Frontend|Streamlit|Streamlit|
-|Embedding Models|BAAI/bge-large-zh-v1.5|BAAI/bge-large-zh-v1.5|
-|Reranker|BAAI/bge-reranker-base|BAAI/bge-reranker-base|
+|Embedding Models|BAAI/bge-small-zh-v1.5|BAAI/bge-large-zh-v1.5|
+|Reranker|BAAI/bge-reranker-base|BAAI/bge-reranker-large|
 |Text Splitter|SentenceSplitter|SpacyTextSplitter|
 |Chat Store|SimpleChatStore|Redis|
-|Doc Store|SimpleDocumentStore|Redis or MangoDB|
-|Index Store|SimpleIndexStore|Redis or MangoDB|
-|Vector Store|SimpleVectorStore|LanceDB as default, Chroma and ES supported|
+|Doc Store|SimpleDocumentStore|Redis|
+|Index Store|SimpleIndexStore|Redis|
+|Vector Store|SimpleVectorStore|Chroma|
 
 <div id='Support-Models'></a>
 

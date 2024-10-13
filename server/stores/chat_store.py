@@ -18,7 +18,6 @@ def create_chat_memory():
             chat_store_key=CHAT_STORE_KEY,
         )
         return simple_chat_memory
-    
     else:
         # Production environment: Redis
         # https://docs.llamaindex.ai/en/stable/examples/vector_stores/RedisIndexDemo/

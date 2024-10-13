@@ -1,11 +1,9 @@
 import streamlit as st
 import config as config
-from llama_index.core import Settings
 from server.models import ollama
 from server.models.llm_api import create_openai_llm, check_openai_llm
 from server.models.ollama import create_ollama_llm
 from server.models.embedding import create_embedding_model
-from server.models.reranker import create_reranker_model
 from server.index import IndexManager
 from server.stores.config_store import CONFIG_STORE
 
@@ -44,27 +42,20 @@ def init_keys():
             api_object = find_api_by_model(st.session_state.llm_api_selected)
             create_openai_llm(st.session_state.llm_api_selected, api_object['api_base'], api_object['api_key'])
     
-    if "embedding_model" not in st.session_state.keys():
-        st.session_state.embedding_model = config.DEFAULT_EMBEDDING_MODEL
-        Settings.embed_model = create_embedding_model(st.session_state.embedding_model)
-    
-    if "reranker_model" not in st.session_state.keys():
-        st.session_state.reranker_model = config.DEFAULT_RERANKER_MODEL
-        Settings.reranker_model = create_reranker_model(st.session_state.reranker_model)
-
-    if "use_reranker" not in st.session_state.keys():
-        st.session_state.use_reranker = config.USE_RERANKER
-
     # Initialize query engine
     if "query_engine" not in st.session_state.keys():
         st.session_state.query_engine = None
 
     if "system_prompt" not in st.session_state.keys():
         st.session_state.system_prompt = "Chat with me!"
-    
-    if "chat_mode" not in st.session_state.keys():
-        st.session_state.chat_mode = "compact"
-    
+        
+    if "response_mode" not in st.session_state.keys():
+        response_mode_result = CONFIG_STORE.get(key="response_mode")
+        if response_mode_result is not None:
+            st.session_state.response_mode = response_mode_result["response_mode"]
+        else:
+            st.session_state.response_mode = config.DEFAULT_RESPONSE_MODE
+
     if "ollama_endpoint" not in st.session_state.keys():
         st.session_state.ollama_endpoint = "http://localhost:11434"
 
@@ -168,14 +159,19 @@ def init_llm_settings():
     if "current_llm_settings" not in st.session_state.keys():
         current_llm_settings = CONFIG_STORE.get(key="current_llm_settings")
         if current_llm_settings:
-            st.session_state.current_llm_settings = current_llm_settings["current_llm_settings"]
+            st.session_state.current_llm_settings = current_llm_settings
         else:
             st.session_state.current_llm_settings = {
                 "temperature": config.TEMPERATURE,
                 "system_prompt": config.SYSTEM_PROMPT,
                 "top_k": config.TOP_K,
+                "response_mode": config.DEFAULT_RESPONSE_MODE,
+                "use_reranker": config.USE_RERANKER,
+                "top_n": config.RERANKER_MODEL_TOP_N,
+                "embedding_model": config.DEFAULT_EMBEDDING_MODEL,
+                "reranker_model": config.DEFAULT_RERANKER_MODEL,
             }
-            CONFIG_STORE.put(key="current_llm_settings", val={"current_llm_settings": st.session_state.current_llm_settings})
+            CONFIG_STORE.put(key="current_llm_settings", val=st.session_state.current_llm_settings)
 
 
 # Create LLM instance if there is related information
@@ -219,4 +215,5 @@ def init_state():
     sp = st.session_state.llm_service_provider_selected
     init_api_model(sp)
     init_api_key(sp)
+    create_embedding_model(st.session_state["current_llm_settings"]["embedding_model"])
     create_llm_instance()

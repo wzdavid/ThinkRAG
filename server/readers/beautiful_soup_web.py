@@ -82,28 +82,28 @@ class BeautifulSoupWebReader(BasePydanticReader):
         for url in urls:
             try:
                 page = requests.get(url)
+                hostname = custom_hostname or urlparse(url).hostname or ""
+
+                soup = BeautifulSoup(page.content, "html.parser")
+
+                data = ""
+                extra_info = {
+                    "title": soup.select_one("title"),
+                    "url_source": url,
+                    "creation_date": datetime.now().date().isoformat(),  # Convert datetime to ISO format string
+                    }
+                if hostname in self._website_extractor:
+                    data, metadata = self._website_extractor[hostname](
+                        soup=soup, url=url, include_url_in_text=include_url_in_text
+                    )
+                    extra_info.update(metadata)
+
+                else:
+                    data = soup.getText()
+
+                documents.append(Document(text=data, id_=url, extra_info=extra_info))
             except Exception:
+                print(f"Could not scrape {url}")
                 raise ValueError(f"One of the inputs is not a valid url: {url}")
-
-            hostname = custom_hostname or urlparse(url).hostname or ""
-
-            soup = BeautifulSoup(page.content, "html.parser")
-
-            data = ""
-            extra_info = {
-                "title": soup.select_one("title"),
-                "url_source": url,
-                "creation_date": datetime.now().date().isoformat(),  # Convert datetime to ISO format string
-                }
-            if hostname in self._website_extractor:
-                data, metadata = self._website_extractor[hostname](
-                    soup=soup, url=url, include_url_in_text=include_url_in_text
-                )
-                extra_info.update(metadata)
-
-            else:
-                data = soup.getText()
-
-            documents.append(Document(text=data, id_=url, extra_info=extra_info))
 
         return documents

@@ -1,27 +1,31 @@
 import streamlit as st
 from server.stores.config_store import CONFIG_STORE
 from frontend.state import create_llm_instance
+from config import RESPONSE_MODE
 
 st.header("Advanced settings")
 advanced_settings = st.container(border=True)
 
-print("Current LLM Settings:", st.session_state["current_llm_settings"])
-
 def change_top_k():
     st.session_state["current_llm_settings"]["top_k"] = st.session_state["top_k"]
-    CONFIG_STORE.put(key="current_llm_settings", val={"current_llm_settings": st.session_state["current_llm_settings"]})
+    CONFIG_STORE.put(key="current_llm_settings", val=st.session_state["current_llm_settings"])
     create_llm_instance()
 
 def change_temperature():
     st.session_state["current_llm_settings"]["temperature"] = st.session_state["temperature"]
-    CONFIG_STORE.put(key="current_llm_settings", val={"current_llm_settings": st.session_state["current_llm_settings"]})
+    CONFIG_STORE.put(key="current_llm_settings", val=st.session_state["current_llm_settings"])
     create_llm_instance()
 
 def change_system_prompt():
     st.session_state["current_llm_settings"]["system_prompt"] = st.session_state["system_prompt"]
-    CONFIG_STORE.put(key="current_llm_settings", val={"current_llm_settings": st.session_state["current_llm_settings"]})
+    CONFIG_STORE.put(key="current_llm_settings", val=st.session_state["current_llm_settings"])
     create_llm_instance()
-    
+
+def change_response_mode():
+    st.session_state["current_llm_settings"]["response_mode"] = st.session_state["response_mode"]
+    CONFIG_STORE.put(key="current_llm_settings", val=st.session_state["current_llm_settings"])
+    create_llm_instance()
+
 with advanced_settings:
     col_1, _, col_2 = st.columns([4, 2, 4])
     with col_1:
@@ -41,6 +45,7 @@ with advanced_settings:
             help="The temperature to use when generating responses. Higher temperatures result in more random responses.",
             value=st.session_state["current_llm_settings"]["temperature"],
             key="temperature",
+            on_change=change_temperature,
         )
     st.text_area(
         "System Prompt",
@@ -51,18 +56,12 @@ with advanced_settings:
         on_change=change_system_prompt,
     )
     st.selectbox(
-        "Chat Mode",
-        (
-            "compact",
-            "refine",
-            "tree_summarize",
-            "simple_summarize",
-            "accumulate",
-            "compact_accumulate",
-        ),
-        help="Sets the [Llama Index Query Engine chat mode](https://github.com/run-llama/llama_index/blob/main/docs/module_guides/deploying/query_engine/response_modes.md) used when creating the Query Engine. Default: `compact`.",
-        key="chat_mode",
-        disabled=True,
+        "Response Mode",
+        options=RESPONSE_MODE,
+        help="Sets the Llama Index Query Engine response mode used when creating the Query Engine. Default: `compact`.",
+        key="response_mode",
+        index=RESPONSE_MODE.index(st.session_state["current_llm_settings"]["response_mode"]), # simple_summarize by default
+        on_change=change_response_mode,
     )
 
 # For debug purpost only

@@ -4,9 +4,6 @@ from math import ceil
 import pandas as pd
 import streamlit as st
 
-from frontend.sidebar import footer
-from frontend.state import init_keys
-
 def get_unique_files_info(ref_doc_info):
     docs = []
     seen_paths = set()
@@ -132,8 +129,6 @@ def handle_knowledgebase():
 
     else:
         st.write("Knowledge base is empty")
-
-init_keys()
 
 handle_knowledgebase()
 

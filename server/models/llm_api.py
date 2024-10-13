@@ -2,7 +2,6 @@
 from llama_index.core import Settings
 from langchain_openai import ChatOpenAI
 from llama_index.llms.langchain import LangChainLLM
-from config import LLM_API_LIST
 
 def create_openai_llm(model_name:str, api_base:str, api_key:str, temperature:float = 0.5, system_prompt:str = None) -> ChatOpenAI:
     try:

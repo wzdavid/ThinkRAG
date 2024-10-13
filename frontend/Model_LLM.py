@@ -191,3 +191,6 @@ def show_llm_instance():
 llm_configuration_page()
 
 show_llm_instance()
+
+st.caption("ThinkRAG supports `OpenAI` and all compatible LLM API like `Zhipu` or `Moonshot`. You may specify the LLMs you want to use in the `config.py` file.")
+st.caption("It is recommended to use `Ollama` if you need run the system without an Internet connection. Plase refer to the Ollama docs to download and use Ollama models.")

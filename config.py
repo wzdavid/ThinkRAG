@@ -10,17 +10,27 @@ CONFIG_STORE_FILE = "config_store.json" # local storage for configurations
 LLM_DEVICE = "auto"
 EMBEDDING_DEVICE = "auto"
 
-# LLM-related configurations
+# LLM Settings
 
 HISTORY_LEN = 3
 
 MAX_TOKENS = 2048
 
-TEMPERATURE = 0.7
+TEMPERATURE = 0.1
 
-TOP_K = 3
+TOP_K = 5
 
 SYSTEM_PROMPT = "You are an AI assistant that helps users to find accurate information. You can answer questions, provide explanations, and generate text based on the input. Please answer the user's question exactly in the same language as the question or follow user's instructions. For example, if user's question is in Chinese, please generate answer in Chinese as well. If you don't know the answer, please reply the user that you don't know. If you need more information, you can ask the user for clarification. Please be professional to the user."
+
+RESPONSE_MODE = [   # Configure the response mode of the query engine
+            "compact",
+            "refine",
+            "tree_summarize",
+            "simple_summarize",
+            "accumulate",
+            "compact_accumulate",
+]
+DEFAULT_RESPONSE_MODE = "simple_summarize"
 
 OLLAMA_API_URL = "http://localhost:11434"
 
@@ -111,13 +121,9 @@ USE_RERANKER = False
 RERANKER_MODEL_TOP_N = 2
 RERANKER_MAX_LENGTH = 1024
 
-# Evironment variable: "Lite" for development, "Prod" for production, "Plus" for enhancement, default to be "Lite"
-THINKRAG_ENV = os.getenv("THINKRAG_ENV", "Lite")
-
-if THINKRAG_ENV == "Prod" or THINKRAG_ENV == "Plus":
-    DEV_MODE = False
-else:
-    DEV_MODE = True
+# Evironment variable, default to be "development", set to "production" for production environment
+THINKRAG_ENV = os.getenv("THINKRAG_ENV", "development")
+DEV_MODE = THINKRAG_ENV == "development"
 
 # For creating IndexManager
 DEFAULT_INDEX_NAME = "knowledge_base"

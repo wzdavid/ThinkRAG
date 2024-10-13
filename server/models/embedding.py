@@ -1,4 +1,5 @@
 # Create embedding models
+import os
 from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from config import DEFAULT_EMBEDDING_MODEL, EMBEDDING_MODEL_PATH, MODEL_DIR
@@ -9,12 +10,14 @@ def create_embedding_model(model_name = DEFAULT_EMBEDDING_MODEL) -> HuggingFaceE
         use_hf_mirror()
         model_path = EMBEDDING_MODEL_PATH[model_name]
         if MODEL_DIR is not None:
-            model_path = f"./{MODEL_DIR}/{model_path}"
+            path = f"./{MODEL_DIR}/{model_path}"
+            if os.path.exists(path): # Use local models if the path exists
+                model_path = path
         embed_model = HuggingFaceEmbedding(model_name=model_path)
         Settings.embed_model = embed_model
-        print(f"created embed model: {model_name}")
-        return embed_model
+        print(f"created embed model: {model_path}")
     except Exception as e:
-        return None
+        print(f"An error occurred while creating the embedding model: {type(e).__name__}: {e}")
+        Settings.embed_model = None
 
-Settings.embed_model = create_embedding_model()
+    return Settings.embed_model

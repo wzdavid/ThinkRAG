@@ -1,9 +1,6 @@
 import time
 import pandas as pd
 import streamlit as st
-
-from frontend.sidebar import footer
-from frontend.state import init_keys
 from server.utils.file import save_uploaded_file, get_save_dir
 
 def handle_file():
@@ -65,8 +62,6 @@ def handle_file():
             st.session_state.uploaded_files = []
             time.sleep(4)
             st.rerun()
-
-init_keys()
 
 handle_file()
 
