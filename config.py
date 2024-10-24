@@ -127,6 +127,3 @@ DEV_MODE = THINKRAG_ENV == "development"
 
 # For creating IndexManager
 DEFAULT_INDEX_NAME = "knowledge_base"
-
-# NLTK model storage path, default to be 'localmodels/nltk', under the project root directory, used for the unstructured library
-NLTK_DATA_PATH = os.path.join(os.getcwd(), MODEL_DIR, "nltk_data")

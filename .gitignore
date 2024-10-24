@@ -11,6 +11,14 @@ storage/
 # Test files
 test_*.*
 
+# Python venv
+.venv/
+bin/
+include/
+lib/
+pyvenv.cfg
+etc/
+
 # The following are ignored by default.
 
 # Byte-compiled / optimized / DLL files
