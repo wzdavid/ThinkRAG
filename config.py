@@ -58,7 +58,7 @@ LLM_API_LIST = {
     "Zhipu": {
         "api_key": ZHIPU_API_KEY,
         "api_base": "https://open.bigmodel.cn/api/paas/v4/",
-        "models": ["glm-4","glm-4v","glm-3-turbo"],
+        "models": ["glm-4-plus", "glm-4-0520", "glm-4", "glm-4-air", "glm-4-airx", "glm-4-long", "glm-4-flashx", "glm-4-flash", "glm-4v-plus", "glm-4v"],
         "provider": "Zhipu",
     },
     # Moonshot API
@@ -72,7 +72,7 @@ LLM_API_LIST = {
     "DeepSeek": {
         "api_key": DEEPSEEK_API_KEY,
         "api_base": "https://api.deepseek.com/v1/",
-        "models": ["deepseek-chat","deepseek-coder"],
+        "models": ["deepseek-chat"],
         "provider": "DeepSeek",
     },
 }
