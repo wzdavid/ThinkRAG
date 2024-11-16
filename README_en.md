@@ -11,14 +11,14 @@
 
 ### Table of Contents
 
-- 🤔 [Project Overview](#What-is-ThinkRAG)
-- ✨ [Key Features](#Key-Features)
+- 🤔 [Overview](#What-is-ThinkRAG)
+- ✨ [Features](#Key-Features)
 - 🧸 [Model Support](#Support-Models)
 - 🛫 [Quick Start](#quick-start)
-- 📖 [Usage Instructions](#engine-interface-instructions)
-- 🔬 [Technical Architecture](#Modes-Comparison)
-- 📜 [Development Roadmap](#Roadmap)
-- 📄 [License](#license)
+- 📖 [User Guide](#Instructions)
+- 🔬 [Architecture](#Architecture)
+- 📜 [Roadmap](#Roadmap)
+- 📄 [License](#License)
 
 <div id='What-is-ThinkRAG'></a>
 
@@ -47,8 +47,6 @@ Specifically, ThinkRAG has also made a lot of customizations and optimizations f
 - Default support for China LLM service provider such as ZhiPu, Moonshot, and DeepSeek
 - Uses bilingual embedding models, such as bge-large-zh-v1.5 from BAAI
 
-<div id='quick-start'></a>
-
 <div id='Support-Models'></a>
 
 # Model Support
@@ -71,6 +69,8 @@ If you want to deploy LLMs locally, ThinkRAG chooses Ollama, which is easy to us
 Currently, Ollama supports the local deployment of almost all large language models, including Llama, Gemma, GLM, Mistral, Phi, Llava, etc. For details, please visit the [Ollama official website](https://ollama.com/).
 
 The system also uses embedding models and reranking models, which can support most models from Hugging Face. Currently, ThinkRAG mainly selects the BGE series models from BAAI. Chinese users can visit the [mirror website](https://hf-mirror.com/BAAI) to learn about and download them.
+
+<div id='quick-start'></a>
 
 # Quick Start
 
@@ -133,7 +133,9 @@ http://localhost:8501/
 
 The first run may take a moment. If you have not downloaded the embedding model from Hugging Face in advance, the system will automatically download the model, which will take a longer time.
 
-# Usage Guide
+<div id='Instructions'></a>
+
+# User Guide
 
 ## 1. System Configuration
 
@@ -218,7 +220,9 @@ As shown in the figure, the system took 2.49 seconds to provide an accurate answ
 
 It can be seen that ThinkRAG fully and effectively implements the function of large model retrieval and enhanced generation based on the local knowledge base.
 
-# Technical Architecture
+<div id='Architecture'></a>
+
+# Architecture
 
 ThinkRAG is developed using the LlamaIndex data framework, with Streamlit for the front end. The development mode and production mode of the system use different technical components, as shown in the table below:
 
@@ -245,7 +249,7 @@ As shown in the figure below:
 
 <div id='Roadmap'></a>
 
-# Development Roadmap
+# Roadmap
 
 ThinkRAG will continue to optimize core functions and continuously improve the efficiency and accuracy of retrieval, including:
 
@@ -260,7 +264,7 @@ At the same time, we will further improve the application architecture and enhan
 
 Welcome to join the ThinkRAG open source project, and together create AI products that users love!
 
-<div id='license'></a>
+<div id='License'></a>
 
 # License
 

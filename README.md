@@ -12,13 +12,13 @@
 ### 目录
 
 - 🤔 [项目简介](#What-is-ThinkRAG)
-- ✨ [主要特点](#Key-Features)
+- ✨ [主要特性](#Key-Features)
 - 🧸 [模型支持](#Support-Models)
 - 🛫 [快速开始](#quick-start)
-- 📖 [用法说明](#engine-interface-instructions)
-- 🔬 [技术架构](#Modes-Comparison)
+- 📖 [使用指南](#Instructions)
+- 🔬 [技术架构](#Architecture)
 - 📜 [开发计划](#Roadmap)
-- 📄 [许可协议](#license)
+- 📄 [许可协议](#License)
 
 <div id='What-is-ThinkRAG'></a>
 
@@ -30,7 +30,7 @@ ThinkRAG 大模型检索增强生成系统，可以轻松部署在笔记本电�
 
 <div id='Key-Features'></a>
 
-# 主要特点
+# 主要特性
 
 ThinkRAG 是为专业人士、科研人员、学生等知识工作者开发的大模型应用系统，可在笔记本电脑上直接使用，且知识库数据都保存在电脑本地。
 
@@ -46,8 +46,6 @@ ThinkRAG具备以下特点：
 - 使用中文提示词模板进行问答和细化过程
 - 默认支持国内大模型厂商，如智谱、月之暗面和深度求索等
 - 使用双语嵌入模型，如 BAAI的bge-large-zh-v1.5
-
-<div id='quick-start'></a>
 
 <div id='Support-Models'></a>
 
@@ -71,6 +69,8 @@ ThinkRAG致力于打造一个直接能用、有用、易用的应用系统。
 目前 Ollama 支持几乎所有主流大模型本地化部署，包括 Llama、Gemma、GLM 、Mistral、Phi、Llava等。具体可访问以下 [Ollama 官网](https://ollama.com/)了解。
 
 系统也使用了嵌入模型和重排模型，可支持来自 Hugging Face 的大多数模型。目前，ThinkRAG主要选用了BAAI的BGE系列模型。国内用户可访问[镜像网址](https://hf-mirror.com/BAAI)了解和下载。
+
+<div id='quick-start'></a>
 
 # 快速开始
 
@@ -132,6 +132,8 @@ streamlit run app.py
 http://localhost:8501/
 
 第一次运行可能会需要等待片刻。如果没有提前下载 Hugging Face 上的嵌入模型，系统还会自动下载模型，将需要等待更长时间。
+
+<div id='Instructions'></a>
 
 # 使用指南
 
@@ -218,6 +220,8 @@ ThinkRAG 支持上传 PDF、DOCX、PPTX 等各类文件，也支持上传网页 
 
 可以看到，ThinkRAG 完整和有效地实现了，基于本地知识库的大模型检索增强生成的功能。
 
+<div id='Architecture'></a>
+
 # 技术架构
 
 ThinkRAG 采用 LlamaIndex 数据框架开发，前端使用Streamlit。系统的开发模式和生产模式，分别选用了不同的技术组件，如下表所示：
@@ -260,7 +264,7 @@ ThinkRAG 将继续优化核心功能，持续提升检索的效率和准确性�
 
 欢迎你加入 ThinkRAG 开源项目，一起打造用户喜爱的 AI 产品！
 
-<div id='license'></a>
+<div id='License'></a>
 
 # 许可协议
 
