@@ -70,6 +70,12 @@ ThinkRAG致力于打造一个直接能用、有用、易用的应用系统。
 
 系统也使用了嵌入模型和重排模型，可支持来自 Hugging Face 的大多数模型。目前，ThinkRAG主要选用了BAAI的BGE系列模型。国内用户可访问[镜像网址](https://hf-mirror.com/BAAI)了解和下载。
 
+## 已知问题
+
+目前有Windows用户报告有问题，尚未复现和解决，请选择Linux或MacOS系统上使用ThinkRAG。
+
+由于LlamaIndex与最新的ollama 0.4未完成兼容，请安装使用ollama 0.3.3，指定版本已在requirements.txt中体现。
+
 <div id='quick-start'></a>
 
 # 快速开始

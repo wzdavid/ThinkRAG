@@ -70,6 +70,12 @@ Currently, Ollama supports the local deployment of almost all large language mod
 
 The system also uses embedding models and reranking models, which can support most models from Hugging Face. Currently, ThinkRAG mainly selects the BGE series models from BAAI. Chinese users can visit the [mirror website](https://hf-mirror.com/BAAI) to learn about and download them.
 
+## Known Issues
+
+Currently, there are issues from Windows users that have not been reproduced or resolved. Please use ThinkRAG on Linux or MacOS systems.
+
+Due to incompatibility between llama_index and the latest ollama 0.4, please install ollama 0.3.3, which is reflected in the requirements.txt file.
+
 <div id='quick-start'></a>
 
 # Quick Start
