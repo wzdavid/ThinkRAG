@@ -111,7 +111,7 @@ def change_llm_api_key():
     CONFIG_STORE.put(key=name, val={
         name: st.session_state.llm_api_key, 
     })
-    is_valid = check_openai_llm(st.session_state.llm_api_model, st.session_state.llm_api_base, st.session_state.llm_api_key)
+    is_valid = check_openai_llm(st.session_state.llm_api_model, st.session_state.llm_api_endpoint, st.session_state.llm_api_key)
     CONFIG_STORE.put(key=name + "_valid", val={ # e.g. "OpenAI_api_key_valid"
         name + "_valid": is_valid, 
     })
