@@ -54,12 +54,12 @@ LLM_API_LIST = {
         "models": ["gpt-4", "gpt-3.5", "gpt-4o"],
         "provider": "OpenAI",
     },
-    # ZhiPu API
-    "Zhipu": {
-        "api_key": ZHIPU_API_KEY,
-        "api_base": "https://open.bigmodel.cn/api/paas/v4/",
-        "models": ["glm-4-plus", "glm-4-0520", "glm-4", "glm-4-air", "glm-4-airx", "glm-4-long", "glm-4-flashx", "glm-4-flash", "glm-4v-plus", "glm-4v"],
-        "provider": "Zhipu",
+    # DeepSeek API
+    "DeepSeek": {
+        "api_key": DEEPSEEK_API_KEY,
+        "api_base": "https://api.deepseek.com/v1/",
+        "models": ["deepseek-chat","deepseek-reasoner"],
+        "provider": "DeepSeek",
     },
     # Moonshot API
     "Moonshot": {
@@ -68,12 +68,12 @@ LLM_API_LIST = {
         "models": ["moonshot-v1-8k","moonshot-v1-32k","moonshot-v1-128k"],
         "provider": "Moonshot",
     },
-    # DeepSeek API
-    "DeepSeek": {
-        "api_key": DEEPSEEK_API_KEY,
-        "api_base": "https://api.deepseek.com/v1/",
-        "models": ["deepseek-chat"],
-        "provider": "DeepSeek",
+    # ZhiPu API
+    "Zhipu": {
+        "api_key": ZHIPU_API_KEY,
+        "api_base": "https://open.bigmodel.cn/api/paas/v4/",
+        "models": ["glm-4-plus", "glm-4-0520", "glm-4", "glm-4-air", "glm-4-airx", "glm-4-long", "glm-4-flashx", "glm-4-flash", "glm-4v-plus", "glm-4v"],
+        "provider": "Zhipu",
     },
 }
 
