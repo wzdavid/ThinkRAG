@@ -5,248 +5,248 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](https://ollama.com/) [![support: LlamaIndex](https://img.shields.io/badge/Support-LlamaIndex-purple.svg)](https://www.llamaindex.ai/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)    [![support: Ollama](https://img.shields.io/badge/Support-Ollama-green.svg)](https://ollama.com/)    [![support: LlamaIndex](https://img.shields.io/badge/Support-LlamaIndex-purple.svg)](https://www.llamaindex.ai/)   
 
 </div>
 
-### 目录
+### Table of Contents
 
-- 🤔 [项目简介](#What-is-ThinkRAG)
-- ✨ [主要特性](#Key-Features)
-- 🧸 [模型支持](#Support-Models)
-- 🛫 [快速开始](#quick-start)
-- 📖 [使用指南](#Instructions)
-- 🔬 [技术架构](#Architecture)
-- 📜 [开发计划](#Roadmap)
-- 📄 [许可协议](#License)
+- 🤔 [Overview](#What-is-ThinkRAG)
+- ✨ [Features](#Key-Features)
+- 🧸 [Model Support](#Support-Models)
+- 🛫 [Quick Start](#quick-start)
+- 📖 [User Guide](#Instructions)
+- 🔬 [Architecture](#Architecture)
+- 📜 [Roadmap](#Roadmap)
+- 📄 [License](#License)
 
 <div id='What-is-ThinkRAG'></a>
 
 # ThinkRAG
 
-ThinkRAG 大模型检索增强生成系统，可以轻松部署在笔记本电脑上，实现本地知识库智能问答。
+ThinkRAG is a LLM RAG system that can be easily deployed on a laptop to implement Q&A with local knowledge base.
 
-该系统基于 LlamaIndex 和 Streamlit 构建，针对国内用户在模型选择、文本处理等诸多领域进行了优化。
+This system is built on LlamaIndex and Streamlit, and has been optimized for Chinese users in various fields such as model selection and text processing.
 
 <div id='Key-Features'></a>
 
-# 主要特性
+# Key Features
 
-ThinkRAG 是为专业人士、科研人员、学生等知识工作者开发的大模型应用系统，可在笔记本电脑上直接使用，且知识库数据都保存在电脑本地。
+ThinkRAG is a LLM application developed for professionals, researchers, students, and other knowledge workers, which can be used directly on a laptop with all knowledge and data stored locally on the computer.
 
-ThinkRAG具备以下特点：
-- LlamaIndex框架的完整应用
-- 开发模式支持本地文件存储，无需安装任何数据库
-- 无需 GPU 支持，即可在笔记本电脑上运行
-- 支持本地部署的模型和离线使用
+ThinkRAG has the following features:
+- Complete application of the LlamaIndex framework
+- Development mode supports local file storage without the need to install any databases
+- No GPU support is required to run on a laptop
+- Supports locally deployed models and offline use
 
-特别地，ThinkRAG 还为国内用户做了大量定制和优化：
-- 使用 Spacy 文本分割器，更好地处理中文字符
-- 采用中文标题增强功能
-- 使用中文提示词模板进行问答和细化过程
-- 默认支持国内大模型厂商，如智谱、月之暗面和深度求索等
-- 使用双语嵌入模型，如 BAAI的bge-large-zh-v1.5
+Specifically, ThinkRAG has also made a lot of customizations and optimizations for Chinese users:
+- Uses Spacy text splitter for better handling of Chinese characters
+- Employs Chinese title enhancement features
+- Uses Chinese prompt templates for Q&A and refinement processes
+- Default support for China LLM service provider such as DeepSeek, Moonshot and ZhiPu 
+- Uses bilingual embedding models, such as bge-large-zh-v1.5 from BAAI
 
 <div id='Support-Models'></a>
 
-# 模型支持
+# Model Support
 
-ThinkRAG 可使用 LlamaIndex 数据框架支持的所有模型。关于模型列表信息，请参考[相关文档](https://docs.llamaindex.ai/en/stable/module_guides/models/llms/modules/)。
+ThinkRAG can use all models supported by the LlamaIndex data framework. For model list information, please refer to [relevant documentation](https://docs.llamaindex.ai/en/stable/module_guides/models/llms/modules/). 
 
-ThinkRAG致力于打造一个直接能用、有用、易用的应用系统。
+ThinkRAG is committed to creating an application system that is directly usable, useful, and easy to use.
 
-因此，在各种模型、组件与技术上，我们做了精心的选择与取舍。
+Therefore, we have made careful selections and trade-offs in various models, components, and technologies.
 
-首先，使用大模型，ThinkRAG支持OpenAI API 以及所有兼容的 LLM API，包括国内主流大模型厂商，例如： 
+Firstly, using large models, ThinkRAG supports the OpenAI API and all compatible LLM APIs, including LLM service providers in China, such as:
 
-- 智谱（Zhipu）
-- 月之暗面（Moonshot ）
-- 深度求索（DeepSeek）
-- ……
+- DeepSeek
+- Moonshot
+- ZhiPu
+- ...
 
-如果要本地化部署大模型，ThinkRAG 选用了简单易用的 Ollama。我们可以从通过 Ollama 将大模型下载到本地运行。
+If you want to deploy LLMs locally, ThinkRAG chooses Ollama, which is easy to use. We can download models to run locally through Ollama.
 
-目前 Ollama 支持几乎所有主流大模型本地化部署，包括 Llama、Gemma、GLM 、Mistral、Phi、Llava等。具体可访问以下 [Ollama 官网](https://ollama.com/)了解。
+Currently, Ollama supports the local deployment of almost all large language models, including Llama, Gemma, GLM, Mistral, Phi, Llava, etc. For details, please visit the [Ollama official website](https://ollama.com/).
 
-系统也使用了嵌入模型和重排模型，可支持来自 Hugging Face 的大多数模型。目前，ThinkRAG主要选用了BAAI的BGE系列模型。国内用户可访问[镜像网址](https://hf-mirror.com/BAAI)了解和下载。
+The system also uses embedding models and reranking models, which can support most models from Hugging Face. Currently, ThinkRAG mainly selects the BGE series models from BAAI. Chinese users can visit the [mirror website](https://hf-mirror.com/BAAI) to learn about and download them.
 
-## 已知问题
+## Known Issues
 
-目前有Windows用户报告有问题，尚未复现和解决，请选择Linux或MacOS系统上使用ThinkRAG。
+Currently, there are issues from Windows users that have not been reproduced or resolved. Please use ThinkRAG on Linux or MacOS systems.
 
-由于LlamaIndex与最新的ollama 0.4未完成兼容，请安装使用ollama 0.3.3，指定版本已在requirements.txt中体现。
+Due to incompatibility between llama_index and the latest ollama 0.4, please install ollama 0.3.3, which is reflected in the requirements.txt file.
 
 <div id='quick-start'></a>
 
-# 快速开始
+# Quick Start
 
-## Step 1 下载与安装
+## Step 1 Download and Installation
 
-从Github下载代码后，用pip安装所需组件。
+After downloading the code from Github, use pip to install the required components.
 ```zsh
 pip3 install -r requirements.txt
 ```
-若要离线运行系统，请首先从官网下载 Ollama。然后，使用 Ollama 命令下载如GLM、 Gemma 和 QWen 等大模型。
+If you want to run the system offline, please first download Ollama from the official website. Then, use the Ollama command to download LLMs such as DeepSeek, Qwen, and Gemma.
 
-同步，从Hugging Face将嵌入模型（BAAI/bge-large-zh-v1.5）和重排模型（BAAI/bge-reranker-base）下载到 localmodels 目录中。
+Then, download the embedding model (BAAI/bge-large-zh-v1.5) and reranking model (BAAI/bge-reranker-base) from Hugging Face to the `localmodels` directory.
 
-具体步骤，可参考 docs 目录下的文档：HowToDownloadModels.md
+For specific steps, please refer to the document in the `docs` directory: HowToDownloadModels.md
 
-## Step 2 系统配置
+## Step 2 System Configuration
 
-为了获得更好的性能，推荐使用千亿级参数的商用大模型 LLM API。
+For better performance, it is recommended to use commercial LLM APIs.
 
-首先，从 LLM 服务商获取 API 密钥，配置如下环境变量。
+First, obtain the API key from the LLM service provider and configure the following environment variables.
 
 ```zsh
-ZHIPU_API_KEY = ""
-MOONSHOT_API_KEY = ""
-DEEPSEEK_API_KEY = ""
 OPENAI_API_KEY = ""
+DEEPSEEK_API_KEY = ""
+MOONSHOT_API_KEY = ""
+ZHIPU_API_KEY = ""
 ```
 
-你可以跳过这一步，在系统运行后，再通过应用界面配置 API 密钥。
+You can skip this step and configure the API keys through the application interface after the system is running.
 
-如果选择使用其中一个或多个 LLM API，请在 config.py 配置文件中删除不再使用的服务商。
+If you choose to use one or more LLM APIs, please delete the unused service providers in the config.py configuration file.
 
-当然，你也可以在配置文件中，添加兼容 OpenAI API 的其他服务商。
+Of course, you can also add other service providers compatible with the OpenAI API in the configuration file.
 
-ThinkRAG 默认以开发模式运行。在此模式下，系统使用本地文件存储，你不需要安装任何数据库。
+ThinkRAG runs in development mode by default. In this mode, the system uses local file storage, and you do not need to install any databases.
 
-若要切换到生产模式，你可以按照以下方式配置环境变量。
+If you want to switch to production mode, you can configure the environment variables as follows.
 
 ```zsh
 THINKRAG_ENV = production
 ```
 
-在生产模式下，系统使用向量数据库 Chroma 和键值数据库 Redis。
+In production mode, the system uses vector databases Chroma or LanceDB, and key-value databases Redis.
 
-如果你没有安装 Redis，建议通过 Docker 安装，或使用已有的 Redis 实例。请在 config.py 文件里，配置 Redis 实例的参数信息。
+If you do not have Redis installed, it is recommended to install it through Docker or use an existing Redis instance. Please configure the parameters of the Redis instance in the config.py file.
 
-## Step 3 运行系统
+## Step 3 Running the System
 
-现在，你已经准备好运行 ThinkRAG。
+Now, you are ready to run ThinkRAG.
 
-请在包含 app.py 文件的目录中运行以下命令。
+Please run the following command in the directory containing the app.py file.
 
 ```zsh
 streamlit run app.py
 ```
 
-系统将运行，并在浏览器上自动打开以下网址，展示应用界面。
+The system will run and automatically open the following URL in the browser to display the application interface.
 
 http://localhost:8501/
 
-第一次运行可能会需要等待片刻。如果没有提前下载 Hugging Face 上的嵌入模型，系统还会自动下载模型，将需要等待更长时间。
+The first run may take a moment. If you have not downloaded the embedding model from Hugging Face in advance, the system will automatically download the model, which will take a longer time.
 
 <div id='Instructions'></a>
 
-# 使用指南
+# User Guide
 
-## 1.系统配置
+## 1. System Configuration
 
-ThinkRAG 支持在用户界面，对大模型进行配置与选择，包括：大模型 LLM API 的 Base URL 和 API 密钥，并可以选择使用的具体模型，例如：智谱的 glm-4。
+ThinkRAG supports configuration and selection of large models in the user interface, including: the Base URL and API key of the large model LLM API, and the specific model to be used, such as ZhiPu's glm-4.
 
 <div align="center">
 <img src="docs/images/Model_LLM.png" width="700" alt="file_uploads">
 </a>
 </div>
 
-系统将自动检测 API 和密钥是否可用，若可用则在底部用绿色文字，显示当前选择的大模型实例。
+The system will automatically detect whether the API and key are available, and if available, display the current selected large model instance in green text at the bottom.
 
-同样，系统可以自动获取 Ollama 下载的模型，用户可以在用户界面上选择所需的模型。
+Similarly, the system can automatically obtain models downloaded by Ollama, and users can select the required models on the user interface.
 
 <div align="center">
 <img src="docs/images/Model_Reranker.png" width="700" alt="file_uploads">
 </a>
 </div>
 
-若你已经将嵌入模型和重排模型下载到本地 localmodels 目录下。在用户界面上，可以切换选择使用的模型，并设置重排模型的参数，比如 Top N。
+If you have already downloaded the embedding model and reranking model to the local localmodels directory, you can switch and select the model to be used on the user interface, and set the parameters of the reranking model, such as Top N.
 
 <div align="center">
 <img src="docs/images/Settings_Advanced.png" width="700" alt="file_uploads">
 </a>
 </div>
 
-在左侧导航栏，点击高级设置（Settings-Advanced），你还可以对下列参数进行设置：
+In the left navigation bar, click on Advanced Settings (Settings-Advanced), and you can also set the following parameters:
 - Top K
 - Temperature
 - System Prompt
 - Response Mode
 
-通过使用不同参数，我们可以对比大模型输出结果，找到最有效的参数组合。
+By using different parameters, we can compare the output results of large models and find the most effective parameter combination.
 
-## 2.管理知识库
+## 2. Knowledge Base Management
 
-ThinkRAG 支持上传 PDF、DOCX、PPTX 等各类文件，也支持上传网页 URL。
+ThinkRAG supports uploading various types of files such as PDF, DOCX, PPTX, and also supports uploading web page URLs.
 
 <div align="center">
 <img src="docs/images/KB_File.png" width="700" alt="file_uploads">
 </a>
 </div>
 
-点击 Browse files 按钮，选择电脑上的文件，然后点击 Load 按钮加载，此时会列出所有加载的文件。
+Click the `Browse files` button, select the files on your computer, and then click the Load button to load, at which point all loaded files will be listed.
 
-然后，点击 Save 按钮，系统会对文件进行处理，包括文本分割和嵌入，保存到知识库中。
+Then, click the `Save` button, and the system will process the files, including text splitting and embedding, and save them to the knowledge base.
 
 <div align="center">
 <img src="docs/images/KB_Web.png" width="700" alt="file_uploads">
 </a>
 </div>
 
-同样，你可以输入或粘贴网页 URL，获取网页信息，处理后保存到知识库中。
+Similarly, you can enter or paste the web page URL to obtain web page information, process it, and save it to the knowledge base.
 
-系统支持对知识库进行管理。
+The system supports knowledge base management.
 
 <div align="center">
 <img src="docs/images/KB_Manage.png" width="700" alt="file_uploads">
 </a>
 </div>
 
-如上图所示，ThinkRAG 可以分页列出，知识库中所有的文档。
+As shown in the figure above, ThinkRAG can list all documents in the knowledge base in pages.
 
-选择要删除的文档，将出现 Delete selected documents 按钮，点击该按钮可以将文档从知识库中删除。
+Select the document to be deleted, and the Delete selected documents button will appear, click the button to delete the document from the knowledge base.
 
-## 3.智能问答
+## 3. Query
 
-在左侧导航栏，点击 Query，将会出现智能问答页面。
+In the left navigation bar, click on `Query`, and the Q&A page will appear.
 
-输入问题后，系统会对知识库进行检索，并给出回答。在这个过程当中，系统将采用混合检索和重排等技术，从知识库获取准确的内容。
+After entering the question, the system will search the knowledge base and provide an answer. In this process, the system will use hybrid retrieval and reranking technologies to obtain accurate content from the knowledge base.
 
-例如，我们已经在知识库中上传了一个 Word 文档：“大卫说流程.docx“。
+For example, we have uploaded a Word document about business process management to the knowledge base.
 
-现在输入问题：”流程有哪三个特征？”
+Now enter the question: "What are the three characteristics of the process?"
 
 <div align="center">
 <img src="docs/images/Query.png" width="700" alt="file_uploads">
 </a>
 </div>
 
-如图所示，系统用时2.49秒，给出了准确的回答：流程具备目标性、重复性与过程性。同时，系统还给出了从知识库检索到的2个相关文档。
+As shown in the figure, the system took 2.49 seconds to provide an accurate answer: The process has the characteristics of goal orientation, repetition, and processuality. At the same time, the system also provided 2 reference documents retrieved from the knowledge base.
 
-可以看到，ThinkRAG 完整和有效地实现了，基于本地知识库的大模型检索增强生成的功能。
+It can be seen that ThinkRAG fully and effectively implements the function of large model retrieval and enhanced generation based on the local knowledge base.
 
 <div id='Architecture'></a>
 
-# 技术架构
+# Architecture
 
-ThinkRAG 采用 LlamaIndex 数据框架开发，前端使用Streamlit。系统的开发模式和生产模式，分别选用了不同的技术组件，如下表所示：
+ThinkRAG is developed using the LlamaIndex data framework, with Streamlit for the front end. The development mode and production mode of the system use different technical components, as shown in the table below:
 
-| |开发模式|生产模式|
+| |Development Mode|Production Mode|
 |:----|:----|:----|
-|RAG框架|LlamaIndex|LlamaIndex|
-|前端框架|Streamlit|Streamlit|
-|嵌入模型|BAAI/bge-small-zh-v1.5|BAAI/bge-large-zh-v1.5|
-|重排模型|BAAI/bge-reranker-base|BAAI/bge-reranker-large|
-|文本分割器|SentenceSplitter|SpacyTextSplitter|
-|对话存储|SimpleChatStore|Redis|
-|文档存储|SimpleDocumentStore|Redis|
-|索引存储|SimpleIndexStore|Redis|
-|向量存储|SimpleVectorStore|LanceDB|
+|RAG Framework|LlamaIndex|LlamaIndex|
+|Frontend Framework|Streamlit|Streamlit|
+|Embedding Model|BAAI/bge-small-zh-v1.5|BAAI/bge-large-zh-v1.5|
+|Reranking Model|BAAI/bge-reranker-base|BAAI/bge-reranker-large|
+|Text Splitter|SentenceSplitter|SpacyTextSplitter|
+|Conversation Storage|SimpleChatStore|Redis|
+|Document Storage|SimpleDocumentStore|Redis|
+|Index Storage|SimpleIndexStore|Redis|
+|Vector Storage|SimpleVectorStore|LanceDB|
 
-这些技术组件，按照前端、框架、大模型、工具、存储、基础设施，这六个部分进行架构设计。
+These technical components are designed according to the Frontend, Framework, LLM, Tools, Storage, and Infrastructure, which are six parts of the architecture.
 
-如下图所示：
+As shown in the figure below:
 
 <div align="center">
 <img src="docs/images/ThinkRAG_Architecture.png" width="700" alt="file_uploads">
@@ -255,23 +255,23 @@ ThinkRAG 采用 LlamaIndex 数据框架开发，前端使用Streamlit。系统�
 
 <div id='Roadmap'></a>
 
-# 开发计划
+# Roadmap
 
-ThinkRAG 将继续优化核心功能，持续提升检索的效率和准确性，主要包括：
+ThinkRAG will continue to optimize core functions and continuously improve the efficiency and accuracy of retrieval, including:
 
-- 优化对文档和网页的处理，支持多模态知识库和多模态检索
-- 构建知识图谱，通过知识图谱增强检索，并基于图进行推理
-- 通过智能体处理复杂场景，尤其是准确调用其他工具和数据，完成任务
+- Optimize the processing of documents and web pages, support multimodal knowledge bases and multimodal retrieval
+- Build a knowledge graph, enhance retrieval through the knowledge graph, and reason based on the graph
+- Process complex scenarios through intelligent agents, especially accurately calling other tools and data to complete tasks
 
-同时，我们还将进一步完善应用架构、提升用户体验，主要包括：
-- 设计：有设计感和极佳用户体验的用户界面
-- 前端：基于Electron、React、Vite等技术，构建桌面客户端应用，为用户提供极致简洁的下载、安装和运行方式
-- 后端：通过FastAPI提供接口，以及消息队列等技术提升整体性能和可扩展性
+At the same time, we will further improve the application architecture and enhance the user experience, mainly including:
+- Design: A user interface with a sense of design and excellent user experience
+- Frontend: Build a desktop client application based on Electron, React, Vite, etc., to provide users with an extremely simple way to download, install, and run
+- Backend: Provide interfaces through FastAPI, and improve overall performance and scalability through technologies such as message queues
 
-欢迎你加入 ThinkRAG 开源项目，一起打造用户喜爱的 AI 产品！
+Welcome to join the ThinkRAG open source project, and together create AI products that users love!
 
 <div id='License'></a>
 
-# 许可协议
+# License
 
-ThinkRAG 使用 [MIT 协议](LICENSE).
+ThinkRAG uses the [MIT License](LICENSE).
