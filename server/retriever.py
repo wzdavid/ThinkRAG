@@ -51,11 +51,15 @@ class SimpleHybridRetriever(BaseRetriever):
         max_score = max(item.score for item in bm25_nodes)
 
         # normalize score
-        normalized_data = [(item.score - min_score) / (max_score - min_score) for item in bm25_nodes]
-
-        # Assign normalized score back to the original object
-        for item, normalized_score in zip(bm25_nodes, normalized_data):
-            item.score = normalized_score
+        if max_score != min_score:
+            normalized_data = [(item.score - min_score) / (max_score - min_score) for item in bm25_nodes]
+            # Assign normalized score back to the original object
+            for item, normalized_score in zip(bm25_nodes, normalized_data):
+                item.score = normalized_score
+        else:
+            # If all scores are the same, assign uniform normalized score of 0.5
+            for item in bm25_nodes:
+                item.score = 0.5
 
         vector_nodes = self.vector_retriever.retrieve(query, **kwargs)
 

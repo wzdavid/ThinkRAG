@@ -29,11 +29,16 @@ def init_keys():
 
     if "ollama_models" not in st.session_state.keys():
         ollama.get_model_list()
+        # Ensure ollama_models is always initialized, even if empty
+        if "ollama_models" not in st.session_state.keys():
+            st.session_state.ollama_models = []
+    
+    if "ollama_model_selected" not in st.session_state.keys():
         if (st.session_state.ollama_models is not None and len(st.session_state.ollama_models) > 0):
             st.session_state.ollama_model_selected = st.session_state.ollama_models[0]
             create_ollama_llm(st.session_state.ollama_model_selected)
-    if "ollama_model_selected" not in st.session_state.keys():
-        st.session_state.ollama_model_selected = None
+        else:
+            st.session_state.ollama_model_selected = None
     if "llm_api_list" not in st.session_state.keys():
         st.session_state.llm_api_list = [model for api in config.LLM_API_LIST.values() for model in api['models']]
     if "llm_api_selected" not in st.session_state.keys():
