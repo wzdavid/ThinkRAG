@@ -35,8 +35,28 @@ class IndexManager:
         print(f"Created index {self.index.index_id}")
         return self.index
 
-    def load_index(self): # TODO: load index based on index_id
-        self.index = load_index_from_storage(self.storage_context)
+    def load_index(self): # Load index from storage, using index_id if available
+        # If index is already loaded (e.g., from check_index_exists), no need to reload
+        if self.index is not None:
+            print(f"Index {self.index.index_id} already loaded")
+            return self.index
+        
+        # If we have a stored index_id, use it for loading
+        if self.index_id is not None:
+            self.index = load_index_from_storage(self.storage_context, index_id=self.index_id)
+        else:
+            # Fallback to loading without index_id (for backward compatibility)
+            try:
+                self.index = load_index_from_storage(self.storage_context)
+            except ValueError as e:
+                # If loading fails, try to check if indices exist first
+                indices = load_indices_from_storage(self.storage_context)
+                if len(indices) > 0:
+                    self.index = indices[0]
+                    self.index_id = indices[0].index_id
+                else:
+                    raise ValueError("No indices found in storage context. Please create an index first.") from e
+        
         if not DEV_MODE:
             self.index._store_nodes_override = True
         print(f"Loaded index {self.index.index_id}")
