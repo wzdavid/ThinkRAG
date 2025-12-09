@@ -153,7 +153,9 @@ def init_api_key(sp):
         if valid_key not in st.session_state.keys():
             valid_result = CONFIG_STORE.get(key=valid_key)
             if valid_result is None and st.session_state[api_key] is not None:
-                is_valid = check_openai_llm(st.session_state[sp + "_model_selected"], config.LLM_API_LIST[sp]["api_base"], st.session_state[api_key])
+                current_base = st.session_state[sp + "_api_base"] if (sp + "_api_base") in st.session_state else config.LLM_API_LIST[sp]["api_base"]
+                current_base = current_base.strip().replace("`", "")
+                is_valid = check_openai_llm(st.session_state[sp + "_model_selected"], current_base, st.session_state[api_key])
                 CONFIG_STORE.put(key=valid_key, val={valid_key: is_valid})
                 st.session_state[valid_key] = is_valid
             else:
@@ -194,7 +196,7 @@ def create_llm_instance():
                 )
         else:
             model_name = current_llm_info["model"]
-            api_base = current_llm_info["api_base"]
+            api_base = current_llm_info["api_base"].strip().replace("`", "")
             api_key = current_llm_info["api_key"]
             api_key_valid = current_llm_info["api_key_valid"]
             if api_key_valid:

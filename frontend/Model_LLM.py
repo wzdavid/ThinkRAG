@@ -99,12 +99,27 @@ def change_ollama_model():
     save_current_llm_info()
 
 def change_llm_api_base():
-    name = option + "_api_base" # e.g. "OpenAI_api_base"
-    st.session_state[name] = st.session_state.llm_api_endpoint
+    name = option + "_api_base"
+    cleaned_endpoint = st.session_state.llm_api_endpoint.strip().replace("`", "")
+    st.session_state[name] = cleaned_endpoint
     CONFIG_STORE.put(key=name, val={
-        name: st.session_state.llm_api_endpoint, 
+        name: cleaned_endpoint,
+    })
+    api_key_name = option + "_api_key"
+    valid_key = api_key_name + "_valid"
+    api_key_val = st.session_state.llm_api_key if "llm_api_key" in st.session_state else None
+    is_valid = False
+    if api_key_val is not None and api_key_val != "":
+        is_valid = check_openai_llm(st.session_state.llm_api_model, cleaned_endpoint, api_key_val)
+    st.session_state[valid_key] = is_valid
+    CONFIG_STORE.put(key=valid_key, val={
+        valid_key: is_valid,
     })
     save_current_llm_info()
+    if is_valid:
+        print("API key is valid")
+    else:
+        print("API key is invalid")
 
 def change_llm_api_key():
     name = option + "_api_key" # e.g. "OpenAI_api_key"
@@ -112,9 +127,7 @@ def change_llm_api_key():
     CONFIG_STORE.put(key=name, val={
         name: st.session_state.llm_api_key, 
     })
-    print("Checking API key...")
-    print(st.session_state.llm_api_key)
-    is_valid = check_openai_llm(st.session_state.llm_api_model, st.session_state.llm_api_endpoint, st.session_state.llm_api_key)
+    is_valid = check_openai_llm(st.session_state.llm_api_model, st.session_state.llm_api_endpoint.strip().replace("`", ""), st.session_state.llm_api_key)
     st.session_state[name + "_valid"] = is_valid
     CONFIG_STORE.put(key=name + "_valid", val={ # e.g. "OpenAI_api_key_valid"
         name + "_valid": is_valid, 
@@ -131,7 +144,23 @@ def change_llm_api_model():
     CONFIG_STORE.put(key=name, val={
         name: st.session_state.llm_api_model,
     })
+    api_key_name = option + "_api_key"
+    valid_key = api_key_name + "_valid"
+    cleaned_endpoint = (st.session_state.llm_api_endpoint.strip().replace("`", "")
+                        if "llm_api_endpoint" in st.session_state else "")
+    api_key_val = st.session_state.llm_api_key if "llm_api_key" in st.session_state else None
+    is_valid = False
+    if api_key_val is not None and api_key_val != "" and cleaned_endpoint != "":
+        is_valid = check_openai_llm(st.session_state.llm_api_model, cleaned_endpoint, api_key_val)
+    st.session_state[valid_key] = is_valid
+    CONFIG_STORE.put(key=valid_key, val={
+        valid_key: is_valid,
+    })
     save_current_llm_info()
+    if is_valid:
+        print("API key is valid")
+    else:
+        print("API key is invalid")
 
 def llm_configuration_page():
     llm_api_settings = st.container(border=True)
@@ -147,12 +176,22 @@ def llm_configuration_page():
             if ollama.is_alive():
                 ollama.get_model_list()
                 st.write("🟢 Ollama is running")
-                st.selectbox('Local LLM', st.session_state.ollama_models,
-                            index=st.session_state.ollama_models.index(st.session_state.ollama_model_selected),
-                            help='Select locally deployed LLM from Ollama',
-                            on_change=change_ollama_model,
-                            key='ollama_model_name', # session_state key
-                )
+                models = st.session_state.ollama_models if "ollama_models" in st.session_state else []
+                if models and len(models) > 0:
+                    default_index = 0
+                    selected = st.session_state.ollama_model_selected if "ollama_model_selected" in st.session_state else None
+                    if selected in models:
+                        default_index = models.index(selected)
+                    st.selectbox(
+                        'Local LLM',
+                        models,
+                        index=default_index,
+                        help='Select locally deployed LLM from Ollama',
+                        on_change=change_ollama_model,
+                        key='ollama_model_name',
+                    )
+                else:
+                    st.warning("No local Ollama models found. Please pull models via Ollama CLI, e.g. `ollama pull llama3`.")
             else:
                 st.write("🔴 Ollama is not running")
 
