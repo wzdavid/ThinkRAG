@@ -35,7 +35,17 @@ def handle_website():
     if process_button:
         print("Generating index...")
         with st.spinner(text="Loading documents and building the index, may take a minute or two"):
-            st.session_state.index_manager.load_websites(st.session_state["websites"], chunk_size, chunk_overlap)
+            try:
+                nodes = st.session_state.index_manager.load_websites(st.session_state["websites"], chunk_size, chunk_overlap)
+                if not nodes:
+                    st.warning(
+                        "No indexable content was extracted from this URL."
+                        "Try a specific ariticle page, or use the r.jina.ai mirror."
+                    )
+                else:
+                    st.success(f"Web pages processed successfully. Indexed {len(nodes)} chunks.")
+            except Exception as e:
+                st.error(f"Failed to load/save web pages: {e}")
             st.toast('✔️ Knowledge base index generation complete', icon='🎉')
             st.session_state.websites = []
             time.sleep(4)

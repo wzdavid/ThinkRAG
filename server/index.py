@@ -7,6 +7,7 @@ from server.utils.file import get_save_dir
 from server.stores.strage_context import STORAGE_CONTEXT
 from server.ingestion import AdvancedIngestionPipeline
 from config import DEV_MODE
+from server.utils_json import sanitize_for_json  # metadata 清洗，避免 Tag 不可序列化
 
 class IndexManager:
     def __init__(self, index_name):
@@ -110,15 +111,62 @@ class IndexManager:
         Settings.chunk_overlap = chunk_overlap
 
         from server.readers.beautiful_soup_web import BeautifulSoupWebReader
-        documents = BeautifulSoupWebReader().load_data(websites)        
-        if len(documents) > 0:
-            pipeline = AdvancedIngestionPipeline()
-            nodes = pipeline.run(documents=documents)
-            index = self.insert_nodes(nodes)
-            return nodes
+
+        # 清理输入（空行/空格）
+        if isinstance(websites, str):
+            websites = [u.strip() for u in websites.splitlines() if u.strip()]
         else:
-            print("No documents found")
+            websites = [str(u).strip() for u in (websites or []) if str(u).strip()]
+
+        def fetch_docs(urls):
+            docs = BeautifulSoupWebReader().load_data(urls) or []
+
+            # 防止 metadata 里混入不可序列化对象
+            for d in docs:
+                if hasattr(d, "metadata") and isinstance(getattr(d, "metadata"), dict):
+                    d.metadata = sanitize_for_json(d.metadata)
+                if hasattr(d, "extra_info") and isinstance(getattr(d, "extra_info"), dict):
+                    d.extra_info = sanitize_for_json(d.extra_info)
+
+            # 过滤空正文
+            valid = []
+            for d in docs:
+                if d is None:
+                    continue
+
+                text = getattr(d, "text", None)
+                if text is None and hasattr(d, "get_content"):
+                    try:
+                        text = d.get_content()
+                    except Exception:
+                        text = None
+
+                if text is None or str(text).strip() == "":
+                    continue
+
+                valid.append(d)
+
+            return valid
+
+        documents = fetch_docs(websites)
+
+        # 抓不到就走 reader 镜像再试一次
+        if not documents:
+            fallback_websites = [f"https://r.jina.ai/{u}" for u in websites]
+            documents = fetch_docs(fallback_websites)
+
+        if not documents:
+            raise ValueError("No extractable text from the given URL(s).")
+
+        pipeline = AdvancedIngestionPipeline()
+        pipeline.disable_cache = True;
+        pipeline.cache = None;
+        nodes = pipeline.run(documents=documents) or []
+        if not nodes:
             return []
+
+        self.insert_nodes(nodes)
+        return nodes
     
     # Delete a document and all related nodes
     def delete_ref_doc(self, ref_doc_id):
