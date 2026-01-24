@@ -119,7 +119,7 @@ def change_llm_api_base():
     if is_valid:
         print("API key is valid")
     else:
-        print("API key is invalid")
+        print("LLM API verification failed. Please verify provider settings / network access.")
 
 def change_llm_api_key():
     name = option + "_api_key" # e.g. "OpenAI_api_key"
@@ -136,7 +136,7 @@ def change_llm_api_key():
     if is_valid:
         print("API key is valid")
     else:
-        print("API key is invalid")
+        print("LLM API verification failed. Please verify provider settings / network access.")
  
 def change_llm_api_model():
     name = option + "_model_selected" # e.g. "OpenAI_model_selected"
@@ -160,7 +160,7 @@ def change_llm_api_model():
     if is_valid:
         print("API key is valid")
     else:
-        print("API key is invalid")
+        print("LLM API verification failed. Please verify provider settings / network access.")
 
 def llm_configuration_page():
     llm_api_settings = st.container(border=True)
