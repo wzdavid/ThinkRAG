@@ -200,7 +200,7 @@ def create_llm_instance():
             api_key = current_llm_info["api_key"]
             api_key_valid = current_llm_info["api_key_valid"]
             if api_key_valid:
-                print("API key is valid when creating LLM instance")
+                print("LLM instance created successfully.")
                 st.session_state.llm = create_openai_llm(
                     model_name=model_name, 
                     api_base=api_base, 
@@ -209,7 +209,7 @@ def create_llm_instance():
                     system_prompt=st.session_state.current_llm_settings["system_prompt"],
                 )
             else:
-                print("API key is invalid when creating LLM instance")
+                print("Failed to create LLM instance. Please check provider settings / networks / region policy.")
                 st.session_state.llm = None
     else:
         print("No current LLM infomation")
