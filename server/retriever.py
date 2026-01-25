@@ -14,20 +14,56 @@ from typing import List
 def chinese_tokenizer(text: str) -> List[str]:
     return list(jieba.cut(text))
 
+def clamp_top_k_to_corpus(vector_index, top_k: int) -> int:
+    """Clamp top_k so it never exceeds available corpus size (docstore & vector store)."""
+    try:
+        sizes = []
+
+        # docstore size
+        doc_sz = len(vector_index.docstore.docs)
+        sizes.append(doc_sz)
+
+        # vector store size (Chroma)
+        vs = getattr(vector_index, "vector_store", None) or getattr(vector_index, "_vector_store", None)
+        col = getattr(vs, "_collection", None) if vs is not None else None
+        if col is not None and hasattr(col, "count"):
+            sizes.append(int(col.count()))
+
+        effective = min(sizes) if sizes else int(top_k)
+        return max(1, min(int(top_k), int(effective)))
+    except Exception:
+        return max(1, int(top_k))
+
+
 class SimpleBM25Retriever(BM25Retriever):
     @classmethod
     def from_defaults(cls, index, similarity_top_k, **kwargs) -> "BM25Retriever":
         docstore = index.docstore
+
+        # clamp top_k to corpus size to avoid bm25s ValueError when corpus is small
+        try:
+            corpus_size = len(docstore.docs)
+        except Exception:
+            corpus_size = None
+
+        if corpus_size is not None:
+            similarity_top_k = max(1, min(int(similarity_top_k), int(corpus_size)))
+
         return BM25Retriever.from_defaults(
-            docstore=docstore, similarity_top_k=similarity_top_k, verbose=True,
-            tokenizer=chinese_tokenizer, **kwargs
+            docstore=docstore,
+            similarity_top_k=similarity_top_k,
+            verbose=True,
+            tokenizer=chinese_tokenizer,
+            **kwargs
         )
+
 
 # A simple hybrid retriever method
 # Reference：https://docs.llamaindex.ai/en/stable/examples/retrievers/bm25_retriever/
 
 class SimpleHybridRetriever(BaseRetriever):
     def __init__(self, vector_index, top_k=2):
+        top_k = clamp_top_k_to_corpus(vector_index, top_k)
         self.top_k = top_k
 
         # Build vector retriever from vector index
@@ -94,6 +130,7 @@ class FUSION_MODES(str, Enum):
 
 class SimpleFusionRetriever(QueryFusionRetriever):
     def __init__(self, vector_index, top_k=2, mode=FUSION_MODES.DIST_BASED_SCORE):
+        top_k = clamp_top_k_to_corpus(vector_index, top_k)
         self.top_k = top_k
         self.mode = mode
 

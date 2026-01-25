@@ -17,6 +17,22 @@ def create_vector_store(type=config.DEFAULT_VS_TYPE):
 
         db = chromadb.PersistentClient(path=".chroma")
         chroma_collection = db.get_or_create_collection("think")
+        
+        try:
+            _orig_query = chroma_collection.query  # bound method
+            def _safe_query(*args, **kwargs):
+                # chroma expects either a valid operator dict or nothing; {} can raise
+                if kwargs.get("where") == {}:
+                    kwargs.pop("where", None)
+                if kwargs.get("where_document") == {}:
+                    kwargs.pop("where_document", None)
+                return _orig_query(*args, **kwargs)
+            chroma_collection.query = _safe_query
+        except Exception as e:
+            # don't block app startup
+            print(f"[warn] failed to patch chroma_collection.query: {e}")
+
+
         chroma_vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
         return chroma_vector_store
     elif type == "es":
