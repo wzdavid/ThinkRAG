@@ -1,5 +1,7 @@
 import streamlit as st
+import socket
 from config import THINKRAG_ENV
+
 
 st.header("Storage")
 st.caption("All your data is stored in local file system or the database you configured.",
@@ -9,6 +11,22 @@ st.caption("All your data is stored in local file system or the database you con
 embedding_settings = st.container(border=True)
 with embedding_settings:
     st.info("You are running ThinkRAG in " + THINKRAG_ENV + " mode.")
+    def _redis_reachable(host="localhost", port=6379, timeout=0.3) -> bool:
+        try:
+            with socket.create_connection((host, port), timeout=timeout):
+                return True
+        except OSError:
+            return False
+
+    if THINKRAG_ENV == "production" and not _redis_reachable():
+        st.warning(
+            "Production mode 需要 Redis（localhost:6379），但当前无法连接。"
+        )
+        st.caption(
+            "WSL/Ubuntu 修复：sudo apt install -y redis-server redis-tools ; "
+            "redis-server --daemonize yes ; redis-cli ping（应返回 PONG）"
+        )
+
     st.dataframe(data={
         "Storage Type": ["Vector Store","Doc Store","Index Store","Chat Store","Config Store"],
         "Development": ["Simple Vector Store","Simple Document Store","Simple Index Store","Simple Chat Store (in memory)","Simple KV Store"],

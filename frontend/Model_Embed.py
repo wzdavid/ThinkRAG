@@ -15,7 +15,23 @@ def change_embedding_model():
     create_embedding_model(st.session_state["current_llm_settings"]["embedding_model"])
 
 doc_store = STORAGE_CONTEXT.docstore
-if len(doc_store.docs) > 0:
+
+def _safe_doc_count(doc_store):
+    try:
+        return len(doc_store.docs)
+    except Exception as e:
+        st.error("Production mode 需要 Redis，但当前无法连接到 Redis（localhost:6379）。")
+        st.code(str(e))
+        st.info(
+            "修复（WSL/Ubuntu）：\n"
+            "1) sudo apt install -y redis-server redis-tools\n"
+            "2) redis-server --daemonize yes\n"
+            "3) redis-cli ping  （应返回 PONG）"
+        )
+        st.stop()
+
+
+if _safe_doc_count(doc_store) > 0:
     disabled = True
 else:
     disabled = False
