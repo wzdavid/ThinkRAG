@@ -68,7 +68,16 @@ def chatbox():
                 if response is None:
                     st.write("Couldn't come up with an answer.")
                 else:
-                    response_text = st.write_stream(response.response_gen)
+                    try:
+                        response_text = st.write_stream(response.response_gen)
+                    except TypeError as e:
+                        st.warning("Streaming failed due to Ollama/LlamaIndex token count issue. Falling back to non-streaming output.")
+                        response_text = str(response)
+                        st.write(response_text)
+                    except Exception as e:
+                        st.warning(f"Streaming failed: {e}. Falling back to non-streaming output.")
+                        response_text = str(response)
+                        st.write(response_text)
                     st.write(f"Took {query_time} second(s)")
                     details_title = f"Found {len(response.source_nodes)} document(s)"
                     with st.expander(
